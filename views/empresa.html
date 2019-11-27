@@ -1,0 +1,11 @@
+<div class="empresa">
+    <div class="border">
+        <h4 class="amarillo">Cliente:</h4>
+        <h4>{{cliente.NOMBRE_CLIENTE}}</h4>
+        <h4 class="amarillo">Inspección</h4>
+        <p>Inspección No: <span>{{cliente.NUMERO_INSPECCION}}</span>
+            <br> Formulario: <span>{{cliente.NUMERO_FORMULARIO}}</span>
+            <br> Fecha: <span>{{cliente.FECHA_HORAINSPECCION.replace('Z', '') | date:'dd/MM/yyyy  h:mma'}}</span>
+        </p>
+    </div>
+</div>

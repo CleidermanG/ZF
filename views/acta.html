@@ -1,0 +1,93 @@
+<div class="titulo text-center py-1">
+    <h6 class="mb-0">F0-S0-15 Acta de inspección de mercancias</h6>
+    <p>Versión: 01 Vigencia: Abr 16</p>
+</div>
+<div class="overflow-auto contenido">
+    <form class="form-app">
+        <div class="form-row">
+            <div class="col-12">
+                <label class="tt">Área de operaciones:</label>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="radio" required class="custom-control-input" name="inlineRadioOptionsOpe" ng-model="operacion" value="Ingreso" id="operaciones1">
+                    <label class="custom-control-label" for="operaciones1">Ingreso</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="radio" required class="custom-control-input" name="inlineRadioOptionsOpe" ng-model="operacion" value="Salida" id="operaciones2">
+                    <label class="custom-control-label" for="operaciones2">Salida</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="radio" required class="custom-control-input" name="inlineRadioOptionsOpe" ng-model="operacion" value="Insp. física" id="operaciones3">
+                    <label class="custom-control-label" for="operaciones3">Insp. física</label>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <input type="number" required ng-model="numDocument" id="NUMEROS_DOCUMENTOS" class="form-control" placeholder="Número(s) de Documento(s):" title="Número(s) de Documento(s)">
+                <label class="tt">Naturaleza</label>
+
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="radio" required class="custom-control-input" name="inlineRadioOptions" ng-model="naturaleza" value="DEX" id="naturaleza1" ng-change="changeTwo ()">
+                    <label class="custom-control-label" for="naturaleza1">DEX</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="radio" required class="custom-control-input" name="inlineRadioOptions" ng-model="naturaleza" value="GUIA" id="naturaleza2" ng-change="changeTwo ()">
+                    <label class="custom-control-label" for="naturaleza2">GUIA</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="radio" required class="custom-control-input" name="inlineRadioOptions" ng-model="naturaleza" value="DI" id="naturaleza3" ng-change="changeTwo ()">
+                    <label class="custom-control-label" for="naturaleza3">DI</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="radio" required class="custom-control-input" name="inlineRadioOptions" ng-model="naturaleza" ng-change="change()" value="Otros" id="naturaleza4">
+                    <label class="custom-control-label" for="naturaleza4">Otros</label>
+                </div>
+                <input type="text" required class="form-control" ng-model="other" placeholder="Cual?" ng-hide="cual" id="other" title="Cual?">
+            </div>
+            <div class="col-12">
+                <input type="number" required class="form-control" ng-model="numForms" id="NUMEROS_FORMULARIOS" placeholder="Número(s) de Formulario(s):" title="Número(s) de Formulario(s)">
+            </div>
+            <div class="col-6">
+                <input type="number" class="form-control" ng-model="numBultos" id="NUMERO_BULTOS" required placeholder="Número de bultos:" title="Número de bultos">
+            </div>
+            <div class="col-6">
+                <input type="number" class="form-control" ng-model="weight" id="PESO" required placeholder="Peso en Kg" title="Peso en Kg">
+            </div>
+            <div class="col-12">
+                <textarea class="form-control" id="DESCRIPCION" rows="2" ng-model="description" placeholder="Descripción:" title="Descripción"></textarea>
+            </div>
+
+            <label class="tt">Naturaleza</label>
+            <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="radio" required class="custom-control-input" name="inlineRadioOptionsVal" ng-model="valoracion" value="Bueno" id="customCheck1">
+                <label class="custom-control-label" for="customCheck1">Bueno</label>
+            </div>
+            <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="radio" required class="custom-control-input" name="inlineRadioOptionsVal" ng-model="valoracion" value="Regular" id="customCheck2">
+                <label class="custom-control-label" for="customCheck2">Regular</label>
+            </div>
+            <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="radio" required class="custom-control-input" name="inlineRadioOptionsVal" ng-model="valoracion" value="Malo" id="customCheck3">
+                <label class="custom-control-label" for="customCheck3">Malo</label>
+            </div>
+
+
+
+            <div class="col-12">
+                <textarea class="form-control" ng-model="observaciones" id="OBSERVACIONES" rows="2" placeholder="Observaciones:" title="Observaciones"></textarea>
+            </div>
+
+            <div class="col-6">
+                <h5>Usuario Operador:</h5>
+                <p>{{cliente.NOMBRE_CONTACTO | uppercase}}</p>
+            </div>
+            <div class="col-6">
+                <h5>Usuario Zona Franca</h5>
+                <p>{{username | uppercase}}</p>
+            </div>
+        </div>
+        <div class="text-center">
+            <button class="btn  btn-amarillo" ng-click="aprobacion()" type="submit">Enviar aprobación</button>
+        </div>
+
+    </form>
+</div>

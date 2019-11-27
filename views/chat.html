@@ -1,0 +1,51 @@
+<div class="titulo text-center py-1">
+    <h4 class="mb-0">CHAT</h4>
+</div>
+
+<div class="overflow-auto contenido" keep-scroll>
+    <div class="messages">
+        <ul>
+            <!-- | orderBy: '-id'" -->
+            <div scroll-item ng-repeat="mensaje in mensajes track by $index">
+                <li ng-class=" messageFromMe(mensaje) ">
+                    <p> {{mensaje.mensaje}}
+                        <br style="font-size: 22px "> {{mensaje.fecha| date:'dd/MM/yyyy h:mma'}} <br/> </p>
+                </li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="message-input ">
+        <div class="wrap ">
+            <input ng-model="myMessage " ng-keypress="sendMessageIntro($event) " type="text " placeholder="Escriba su mensaje aquí... ">
+            <button scroll-bottom="autoscroll " ng-click="sendMenssage() " class="submit "><img src="../images/boton-enviar.png "></button>
+        </div>
+    </div>
+</div>
+
+<!-- <style>
+    .wrapper {
+        width: 200px;
+        height: 220px;
+        border: 1px solid black;
+        overflow: auto;
+    }
+    
+    .item {
+        background-color: #ccc;
+        height: 100px;
+        margin-bottom: 1px;
+    }
+</style>
+<div class="wrapper contenido " keep-scroll>
+    <div class="messages ">
+        <ul>
+            <div scroll-item ng-repeat="mensaje in mensajes | orderBy: 'id' ">
+                <li ng-class="messageFromMe(mensaje) ">
+                    <p> {{mensaje.id}}
+                        <br style="font-size: 22px "> {{mensaje.fecha| date:'dd/MM/yyyy h:mma'}} <br/> </p>
+                </li>
+            </div>
+        </ul>
+    </div>
+</div> -->

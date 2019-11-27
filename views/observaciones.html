@@ -1,0 +1,18 @@
+<div class="titulo text-center py-1">
+    <h4 class="mb-0">OBSERVACIONES</h4>
+</div>
+<div class="overflow-auto contenido">
+
+    <div class="p-4">
+        <div ng-repeat="mensaje in mnsobservations">
+            <p>{{mensaje.text}} </p>
+        </div>
+    </div>
+
+    <div class="message-input">
+        <div class="wrap">
+            <input ng-model="myMessageObservation" ng-keypress="sendMessageIntroObservation($event)" type="text" placeholder="Escriba su mensaje aquí...">
+            <button class="submit" ng-click="sendObservation()"><img src="../images/boton-enviar.png"></button>
+        </div>
+    </div>
+</div>

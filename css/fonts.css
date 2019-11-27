@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'Neo Sans';
+    src: url('../fonts/NeoSans-Bold.eot');
+    src: url('../fonts/NeoSans-Bold.eot?#iefix') format('embedded-opentype'), url('../fonts/NeoSans-Bold.woff2') format('woff2'), url('../fonts/NeoSans-Bold.woff') format('woff'), url('../fonts/NeoSans-Bold.ttf') format('truetype'), url('../fonts/NeoSans-Bold.svg#NeoSans-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Neo Sans';
+    src: url('../fonts/NeoSans-Light.eot');
+    src: url('../fonts/NeoSans-Light.eot?#iefix') format('embedded-opentype'), url('../fonts/NeoSans-Light.woff2') format('woff2'), url('../fonts/NeoSans-Light.woff') format('woff'), url('../fonts/NeoSans-Light.ttf') format('truetype'), url('../fonts/NeoSans-Light.svg#NeoSans-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Neo Sans';
+    src: url('../fonts/NeoSans-Medium.eot');
+    src: url('../fonts/NeoSans-Medium.eot?#iefix') format('embedded-opentype'), url('../fonts/NeoSans-Medium.woff2') format('woff2'), url('../fonts/NeoSans-Medium.woff') format('woff'), url('../fonts/NeoSans-Medium.ttf') format('truetype'), url('../fonts/NeoSans-Medium.svg#NeoSans-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
