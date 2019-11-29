@@ -66,7 +66,7 @@ app.controller('myCtrlActa', function($scope, WebexTeams) {
                     }
                     let enviarActa = WebexTeams.enviarAprovacion(user, response.data.ipServices);
                     enviarActa.then(function successCallback(response) {
-                        if (response.data != null) {
+                        if (response.data) {
                             toastr.success("Esperando aprobación del operador", "Sistema Zona Franca");
                         } else {
                             toastr.error("Problemas al enviar el acta", "Sistema Zona Franca");

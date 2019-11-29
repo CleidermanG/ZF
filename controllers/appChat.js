@@ -40,7 +40,6 @@ app.controller('myCtrlChat', function($scope, ChatWebex, WebexTeams, $timeout) {
             users.then(function(mns) {
                 $scope.mensajes = mns.data;
                 var count = Object.keys($scope.mensajes).length;
-
                 for (var i = 0; i < count; i++) {
                     $scope.mensajes[i]["id"] = i;
                 }

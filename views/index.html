@@ -51,10 +51,10 @@
                             <div class="scrollbar" id="style-1" style="height: 40%;">
                                 <div class="force-overflow">
                                     <div class="imagenes">
-                                        <div ng-repeat="screen in imagesScreenshot">
+                                        <div ng-repeat="screen in imagesScreenshot track by $index">
                                             <div>
-                                                <a href="{{multimediaUrl}}/screenshot/{{screen.name}}" data-lightbox="mygallery" data-title="{{screen.name}}">
-                                                    <img ng-src="{{multimediaUrl}}/screenshot/{{screen.name}}" class="img-fluid mx-auto">
+                                                <a href="{{multimediaUrl}}/screenshot/{{screen.name}}.png" data-lightbox="mygallery" data-title="{{screen.name}}">
+                                                    <img ng-src="{{multimediaUrl}}/screenshot/{{screen.name}}.png" class="img-fluid mx-auto">
                                                 </a>
                                                 <a class="closed" href="#" ng-click="test(screen.name,'screenshot')"><img src="../images/closed.png"></a>
                                             </div>
