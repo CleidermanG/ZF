@@ -1,3 +1,9 @@
+app.filter('reverse', function() {
+    return function(items) {
+        return items.slice().reverse();
+    };
+});
+
 app.filter('hh', function() {
     return function(time) {
         var sec_num = parseInt(time, 10); // don't forget the second param

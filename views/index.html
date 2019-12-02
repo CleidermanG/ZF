@@ -33,10 +33,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-scroll/1.0.0/angular-scroll.min.js"></script>
 </head>
 
-<body class="app" ng-app="myApp" ng-controller="myCtrl" ng-init="connection()">
+<body class="app" ng-cloak ng-app="myApp" ng-controller="myCtrl" ng-init="connection()">
     <!-- <button ng-click="myFunction()">fullscreen</button> -->
-    <my-scroll ids="ids"></my-scroll>
-    <div class="container-fluid">
+    <div id="loader2"></div>
+    <div id="pagina" class="container-fluid">
         <div class="row user">
             <div class="col-md-12">
                 <img src="{{avatar}} "> <span>{{username}}</span>
@@ -51,10 +51,10 @@
                             <div class="scrollbar" id="style-1" style="height: 40%;">
                                 <div class="force-overflow">
                                     <div class="imagenes">
-                                        <div ng-repeat="screen in imagesScreenshot track by $index">
+                                        <div ng-repeat="screen in imagesScreenshot">
                                             <div>
-                                                <a href="{{multimediaUrl}}/screenshot/{{screen.name}}.png" data-lightbox="mygallery" data-title="{{screen.name}}">
-                                                    <img ng-src="{{multimediaUrl}}/screenshot/{{screen.name}}.png" class="img-fluid mx-auto">
+                                                <a title="{{screen.name}}" href="{{multimediaUrl}}/screenshot/{{screen.name}}" data-lightbox="mygallery">
+                                                    <img ng-src="{{multimediaUrl}}/screenshot/{{screen.name}}" class="img-fluid mx-auto">
                                                 </a>
                                                 <a class="closed" href="#" ng-click="test(screen.name,'screenshot')"><img src="../images/closed.png"></a>
                                             </div>
@@ -69,7 +69,7 @@
                                     <div class="videos">
                                         <div ng-repeat="video in videosInspeccion">
                                             <div>
-                                                <a href="{{multimediaUrl}}/videos/{{video.name}}" target="_blank">
+                                                <a title="{{video.name}}" href="{{multimediaUrl}}/videos/{{video.name}}" target="_blank">
                                                     <video class="img-fluid mx-auto">
                                                         <source src="{{multimediaUrl}}/videos/{{video.name}}"
                                                             type="video/mp4" />
@@ -211,6 +211,8 @@
                                         <span>Llamando a {{cliente.NOMBRE_CONTACTO}}...</span>
                                     </div>
                                     <div class="iconos">
+
+
                                         <div id="iconScreen" style="display:none">
                                             <a title="Screenshot" id="btnScreen" ng-click="screenshot()" href=""><img src="../images/camera.png"></a>
                                         </div>

@@ -11,13 +11,19 @@ app.controller('myCtrlChat', function($scope, ChatWebex, WebexTeams, $timeout) {
             toPersonEmail: $scope.cliente.USUARIO_WEBEXCONTACTO,
             text: $scope.myMessage,
         }
-        webex.messages.create(menssage)
-            .then(() => {
-                $scope.myMessage = '';
-            })
-            .catch((err) => {
-                console.error(`error listening to messages: ${err}`);
-            });
+        var blockURL = menssage.text.includes("https://bfececae.ngrok.io/api/aprobacion?token");
+        if (!blockURL) {
+            webex.messages.create(menssage)
+                .then(() => {
+                    $scope.myMessage = '';
+                })
+                .catch((err) => {
+                    console.error(`error listening to messages: ${err}`);
+                });
+        } else {
+            $scope.myMessage = '';
+        }
+
     }
     $scope.sendMessageIntro = function(keyEvent) {
         if (keyEvent.which === 13)
@@ -68,20 +74,26 @@ app.controller('myCtrlChat', function($scope, ChatWebex, WebexTeams, $timeout) {
                             fecha: message.data.created,
                             inspeccion: $scope.cliente.NUMERO_INSPECCION
                         };
-                        // var str = "Visit W3Schools!";
-                        // var n = str.search("W");
-                        // console.log(n);
 
-                        if (message.data.personEmail == $scope.cliente.USUARIO_WEBEXCONTACTO ||
-                            message.data.personEmail == $scope.gmailWebex) {
-                            $scope.mensajes.push($scope.data);
-                            let ip = WebexTeams.Ip();
-                            ip.then(function successCallback(response) {
-                                ChatWebex.sendMessage($scope.data, response.data.ipServices);
-                            }, function errorCallback(error) {
-                                console.log(error);
-                            });
+
+                        // var str = "https://bfececae.ngrok.io/api/aprobacion?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbnNwZWNjaW9uIjoiMzIxIiwiaWF0IjoxNTc0OTc2OTkwLCJleHAiOjE1NzQ5NzcwNTB9.a-QoPnjUH7cqqyvOEIsBzBh3mefDZe8aUD3HyFBEmS8";
+                        var blockURL = message.data.text.includes("https://bfececae.ngrok.io/api/aprobacion?token");
+                        if (!blockURL) {
+                            if (message.data.personEmail == $scope.cliente.USUARIO_WEBEXCONTACTO ||
+                                message.data.personEmail == $scope.gmailWebex) {
+                                $scope.mensajes.push($scope.data);
+                                let ip = WebexTeams.Ip();
+                                ip.then(function successCallback(response) {
+                                    ChatWebex.sendMessage($scope.data, response.data.ipServices);
+                                }, function errorCallback(error) {
+                                    console.log(error);
+                                });
+                            }
                         }
+
+
+
+
                     });
                     webex.messages.on('deleted', (message) => {
                         console.log('message deleted event:');

@@ -1,4 +1,5 @@
 var app = angular.module('myApp', ['ngFileUpload', 'ngStorage', 'duScroll']).value('duScrollOffset', 60);
+document.getElementById("pagina").style.visibility = "hidden";
 app.config(['$locationProvider', function($locationProvider) {
     $locationProvider.html5Mode({
         enabled: true,
@@ -51,7 +52,6 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
             confirmButtonText: 'Si, estoy seguro'
         }).then((result) => {
             if (result.value) {
-
                 var deleteFile = {
                     type: type,
                     name: nameFile,
@@ -133,6 +133,8 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         ip.then(function successCallback(response) {
             let validateToken = ServicesToken.validateToken($localStorage.sesion, response.data.ipServices);
             validateToken.then(function successCallback(token) {
+                    document.getElementById("loader2").style.visibility = "hidden";
+                    document.getElementById("pagina").style.visibility = "visible";
                     console.log(token.data.user);
                     $scope.id_usuariozf = token.data.user.recordset.ID_USUARIOZF;
                     $scope.username = token.data.user.recordset.NOMBRE_USUARIOZF;
@@ -191,9 +193,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
             $scope.multimediaUrl = response.data.ipServices + "/multimedia/" + inspeccion;
             var screenInspeccion = servicesMultimedia.loadScreen(inspeccion, response.data.ipServices);
             screenInspeccion.then(function successCallback(dataScreen) {
-                console.log(dataScreen.data.sort(function(a, b) { return b.name - a.name }));
-
-                $scope.imagesScreenshot = dataScreen.data.sort(function(a, b) { return b.name - a.name });
+                $scope.imagesScreenshot = dataScreen.data.sort(function(a, b) { return b.num - a.num });
             }, function errorCallback(error) {
                 console.log(error);
             });
@@ -208,7 +208,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         ip.then(function successCallback(response) {
             var videosUser = servicesMultimedia.loadVideos(inspeccion, response.data.ipServices);
             videosUser.then(function successCallback(dataVideo) {
-                $scope.videosInspeccion = dataVideo.data
+                $scope.videosInspeccion = dataVideo.data.sort(function(a, b) { return b.num - a.num });
             }, function errorCallback(error) {
                 console.log(error);
             });
@@ -244,18 +244,18 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
             document.getElementById(`remote-view-video`).srcObject = call.remoteMediaStream;
             document.getElementById(`remote-view-video`).onloadedmetadata = function() {
 
-                var sendFile = function() {
-                    var promise = new Promise(function(resolve, reject) {
-                        var myAudio = document.getElementById("myAudio");
-                        myAudio.pause();
-                        // document.getElementById("loader").style.display = "none";
-                        // document.getElementById("llamando").style.display = "none";
-                        // document.getElementById("remote-view-video").poster = "../images/video.jpg";
-                        resolve(true)
-                    });
-                    return promise;
-                };
-                sendFile();
+                // var sendFile = function() {
+                //     var promise = new Promise(function(resolve, reject) {
+                //         var myAudio = document.getElementById("myAudio");
+                //         myAudio.pause();
+                //         document.getElementById("loader").style.display = "none";
+                //         document.getElementById("llamando").style.display = "none";
+                //         document.getElementById("remote-view-video").poster = "../images/video.jpg";
+                //         resolve(true)
+                //     });
+                //     return promise;
+                // };
+                // sendFile();
 
                 $scope.startTimerWithTimeout()
                 recorder = RecordRTC(call.remoteMediaStream, {
@@ -292,15 +292,15 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
 
 
         function stopRecordingCallback() {
-            var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0');
-            var yyyy = today.getFullYear();
-            var h = today.getHours();
-            var min = today.getMinutes();
-            var sg = today.getSeconds();
-            var num = Math.floor(Math.random() * (100 - 1) + 1);
-            today = mm + dd + yyyy + h + min + sg + num;
+            // var today = new Date();
+            // var dd = String(today.getDate()).padStart(2, '0');
+            // var mm = String(today.getMonth() + 1).padStart(2, '0');
+            // var yyyy = today.getFullYear();
+            // var h = today.getHours();
+            // var min = today.getMinutes();
+            // var sg = today.getSeconds();
+            // var num = Math.floor(Math.random() * (100 - 1) + 1);
+            // today = mm + dd + yyyy + h + min + sg + num;
 
             var saveBlob = function() {
                 var promise = new Promise(function(resolve, reject) {
@@ -314,7 +314,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
             var codingFile = function(blob) {
                 var promise = new Promise(function(resolve, reject) {
                     setTimeout(function() {
-                        var file = new File([blob], (today + '.webm'), {
+                        var file = new File([blob], ('video' + '.webm'), {
                             type: 'video/webm'
                         });
                         resolve(file);
@@ -437,8 +437,8 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
             }).then((result) => {
                 if (result.value) {
 
-                    // var myAudio = document.getElementById("myAudio");
-                    // myAudio.pause();
+                    var myAudio = document.getElementById("myAudio");
+                    myAudio.pause();
                     // document.getElementById("loader").style.display = "none";
                     // document.getElementById("llamando").style.display = "none";
                     // document.getElementById("remote-view-video").poster = "../images/video.jpg";
