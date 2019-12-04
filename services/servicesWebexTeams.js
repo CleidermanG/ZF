@@ -41,7 +41,7 @@ app.service('WebexTeams', function($http) {
     };
 
     this.actaInspeccion = function(actaInspeccion, url) {
-        return $http.post(url + '/api/terminarActaInspeccion', JSON.stringify(actaInspeccion));
+        return $http.post(url + '/api/guardarActaInspeccion', JSON.stringify(actaInspeccion));
     };
 
     this.cosultaActaInspeccion = function(inspeccion, url) {

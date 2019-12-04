@@ -13,6 +13,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
     var recorder; // globally accessible
     let webex; // globally accessible
 
+
     $scope.$storage = $localStorage.$default({
         time: 0,
         sesion: null
@@ -94,6 +95,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
     $scope.avatar = "../images/user.png";
     $scope.imagesScreenshot = [];
     $scope.videosInspeccion = [];
+    $scope.btnAprobacion = false;
 
     $scope.connection = function() {
         if ($location.search().token == null) {
@@ -503,10 +505,17 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         ip.then(function successCallback(response) {
             let actaInspeccion = WebexTeams.cosultaActaInspeccion($scope.cliente.NUMERO_INSPECCION, response.data.ipServices);
             actaInspeccion.then(function successCallback(inspeccion) {
-                if (inspeccion.data.recordset[0].ID_USUARIOZF) {
+                if (inspeccion.data.recordset[0].ID_ESTADOACTA != 1) {
+                    if (inspeccion.data.recordset[0].ID_USUARIOZF) {
+                        $scope.formActa(inspeccion.data.recordset[0]);
+                        toastr.success("Esperando aprobación del operador", "Sistema Zona Franca");
+                    }
+                } else {
+                    $scope.btnAprobacion = true;
+                    toastr.success("El acta fue aprobada por el operador", "Sistema Zona Franca");
                     $scope.formActa(inspeccion.data.recordset[0]);
-                    toastr.success("Esperando aprobación del operador", "Sistema Zona Franca");
                 }
+
             }, function errorCallback(error) {
                 console.log(error);
             });

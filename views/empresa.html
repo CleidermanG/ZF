@@ -7,7 +7,7 @@
         <h4 class="amarillo">Inspección</h4>
         <p>Inspección No: <span>{{cliente.NUMERO_INSPECCION}}</span>
             <br> Formulario: <span>{{cliente.NUMERO_FORMULARIO}}</span>
-            <br> Fecha: <span>{{cliente.FECHA_HORAINSPECCION.replace('Z', '') | date:'dd/MM/yyyy  h:mma'}}</span>
+            <br> Fecha: <span>{{cliente.FECHA_HORAINSPECCION.replace('Z', '') | date:'dd/MM/yyyy  h:mm a'}}</span>
         </p>
     </div>
 </div>

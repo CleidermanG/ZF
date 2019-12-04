@@ -76,24 +76,19 @@ app.controller('myCtrlChat', function($scope, ChatWebex, WebexTeams, $timeout) {
                         };
 
 
-                        // var str = "https://bfececae.ngrok.io/api/aprobacion?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbnNwZWNjaW9uIjoiMzIxIiwiaWF0IjoxNTc0OTc2OTkwLCJleHAiOjE1NzQ5NzcwNTB9.a-QoPnjUH7cqqyvOEIsBzBh3mefDZe8aUD3HyFBEmS8";
-                        var blockURL = message.data.text.includes("https://bfececae.ngrok.io/api/aprobacion?token");
-                        if (!blockURL) {
-                            if (message.data.personEmail == $scope.cliente.USUARIO_WEBEXCONTACTO ||
-                                message.data.personEmail == $scope.gmailWebex) {
-                                $scope.mensajes.push($scope.data);
-                                let ip = WebexTeams.Ip();
-                                ip.then(function successCallback(response) {
+                        let ip = WebexTeams.Ip();
+                        ip.then(function successCallback(response) {
+                            var blockURL = message.data.text.includes(response.data.ipServices + "/api/aprobacion?token");
+                            if (!blockURL) {
+                                if (message.data.personEmail == $scope.cliente.USUARIO_WEBEXCONTACTO ||
+                                    message.data.personEmail == $scope.gmailWebex) {
+                                    $scope.mensajes.push($scope.data);
                                     ChatWebex.sendMessage($scope.data, response.data.ipServices);
-                                }, function errorCallback(error) {
-                                    console.log(error);
-                                });
+                                }
                             }
-                        }
-
-
-
-
+                        }, function errorCallback(error) {
+                            console.log(error);
+                        });
                     });
                     webex.messages.on('deleted', (message) => {
                         console.log('message deleted event:');

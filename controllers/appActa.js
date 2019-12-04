@@ -54,32 +54,56 @@ app.controller('myCtrlActa', function($scope, WebexTeams) {
         ip.then(function successCallback(response) {
             let actaInspeccion = WebexTeams.cosultaActaInspeccion($scope.cliente.NUMERO_INSPECCION, response.data.ipServices);
             actaInspeccion.then(function successCallback(inspeccion) {
+                console.log(inspeccion);
 
                 if (inspeccion.data.recordset[0].ID_USUARIOZF == null) {
                     $scope.AddActaInspeccion();
                 } else {
                     $scope.formActa(inspeccion.data.recordset[0]);
+                    $scope.enviarActa();
                 }
-                var user = {
-                    token: $scope.access_token,
-                    toPersonEmail: $scope.cliente.USUARIO_WEBEXCONTACTO,
-                    inspeccion: $scope.cliente.NUMERO_INSPECCION
-                }
-                let enviarActa = WebexTeams.enviarAprovacion(user, response.data.ipServices);
-                enviarActa.then(function successCallback(response) {
-                    if (response.data) {
-                        alert(response.data)
-                        toastr.success(response.data, "Sistema Zona Franca");
-                    } else {
-                        toastr.error("Problemas al enviar el acta", "Sistema Zona Franca");
-                    }
-                }, function errorCallback(error) {
-                    console.log(error);
-                });
+                // var user = {
+                //     token: $scope.access_token,
+                //     toPersonEmail: $scope.cliente.USUARIO_WEBEXCONTACTO,
+                //     inspeccion: $scope.cliente.NUMERO_INSPECCION
+                // }
+                // let enviarActa = WebexTeams.enviarAprovacion(user, response.data.ipServices);
+                // enviarActa.then(function successCallback(response) {
+                //     if (response.data) {
+                //         alert(response.data)
+                //         toastr.success(response.data, "Sistema Zona Franca");
+                //     } else {
+                //         toastr.error("Problemas al enviar el acta", "Sistema Zona Franca");
+                //     }
+                // }, function errorCallback(error) {
+                //     console.log(error);
+                // });
             }, function errorCallback(error) {
                 console.log(error);
             });
 
+        }, function errorCallback(error) {
+            console.log(error);
+        });
+    }
+    $scope.enviarActa = function() {
+        var user = {
+            token: $scope.access_token,
+            toPersonEmail: $scope.cliente.USUARIO_WEBEXCONTACTO,
+            inspeccion: $scope.cliente.NUMERO_INSPECCION
+        }
+        let ip = WebexTeams.Ip();
+        ip.then(function successCallback(response) {
+            let enviarActa = WebexTeams.enviarAprovacion(user, response.data.ipServices);
+            enviarActa.then(function successCallback(response) {
+                if (response.data) {
+                    toastr.success(response.data, "Sistema Zona Franca");
+                } else {
+                    toastr.error("Problemas al enviar el acta", "Sistema Zona Franca");
+                }
+            }, function errorCallback(error) {
+                console.log(error);
+            });
         }, function errorCallback(error) {
             console.log(error);
         });
@@ -93,9 +117,9 @@ app.controller('myCtrlActa', function($scope, WebexTeams) {
             var other = document.getElementById("other").required;
             if (other && $scope.other == null) {} else {
                 var data = {}
-                var fecha = fechaServer();
+                    // var fecha = fechaServer();
                 data.numero_inspeccion = $scope.cliente.NUMERO_INSPECCION;
-                data.fecha = fecha;
+                data.fecha = $scope.cliente.FECHA_HORAINSPECCION;
                 data.id_usuariozf = $scope.id_usuariozf;
                 if ($scope.operacion == 'Ingreso') {
                     data.ingreso = 1;
@@ -163,7 +187,8 @@ app.controller('myCtrlActa', function($scope, WebexTeams) {
                 ip.then(function successCallback(response) {
                     let actaInspeccion = WebexTeams.actaInspeccion(data, response.data.ipServices);
                     actaInspeccion.then(function successCallback(inspeccion) {
-                        toastr.success("El acta ha sido enviada", "Sistema Zona Franca");
+                        $scope.enviarActa();
+                        toastr.success("El acta se guardó correctamente", "Sistema Zona Franca");
                     }, function errorCallback(error) {
                         console.log(error);
                     });

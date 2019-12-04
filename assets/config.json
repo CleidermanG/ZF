@@ -1,5 +1,5 @@
  {
-     "ipServices": "http://localhost:8000",
+     "ipServices": "https://299cc390.ngrok.io",
      "ipApplication": "http://localhost:8087",
      "portApplication": "8087"
  }
