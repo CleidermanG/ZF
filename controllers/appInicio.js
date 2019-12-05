@@ -1,4 +1,9 @@
-var app = angular.module('myApp', ['ngFileUpload', 'ngStorage', 'duScroll']).value('duScrollOffset', 60);
+var app = angular.module('myApp', [
+    'ngFileUpload',
+    'ngStorage',
+    'duScroll',
+    'btford.socket-io'
+]).value('duScrollOffset', 60);
 document.getElementById("pagina").style.visibility = "hidden";
 app.config(['$locationProvider', function($locationProvider) {
     $locationProvider.html5Mode({
@@ -9,9 +14,18 @@ app.config(['$locationProvider', function($locationProvider) {
 
 
 app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filter, $location,
-    $timeout, $interval, $window, $localStorage, ServicesToken, $timeout, $http) {
+    $timeout, $interval, $window, $localStorage, ServicesToken, $timeout, $http, socket) {
     var recorder; // globally accessible
     let webex; // globally accessible
+    console.log(socket);
+
+    socket.on('actaAprobada', function(resp) {
+        toastr.success("Acta aprobada " + resp, "Sistema Zona Franca");
+        console.log();
+
+    });
+
+
 
 
     $scope.$storage = $localStorage.$default({
