@@ -62,22 +62,6 @@ app.controller('myCtrlActa', function($scope, WebexTeams) {
                     $scope.formActa(inspeccion.data.recordset[0]);
                     $scope.enviarActa();
                 }
-                // var user = {
-                //     token: $scope.access_token,
-                //     toPersonEmail: $scope.cliente.USUARIO_WEBEXCONTACTO,
-                //     inspeccion: $scope.cliente.NUMERO_INSPECCION
-                // }
-                // let enviarActa = WebexTeams.enviarAprovacion(user, response.data.ipServices);
-                // enviarActa.then(function successCallback(response) {
-                //     if (response.data) {
-                //         alert(response.data)
-                //         toastr.success(response.data, "Sistema Zona Franca");
-                //     } else {
-                //         toastr.error("Problemas al enviar el acta", "Sistema Zona Franca");
-                //     }
-                // }, function errorCallback(error) {
-                //     console.log(error);
-                // });
             }, function errorCallback(error) {
                 console.log(error);
             });
@@ -117,7 +101,7 @@ app.controller('myCtrlActa', function($scope, WebexTeams) {
             var other = document.getElementById("other").required;
             if (other && $scope.other == null) {} else {
                 var data = {}
-                    // var fecha = fechaServer();
+
                 data.numero_inspeccion = $scope.cliente.NUMERO_INSPECCION;
                 data.fecha = $scope.cliente.FECHA_HORAINSPECCION;
                 data.id_usuariozf = $scope.id_usuariozf;
@@ -179,6 +163,8 @@ app.controller('myCtrlActa', function($scope, WebexTeams) {
                 }
                 data.cedula_usuariooperador = $scope.cliente.CEDULA_CONTACTO;
                 data.nombre_usuariooperador = $scope.cliente.NOMBRE_CONTACTO;
+                data.usuario_webexcontacto = $scope.cliente.USUARIO_WEBEXCONTACTO;
+
                 data.id_estadoacta = null;
                 data.fecha_horaaprobacion = null;
                 data.observaciones = $scope.observaciones;
