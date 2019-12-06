@@ -56,7 +56,6 @@
     ng-init="connection()"
   >
     <!-- <button ng-click="myFunction()">fullscreen</button> -->
-    <h1>Hola Mundo</h1>
     <div id="loader2"></div>
     <div id="pagina" class="container-fluid">
       <div class="row user">
@@ -65,12 +64,13 @@
           <span id="ipZF" style="visibility: hidden;">{{arrBirds}}</span>
         </div>
       </div>
-      <div class="row" style="padding: 5px">
-        <div id="wrapper">
-          <div id="left-sidebar-wrapper">
+      <div class="row">
+        <!-- <div id="wrapper" class=""> -->
+        <!-- <div class=""> -->
+          <div class="rbox" id="left-sidebar-wrapper">
             <ul class="sidebar-nav" style="height: 100%;">
-              <div class="col-md-5 text-center pt-3" style="height: 100%;">
-                <div class="scrollbar" id="style-1" style="height: 40%;">
+              <div class="text-center pt-3" style="height: 100%;">
+                <div class="scrollbar" id="style-1">
                   <div class="force-overflow">
                     <div class="imagenes">
                       <div ng-repeat="screen in imagesScreenshot">
@@ -97,8 +97,8 @@
                   </div>
                 </div>
 
-                <div class="borde-am my-3" style="width: 90px"></div>
-                <div class="scrollbar" id="style-1" style="height: 40%;">
+                <div class="borde-am my-3" ></div>
+                <div class="scrollbar" id="style-1" >
                   <div class="force-overflow">
                     <div class="videos">
                       <div ng-repeat="video in videosInspeccion">
@@ -129,10 +129,100 @@
               </div>
             </ul>
           </div>
-          <div id="sidebar-wrapper">
+          <div class="rbox" id="page-content-wrapper">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="text-left">
+                    <div id="menu-toggle-uno" style="cursor: pointer;">
+                      <i id="toggleIcon" class="fa fa-angle-double-down"></i>
+                      <img src="../Images/arrow-left.png" />
+                      <i
+                        class="fa fa-
+                                                filter"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="text-right">
+                    <div id="menu-toggle-dos" style="cursor: pointer;">
+                      <i
+                        id="toggleIconRight"
+                        class="fa fa-angle-double-down"
+                      ></i>
+                      <img src="../Images/arrow-right.png" />
+                      <i
+                        class="fa fa-
+                                                filter"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="video-llamada" id="test">
+                    <div class="tiempo text-center py-2">
+                      <span>{{timerWithTimeout | hh }}</span>:<span
+                        >{{timerWithTimeout | mm }}</span
+                      >:<span>{{timerWithTimeout | ss }}</span>
+                    </div>
+                    <div id="loader" style="display: none"></div>
+                    <video
+                      class="img-fluid"
+                      width="100%"
+                      poster="../images/video.jpg"
+                      style="background-color: #fff;"
+                      id="remote-view-video"
+                      autoplay
+                    ></video>
+                    <audio
+                      id="myAudio"
+                      src="sonido.mp3"
+                      type="audio/mpeg"
+                      controls
+                      loop="true"
+                      hidden
+                    ></audio>
+                    <div
+                      class=" tiempo2 text-center"
+                      id="llamando"
+                      style="display: none"
+                    >
+                      <span>Llamando a {{cliente.NOMBRE_CONTACTO}}...</span>
+                    </div>
+                    <div class="iconos">
+                      <div id="iconScreen" style="display:none">
+                        <a
+                          title="Screenshot"
+                          id="btnScreen"
+                          ng-click="screenshot()"
+                          href=""
+                          ><img src="../images/camera.png"
+                        /></a>
+                      </div>
+                      <div id="iconColgar" style="visibility: hidden">
+                        <a title="Colgar" href="" id="btnColgar"
+                          ><img src="../images/colgar.png"
+                        /></a>
+                      </div>
+                      <canvas
+                        id="canvas"
+                        width="300"
+                        height="300"
+                        style="display:none"
+                      ></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rbox" id="sidebar-wrapper">
             <ul class="sidebar-nav">
               <div index-directive type="empresa"></div>
-              <div class="box">
+              <div class="">
                 <div class="tab-content" id="pills-tabContent">
                   <div
                     class="tab-pane fade show active"
@@ -320,110 +410,22 @@
               </div>
             </ul>
           </div>
-
-          <div id="page-content-wrapper">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="text-left">
-                    <div id="menu-toggleNew" style="cursor: pointer;">
-                      <i id="toggleIcon" class="fa fa-angle-double-down"></i>
-                      <img src="../Images/arrow-left.png" />
-                      <i
-                        class="fa fa-
-                                                filter"
-                      ></i>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="text-right">
-                    <div id="menu-toggle" style="cursor: pointer;">
-                      <i
-                        id="toggleIconRight"
-                        class="fa fa-angle-double-down"
-                      ></i>
-                      <img src="../Images/arrow-right.png" />
-                      <i
-                        class="fa fa-
-                                                filter"
-                      ></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="video-llamada" id="test">
-                    <div class="tiempo text-center py-2">
-                      <span>{{timerWithTimeout | hh }}</span>:<span
-                        >{{timerWithTimeout | mm }}</span
-                      >:<span>{{timerWithTimeout | ss }}</span>
-                    </div>
-                    <div id="loader" style="display: none"></div>
-                    <video
-                      class="img-fluid"
-                      width="100%"
-                      poster="../images/video.jpg"
-                      style="background-color: #fff;"
-                      id="remote-view-video"
-                      autoplay
-                    ></video>
-                    <audio
-                      id="myAudio"
-                      src="sonido.mp3"
-                      type="audio/mpeg"
-                      controls
-                      loop="true"
-                      hidden
-                    ></audio>
-                    <div
-                      class=" tiempo2 text-center"
-                      id="llamando"
-                      style="display: none"
-                    >
-                      <span>Llamando a {{cliente.NOMBRE_CONTACTO}}...</span>
-                    </div>
-                    <div class="iconos">
-                      <div id="iconScreen" style="display:none">
-                        <a
-                          title="Screenshot"
-                          id="btnScreen"
-                          ng-click="screenshot()"
-                          href=""
-                          ><img src="../images/camera.png"
-                        /></a>
-                      </div>
-                      <div id="iconColgar" style="visibility: hidden">
-                        <a title="Colgar" href="" id="btnColgar"
-                          ><img src="../images/colgar.png"
-                        /></a>
-                      </div>
-                      <canvas
-                        id="canvas"
-                        width="300"
-                        height="300"
-                        style="display:none"
-                      ></canvas>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
 
     <script>
       $(document).ready(function() {
-        $("#menu-toggle").click(function(e) {
+        $("#menu-toggle-uno").click(function(e) {
           e.preventDefault();
-          $("#wrapper").toggleClass("toggled-right");
+          console.log("izq");
+          // $("#wrapper").toggleClass("toggled-left");
         });
-        $("#menu-toggleNew").click(function(e) {
+        $("#menu-toggle-dos").click(function(e) {
           e.preventDefault();
-          $("#wrapper").toggleClass("toggled-left");
+          console.log("der");
+          $("#sidebar-wrapper").toggleClass("toggled-right");
+          $("#page-content-wrapper").toggleClass("toggled-right");
         });
       });
     </script>
