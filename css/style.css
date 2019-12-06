@@ -100,7 +100,7 @@ ul#pills-tab li {
 .empresa {
     background: #00632F;
     color: #ffffff;
-    padding: 18px;
+    padding: 20px;
 }
 
 .empresa span {
@@ -371,10 +371,18 @@ a.closed {
 }
 
 #wrapper.toggled-right {
-    padding-right: 250px;
+    padding-right: 25px;
+}
+
+#wrapper.toggled-rights {
+    padding-right: 0px;
 }
 
 #wrapper.toggled-left {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper.toggled-left {
     padding-left: 250px;
 }
 
@@ -428,6 +436,22 @@ a.closed {
     padding: 15px;
 }
 
+#wrapper.toggled-right .navegacion {
+    height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    position: absolute;
+    padding: 0;
+}
+
+#wrapper.toggled-right #pills-tab {
+    padding-top: 220px;
+}
+
+#wrapper.toggled-right .nav-pills2 {
+    padding-top: 2px;
+}
+
 #wrapper.toggled-right #page-content-wrapper {
     position: absolute;
     margin-right: -250px;
@@ -444,7 +468,7 @@ a.closed {
 .sidebar-nav {
     position: absolute;
     top: 0;
-    width: 350px;
+    width: 100%;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -570,13 +594,16 @@ a.closed {
     background: none;
 }
 
-@media(min-width:768px) {
+@media screen and (min-width:768px) {
     #wrapper {
-        padding-right: 351px;
+        padding-right: 340px;
         padding-left: 115px;
     }
     #wrapper.toggled-right {
-        padding-right: 0;
+        padding-right: 4%;
+    }
+    #wrapper.toggled-rights {
+        padding-right: 250px;
     }
     #wrapper.toggled-left {
         padding-left: 0;
@@ -588,10 +615,16 @@ a.closed {
         width: 115px;
     }
     #wrapper.toggled-right #sidebar-wrapper {
-        width: 0;
+        width: 5%;
+    }
+    #wrapper.toggled-rights #sidebar-wrapper {
+        width: 250px;
     }
     #wrapper.toggled-right #menu-toggle img {
         content: url('../images/arrow-left.png');
+    }
+    #wrapper.toggled-rights #menu-toggle img {
+        content: url('../images/arrow-right.png');
     }
     #wrapper.toggled-left #menu-toggleNew img {
         content: url('../images/arrow-right.png');
