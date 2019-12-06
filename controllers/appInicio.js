@@ -154,7 +154,8 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
                     $scope.gmailWebex = token.data.user.recordset.USUARIOWEBEX;
                     var socket = configSocket.generate($scope.gmailWebex)
                     socket.on('actaAprobada', function(resp) {
-                        toastr.success("Acta aprobada ", "Sistema Zona Franca");
+                        // $scope.btnAprobacion = true;
+                        toastr.success("El acta fue aprobada por el operador", "Sistema Zona Franca");
                     });
 
                     if (token.data.user.avatar) {
