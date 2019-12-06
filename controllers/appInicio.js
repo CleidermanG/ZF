@@ -14,16 +14,13 @@ app.config(['$locationProvider', function($locationProvider) {
 
 
 app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filter, $location,
-    $timeout, $interval, $window, $localStorage, ServicesToken, $timeout, $http, socket) {
+    $timeout, $interval, $window, $localStorage, ServicesToken, $timeout, $http, configSocket) {
     var recorder; // globally accessible
     let webex; // globally accessible
-    console.log(socket);
+    // socket.log();
+    // console.log(socket);
 
-    socket.on('actaAprobada', function(resp) {
-        toastr.success("Acta aprobada " + resp, "Sistema Zona Franca");
-        console.log();
 
-    });
 
 
 
@@ -155,6 +152,11 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
                     $scope.id_usuariozf = token.data.user.recordset.ID_USUARIOZF;
                     $scope.username = token.data.user.recordset.NOMBRE_USUARIOZF;
                     $scope.gmailWebex = token.data.user.recordset.USUARIOWEBEX;
+                    var socket = configSocket.generate($scope.gmailWebex)
+                    socket.on('actaAprobada', function(resp) {
+                        toastr.success("Acta aprobada ", "Sistema Zona Franca");
+                    });
+
                     if (token.data.user.avatar) {
                         $scope.avatar = token.data.user.avatar;
                     }
