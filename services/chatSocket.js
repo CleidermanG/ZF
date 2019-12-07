@@ -1,8 +1,8 @@
 app.factory('configSocket', function($rootScope) {
 
     var randomObject = {};
-    randomObject.generate = function(gmailWebex) {
-        var socket = io.connect('http://192.168.1.4:8000', {
+    randomObject.socket = function(gmailWebex, urlServerSocket) {
+        var socket = io.connect(urlServerSocket, {
             forceNew: true,
             query: {
                 "correoElectronico": gmailWebex,
