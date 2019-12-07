@@ -153,7 +153,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
                     $scope.id_usuariozf = token.data.user.recordset.ID_USUARIOZF;
                     $scope.username = token.data.user.recordset.NOMBRE_USUARIOZF;
                     $scope.gmailWebex = token.data.user.recordset.USUARIOWEBEX;
-                    var socket = configSocket.generate($scope.gmailWebex)
+                    var socket = configSocket.socket($scope.gmailWebex, response.data.ipServices)
                     socket.on('actaAprobada', function(resp) {
                         $scope.btnAprobacion = true;
                         $scope.btnTerminarInspeccion = false;
