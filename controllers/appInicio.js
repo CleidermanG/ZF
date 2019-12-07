@@ -107,6 +107,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
     $scope.imagesScreenshot = [];
     $scope.videosInspeccion = [];
     $scope.btnAprobacion = false;
+    $scope.btnTerminarInspeccion = true;
 
     $scope.connection = function() {
         if ($location.search().token == null) {
@@ -154,7 +155,8 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
                     $scope.gmailWebex = token.data.user.recordset.USUARIOWEBEX;
                     var socket = configSocket.generate($scope.gmailWebex)
                     socket.on('actaAprobada', function(resp) {
-                        // $scope.btnAprobacion = true;
+                        $scope.btnAprobacion = true;
+                        $scope.btnTerminarInspeccion = false;
                         toastr.success(resp.asunto, "Sistema Zona Franca");
                     });
 
@@ -177,6 +179,8 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
 
                             $scope.cargarMultimediaImages($scope.cliente.NUMERO_INSPECCION);
                             $scope.cargarMultimediaVideos($scope.cliente.NUMERO_INSPECCION);
+
+                            $scope.acta()
 
                         } else {
                             toastr.error("Ups!, No existe inspecciones por el momento", "Sistema Zona Franca");
@@ -311,16 +315,6 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
 
 
         function stopRecordingCallback() {
-            // var today = new Date();
-            // var dd = String(today.getDate()).padStart(2, '0');
-            // var mm = String(today.getMonth() + 1).padStart(2, '0');
-            // var yyyy = today.getFullYear();
-            // var h = today.getHours();
-            // var min = today.getMinutes();
-            // var sg = today.getSeconds();
-            // var num = Math.floor(Math.random() * (100 - 1) + 1);
-            // today = mm + dd + yyyy + h + min + sg + num;
-
             var saveBlob = function() {
                 var promise = new Promise(function(resolve, reject) {
                     setTimeout(function() {
@@ -529,6 +523,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
                     }
                 } else {
                     $scope.btnAprobacion = true;
+                    $scope.btnTerminarInspeccion = false;
                     toastr.success("El acta fue aprobada por el operador", "Sistema Zona Franca");
                     $scope.formActa(inspeccion.data.recordset[0]);
                 }
