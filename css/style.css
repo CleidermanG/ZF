@@ -44,7 +44,7 @@ body.app {
 }
 
 #sidebar-wrapper {
-  z-index: -1000;
+  z-index: 1000;
   position: relative;
   clear: right;
   width: 20%;
