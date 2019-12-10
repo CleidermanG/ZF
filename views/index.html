@@ -67,348 +67,338 @@
       <div class="row">
         <!-- <div id="wrapper" class=""> -->
         <!-- <div class=""> -->
-          <div class="rbox" id="left-sidebar-wrapper">
-            <ul class="sidebar-nav" style="height: 100%;">
-              <div class="text-center pt-3" style="height: 100%;">
-                <div class="scrollbar" id="style-1">
-                  <div class="force-overflow">
-                    <div class="imagenes">
-                      <div ng-repeat="screen in imagesScreenshot">
-                        <div>
-                          <a
-                            title="{{screen.name}}"
-                            href="{{multimediaUrl}}/screenshot/{{screen.name}}"
-                            data-lightbox="mygallery"
-                          >
-                            <img
-                              ng-src="{{multimediaUrl}}/screenshot/{{screen.name}}"
-                              class="img-fluid mx-auto"
-                            />
-                          </a>
-                          <a
-                            class="closed"
-                            href="#"
-                            ng-click="test(screen.name,'screenshot')"
-                            ><img src="../images/closed.png"
-                          /></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="borde-am my-3" ></div>
-                <div class="scrollbar" id="style-1" >
-                  <div class="force-overflow">
-                    <div class="videos">
-                      <div ng-repeat="video in videosInspeccion">
-                        <div>
-                          <a
-                            title="{{video.name}}"
-                            href="{{multimediaUrl}}/videos/{{video.name}}"
-                            target="_blank"
-                          >
-                            <video class="img-fluid mx-auto">
-                              <source
-                                src="{{multimediaUrl}}/videos/{{video.name}}"
-                                type="video/mp4"
-                              />
-                            </video>
-                          </a>
-                          <a
-                            class="closed"
-                            href="#"
-                            ng-click="test(video.name,'videos')"
-                            ><img src="../images/closed.png"
-                          /></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ul>
-          </div>
-          <div class="rbox" id="page-content-wrapper">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="text-left">
-                    <div id="menu-toggle-uno" style="cursor: pointer;">
-                      <i id="toggleIcon" class="fa fa-angle-double-down"></i>
-                      <img src="../Images/arrow-left.png" />
-                      <i
-                        class="fa fa-filter"
-                      ></i>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="text-right">
-                    <div id="menu-toggle-dos" style="cursor: pointer;">
-                      <i
-                        id="toggleIconRight"
-                        class="fa fa-angle-double-down"
-                      ></i>
-                      <img src="../Images/arrow-right.png" />
-                      <i class="fa fa-filter"
-                      ></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="video-llamada" id="test">
-                    <div class="tiempo text-center py-2">
-                      <span>{{timerWithTimeout | hh }}</span>:<span
-                        >{{timerWithTimeout | mm }}</span
-                      >:<span>{{timerWithTimeout | ss }}</span>
-                    </div>
-                    <div id="loader" style="display: none"></div>
-                    <video
-                      class="img-fluid"
-                      width="100%"
-                      poster="../images/video.jpg"
-                      style="background-color: #fff;display: block;"
-                      id="remote-view-video"
-                      autoplay
-                    ></video>
-                    <audio
-                      id="myAudio"
-                      src="sonido.mp3"
-                      type="audio/mpeg"
-                      controls
-                      loop="true"
-                      hidden
-                    ></audio>
-                    <div
-                      class=" tiempo2 text-center"
-                      id="llamando"
-                      style="display: none"
-                    >
-                      <span>Llamando a {{cliente.NOMBRE_CONTACTO}}...</span>
-                    </div>
-                    <div class="iconos">
-                      <div id="iconScreen" style="display:none">
+        <div class="rbox" id="left-sidebar-wrapper">
+          <ul class="sidebar-nav" style="height: 100%;">
+            <div class="text-center pt-3" style="height: 100%;">
+              <div class="scrollbar" id="style-1">
+                <div class="force-overflow">
+                  <div class="imagenes">
+                    <div ng-repeat="screen in imagesScreenshot">
+                      <div>
                         <a
-                          title="Screenshot"
-                          id="btnScreen"
-                          ng-click="screenshot()"
-                          href=""
-                          ><img src="../images/camera.png"
+                          title="{{screen.name}}"
+                          href="{{multimediaUrl}}/screenshot/{{screen.name}}"
+                          data-lightbox="mygallery"
+                        >
+                          <img
+                            ng-src="{{multimediaUrl}}/screenshot/{{screen.name}}"
+                            class="img-fluid mx-auto"
+                          />
+                        </a>
+                        <a
+                          class="closed"
+                          href="#"
+                          ng-click="test(screen.name,'screenshot')"
+                          ><img src="../images/closed.png"
                         /></a>
                       </div>
-                      <div id="iconColgar" style="visibility: hidden">
-                        <a title="Colgar" href="" id="btnColgar"
-                          ><img src="../images/colgar.png"
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="borde-am my-3"></div>
+              <div class="scrollbar" id="style-1">
+                <div class="force-overflow">
+                  <div class="videos">
+                    <div ng-repeat="video in videosInspeccion">
+                      <div>
+                        <a
+                          title="{{video.name}}"
+                          href="{{multimediaUrl}}/videos/{{video.name}}"
+                          target="_blank"
+                        >
+                          <video class="img-fluid mx-auto">
+                            <source
+                              src="{{multimediaUrl}}/videos/{{video.name}}"
+                              type="video/mp4"
+                            />
+                          </video>
+                        </a>
+                        <a
+                          class="closed"
+                          href="#"
+                          ng-click="test(video.name,'videos')"
+                          ><img src="../images/closed.png"
                         /></a>
                       </div>
-                      <canvas
-                        id="canvas"
-                        width="300"
-                        height="300"
-                        style="display:none"
-                      ></canvas>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="rbox" id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-              <div index-directive type="empresa"></div>
-              <div class="rbox-5-v">
-                <div class="tab-content" id="pills-tabContent">
-                  <div
-                    class="tab-pane fade show active"
-                    id="modificar"
-                    role="tabpanel"
-                    aria-labelledby="modificar-tab"
-                  >
-                    <div class="titulo text-center py-1">
-                      <h4 class="mb-0">Modificar Inspección</h4>
-                    </div>
-                    <div class="overflow-auto contenido">
-                      <div class="px-5">
-                        <div class="custom-control custom-radio">
-                          <input
-                            type="radio"
-                            id="modificar1"
-                            name="modificar"
-                            class="custom-control-input"
-                          />
-                          <label class="custom-control-label" for="modificar1"
-                            >Inspeccionar Presencialmente</label
-                          >
-                        </div>
-                        <div class="custom-control custom-radio">
-                          <input
-                            type="radio"
-                            id="modificar2"
-                            name="modificar"
-                            class="custom-control-input"
-                          />
-                          <label class="custom-control-label" for="modificar2">
-                            Inspeccionar por el usuario</label
-                          >
-                        </div>
-                        <div class="custom-control custom-radio">
-                          <input
-                            type="radio"
-                            id="modificar3"
-                            name="modificar"
-                            class="custom-control-input"
-                          />
-                          <label class="custom-control-label" for="modificar3">
-                            Cancelar la inspección</label
-                          >
-                        </div>
-                        <div class="custom-control custom-radio">
-                          <input
-                            type="radio"
-                            id="modificar4"
-                            name="modificar"
-                            class="custom-control-input"
-                          />
-                          <label class="custom-control-label" for="modificar4">
-                            Reprogramar</label
-                          >
-                        </div>
-                        <div class="text-center py-1">
-                          <button type="submit" class="btn  btn-amarillo mr-3">
-                            Si
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="titulo borde-t text-center py-1">
-                    <h4 class="mb-0">Terminar Inspección</h4>
-                  </div>
-                  <div class="px-5">
-                    <p>¿Deseas terminar la inspección?</p>
-                    <div class="text-center py-1">
-                      <button type="submit" class="btn btn-amarillo mr-3">
-                        Si
-                      </button>
-                    </div>
-                  </div>
-                  <!-- <div index-directive-chat type="chat"></div> -->
-
-                  <div
-                    data-spy="scroll"
-                    class="tab-pane fade"
-                    id="chat"
-                    role="tabpanel"
-                    aria-labelledby="chat-tab"
-                  >
-                    <div index-directive-chat type="chat"></div>
-                  </div>
-
-                  <div
-                    class="tab-pane fade"
-                    id="check"
-                    role="tabpanel"
-                    aria-labelledby="check-tab"
-                  >
-                    <div index-directive-acta type="acta"></div>
-                  </div>
-                  <div
-                    class="tab-pane fade"
-                    id="observacion"
-                    role="tabpanel"
-                    aria-labelledby="observacion-tab"
-                  >
-                    <div
-                      index-directive-observaciones
-                      type="observaciones"
-                    ></div>
+          </ul>
+        </div>
+        <div class="rbox" id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="text-left">
+                  <div id="menu-toggle-uno" style="cursor: pointer;">
+                    <i id="toggleIcon" class="fa fa-angle-double-down"></i>
+                    <img src="../Images/arrow-left.png" />
+                    <i class="fa fa-filter"></i>
                   </div>
                 </div>
               </div>
-              <div class="text-center navegacion">
-                <ul
-                  class="nav nav-pills mb-3 text-center"
-                  id="pills-tab"
-                  role="tablist"
-                >
-                  <li class="nav-pills2 ">
-                    <a
-                      id="btnLlamar"
-                      title="Llamar"
-                      class="nav-link"
-                      href=""
-                      ng-click="btnllamar()"
-                      ><span class="icon-llamar"
-                        ><span class="path1"></span><span class="path2"></span
-                        ><span class="path3"></span
-                        ><span class="path4"></span></span
-                    ></a>
-                  </li>
-                  <li class="nav-item nav-pills2  ">
-                    <a
-                      class="nav-link active "
-                      id="modificar-tab"
-                      data-toggle="pill"
-                      href="#modificar"
-                      role="tab"
-                      aria-controls="pills-home"
-                      aria-selected="true"
-                      ><span class="icon-terminar"></span
-                    ></a>
-                  </li>
-                  <li class=" borde-r  "></li>
-                  <li class="nav-item nav-pills2">
-                    <a
-                      title="Chat"
-                      ng-click="chat()"
-                      class="nav-link"
-                      id="chat-tab"
-                      data-toggle="pill"
-                      href="#chat"
-                      role="tab"
-                      aria-controls="pills-profile"
-                      aria-selected="false"
-                      ><span class="icon-chat"></span
-                    ></a>
-                  </li>
-                  <li class="nav-item nav-pills2">
-                    <a
-                      title="Acta inspección"
-                      ng-click="acta()"
-                      class="nav-link"
-                      id="check-tab"
-                      data-toggle="pill"
-                      href="#check"
-                      role="tab"
-                      aria-controls="pills-profile"
-                      aria-selected="false"
-                      ><span class="icon-check"></span
-                    ></a>
-                  </li>
-                  <li class="nav-item nav-pills2">
-                    <a
-                      title="Observaciones"
-                      class="nav-link"
-                      ng-click="observations()"
-                      id="observacion-tab"
-                      data-toggle="pill"
-                      href="#observacion"
-                      role="tab"
-                      aria-controls="pills-contact"
-                      aria-selected="false"
-                      ><span class="icon-observacion"></span
-                    ></a>
-                  </li>
-                </ul>
+              <div class="col-lg-6">
+                <div class="text-right">
+                  <div id="menu-toggle-dos" style="cursor: pointer;">
+                    <i id="toggleIconRight" class="fa fa-angle-double-down"></i>
+                    <img src="../Images/arrow-right.png" />
+                    <i class="fa fa-filter"></i>
+                  </div>
+                </div>
               </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="video-llamada" id="test">
+                  <div class="tiempo text-center py-2">
+                    <span>{{timerWithTimeout | hh }}</span>:<span
+                      >{{timerWithTimeout | mm }}</span
+                    >:<span>{{timerWithTimeout | ss }}</span>
+                  </div>
+                  <div id="loader" style="display: none"></div>
+                  <video
+                    class="img-fluid"
+                    width="100%"
+                    poster="../images/video.jpg"
+                    style="background-color: #fff;display: block;"
+                    id="remote-view-video"
+                    autoplay
+                  ></video>
+                  <audio
+                    id="myAudio"
+                    src="sonido.mp3"
+                    type="audio/mpeg"
+                    controls
+                    loop="true"
+                    hidden
+                  ></audio>
+                  <div
+                    class=" tiempo2 text-center"
+                    id="llamando"
+                    style="display: none"
+                  >
+                    <span>Llamando a {{cliente.NOMBRE_CONTACTO}}...</span>
+                  </div>
+                  <div class="iconos">
+                    <div id="iconScreen" style="display:none">
+                      <a
+                        title="Screenshot"
+                        id="btnScreen"
+                        ng-click="screenshot()"
+                        href=""
+                        ><img src="../images/camera.png"
+                      /></a>
+                    </div>
+                    <div id="iconColgar" style="visibility: hidden">
+                      <a title="Colgar" href="" id="btnColgar"
+                        ><img src="../images/colgar.png"
+                      /></a>
+                    </div>
+                    <canvas
+                      id="canvas"
+                      width="300"
+                      height="300"
+                      style="display:none"
+                    ></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rbox" id="sidebar-wrapper">
+          <!-- <ul class="sidebar-nav"> -->
+          <div index-directive type="empresa"></div>
+          <div class="titulo text-center py-1">
+            <h4 class="mb-0">Modificar Inspección</h4>
+          </div>
+          <div class="rbox-5-v">
+            <!-- <div class="tab-content" id="pills-tabContent"> -->
+            <div
+              class="tab-pane fade show active"
+              id="modificar"
+              role="tabpanel"
+              aria-labelledby="modificar-tab"
+            >
+              <div class="overflow-auto contenido">
+                <div class="px-5">
+                  <div class="custom-control custom-radio">
+                    <input
+                      type="radio"
+                      id="modificar1"
+                      name="modificar"
+                      class="custom-control-input"
+                    />
+                    <label class="custom-control-label" for="modificar1"
+                      >Inspeccionar Presencialmente</label
+                    >
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input
+                      type="radio"
+                      id="modificar2"
+                      name="modificar"
+                      class="custom-control-input"
+                    />
+                    <label class="custom-control-label" for="modificar2">
+                      Inspeccionar por el usuario</label
+                    >
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input
+                      type="radio"
+                      id="modificar3"
+                      name="modificar"
+                      class="custom-control-input"
+                    />
+                    <label class="custom-control-label" for="modificar3">
+                      Cancelar la inspección</label
+                    >
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input
+                      type="radio"
+                      id="modificar4"
+                      name="modificar"
+                      class="custom-control-input"
+                    />
+                    <label class="custom-control-label" for="modificar4">
+                      Reprogramar</label
+                    >
+                  </div>
+                  <div class="text-center py-1">
+                    <button type="submit" class="btn  btn-amarillo mr-3">
+                      Si
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="titulo borde-t text-center py-1">
+              <h4 class="mb-0">Terminar Inspección</h4>
+            </div>
+            <div class="px-5">
+              <p>¿Deseas terminar la inspección?</p>
+              <div class="text-center py-1">
+                <button type="submit" class="btn btn-amarillo mr-3">
+                  Si
+                </button>
+              </div>
+            </div>
+            <!-- <div index-directive-chat type="chat"></div> -->
+
+            <div
+              data-spy="scroll"
+              class="tab-pane fade"
+              id="chat"
+              role="tabpanel"
+              aria-labelledby="chat-tab"
+            >
+              <div index-directive-chat type="chat"></div>
+            </div>
+
+            <div
+              class="tab-pane fade"
+              id="check"
+              role="tabpanel"
+              aria-labelledby="check-tab"
+            >
+              <div index-directive-acta type="acta"></div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="observacion"
+              role="tabpanel"
+              aria-labelledby="observacion-tab"
+            >
+              <div index-directive-observaciones type="observaciones"></div>
+            </div>
+          </div>
+
+          <div class="text-center navegacion">
+            <ul
+              class="nav nav-pills mb-3 text-center"
+              id="pills-tab"
+              role="tablist"
+            >
+              <li class="nav-pills2 ">
+                <a
+                  id="btnLlamar"
+                  title="Llamar"
+                  class="nav-link"
+                  href=""
+                  ng-click="btnllamar()"
+                  ><span class="icon-llamar"
+                    ><span class="path1"></span><span class="path2"></span
+                    ><span class="path3"></span
+                    ><span class="path4"></span></span
+                ></a>
+              </li>
+              <li class="nav-item nav-pills2  ">
+                <a
+                  class="nav-link active "
+                  id="modificar-tab"
+                  data-toggle="pill"
+                  href="#modificar"
+                  role="tab"
+                  aria-controls="pills-home"
+                  aria-selected="true"
+                  ><span class="icon-terminar"></span
+                ></a>
+              </li>
+              <li class=" borde-r  "></li>
+              <li class="nav-item nav-pills2">
+                <a
+                  title="Chat"
+                  ng-click="chat()"
+                  class="nav-link"
+                  id="chat-tab"
+                  data-toggle="pill"
+                  href="#chat"
+                  role="tab"
+                  aria-controls="pills-profile"
+                  aria-selected="false"
+                  ><span class="icon-chat"></span
+                ></a>
+              </li>
+              <li class="nav-item nav-pills2">
+                <a
+                  title="Acta inspección"
+                  ng-click="acta()"
+                  class="nav-link"
+                  id="check-tab"
+                  data-toggle="pill"
+                  href="#check"
+                  role="tab"
+                  aria-controls="pills-profile"
+                  aria-selected="false"
+                  ><span class="icon-check"></span
+                ></a>
+              </li>
+              <li class="nav-item nav-pills2">
+                <a
+                  title="Observaciones"
+                  class="nav-link"
+                  ng-click="observations()"
+                  id="observacion-tab"
+                  data-toggle="pill"
+                  href="#observacion"
+                  role="tab"
+                  aria-controls="pills-contact"
+                  aria-selected="false"
+                  ><span class="icon-observacion"></span
+                ></a>
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </div>
+    <!-- </div> -->
 
     <script>
       $(document).ready(function() {

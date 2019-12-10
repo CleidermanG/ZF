@@ -24,6 +24,7 @@ body.app {
   position: relative;
   left: 0px;
   width: 6%;
+  height: 92vh;
   clear: left;
   float: left;
   -webkit-transition: all 1s ease;
@@ -36,6 +37,7 @@ body.app {
   position: relative;
   padding: 15px;
   width: 74%;
+  height: 92vh;
   float: left;
 }
 
@@ -44,10 +46,11 @@ body.app {
   width: 20%;
   float: left;
   clear: right;
+  height: 92vh;
   -webkit-transition: all 1s ease;
   -moz-transition: all 1s ease;
   -o-transition: all 1s ease;
-  transition: all 1s ease;
+  transition: width 2s;
 }
 /********************************* */
 
@@ -99,6 +102,7 @@ ul#pills-tab li {
   box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.2);
   z-index: 10;
   position: relative;
+  height: 8vh;
 }
 
 .user img {
@@ -140,6 +144,7 @@ ul#pills-tab li {
 }
 
 .empresa {
+  
   background: #00632f;
   color: #ffffff;
   padding: 20px;
@@ -265,8 +270,8 @@ a.closed {
 }
 
 .navegacion {
-  /* position: absolute;
-  bottom: 0px; */
+  position: absolute;
+  bottom: 0px;
   background: #ffffff;
   width: 100%;
   padding: 10px;
@@ -419,7 +424,8 @@ a.closed {
   padding-left: 250px;
 }
 #sidebar-wrapper.toggled-right {
-  min-width: 4%;
+  max-width: 4%;
+  transition: width 2s;
 }
 #page-content-wrapper.toggled-right {
   min-width: 90%;
