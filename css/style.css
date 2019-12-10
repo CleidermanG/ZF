@@ -12,7 +12,44 @@ body.app {
 .rbox {
   border: 1px dotted red;
 }
+.rbox-5 {
+  border: 5px dotted red;
+}
+.rbox-5-v {
+  border: 5px dotted #ff008d;
+}
 
+/********************************* */
+#left-sidebar-wrapper {
+  position: relative;
+  left: 0px;
+  width: 6%;
+  clear: left;
+  float: left;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+#page-content-wrapper {
+  position: relative;
+  padding: 15px;
+  width: 74%;
+  float: left;
+}
+
+#sidebar-wrapper {
+  position: relative;
+  width: 20%;
+  float: left;
+  clear: right;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+/********************************* */
 
 .boxes {
   display: flex;
@@ -79,8 +116,8 @@ ul#pills-tab li {
   left: 0;
   right: 0;
   bottom: 0;
-  margin: auto;
   font-size: 22px;
+  height: 10%;
 }
 
 .tiempo2 {
@@ -228,16 +265,17 @@ a.closed {
 }
 
 .navegacion {
-  bottom: 45px;
+  /* position: absolute;
+  bottom: 0px; */
   background: #ffffff;
   width: 100%;
   padding: 10px;
 }
 
-.contenido {
+/* .contenido {
   height: calc(100vh - 350px);
   padding-bottom: 90px;
-}
+} */
 
 .tab-content > .tab-pane {
   font-weight: 300;
@@ -341,7 +379,7 @@ a.closed {
   width: 85%;
   background: #f5f5f5;
   overflow-y: scroll;
-  margin: 15px;
+  /* margin: 15px; */
 }
 
 .force-overflow {
@@ -365,15 +403,6 @@ a.closed {
 
 /* Menu */
 
-#wrapper {
-  width: 100%;
-  padding-left: 0;
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -o-transition: all 1s ease;
-  transition: all 1s ease;
-}
-
 #wrapper.toggled-right {
   padding-right: 25px;
 }
@@ -394,36 +423,6 @@ a.closed {
 }
 #page-content-wrapper.toggled-right {
   min-width: 90%;
-}
-
-#left-sidebar-wrapper {
-  position: relative;
-  left: 0px;
-  min-width: 6%;
-  clear: left;
-  float: left;
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -o-transition: all 1s ease;
-  transition: all 1s ease;
-}
-
-#page-content-wrapper {
-  position: relative;
-  padding: 15px;
-  min-width: 74%;
-  float: left;
-}
-
-#sidebar-wrapper {
-  position: relative;
-  min-width: 20%;
-  float: left;
-  clear: right;
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -o-transition: all 1s ease;
-  transition: all 1s ease;
 }
 
 #toggleIconRight img {
@@ -708,52 +707,52 @@ a.closed {
 */
 
 #loader {
-    position: absolute;
-    left: 53%;
-    top: 35%;
-    z-index: 1;
-    width: 150px;
-    height: 150px;
-    margin: -75px 0 0 -75px;
-    border: 16px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 16px solid #006f34;
-    width: 120px;
-    height: 120px;
-    -webkit-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
-
+  position: absolute;
+  left: 53%;
+  top: 35%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #006f34;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
 #loader2 {
-    position: absolute;
-    left: 53%;
-    top: 35%;
-    z-index: 1;
-    width: 150px;
-    height: 150px;
-    margin: -75px 0 0 -75px;
-    border: 16px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 16px solid #006f34;
-    width: 120px;
-    height: 120px;
-    -webkit-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
+  position: absolute;
+  left: 53%;
+  top: 35%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #006f34;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
 }
 
 @-webkit-keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-} 
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
