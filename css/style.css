@@ -67,9 +67,7 @@ body.app {
 #caja-comp .altura-comp {
   height: 50vh;
 }
-/* #caja-comp .altura-comp.input-mjs{
-  height: 58vh;
-} */
+
 
 #comp-chat {
   position: relative;
@@ -79,6 +77,31 @@ body.app {
   position: relative;
   height: 50vh;
 }
+
+/* ****************************************************** */
+/* clases de movivimiento */
+
+#sidebar-wrapper.toggle {
+  position: relative;
+  width: 6%;
+  height: 100vh;
+  float: left;
+  clear: right;
+  z-index: -1000;
+  transition: width 1s;
+}
+
+
+
+
+
+
+
+
+
+
+/* ****************************************************** */
+
 
 .nav-pills .nav-link {
   background: #00632f;
