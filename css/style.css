@@ -347,6 +347,11 @@ a.closed {
   width: 100%;
   z-index: 99;
 }
+.message-input.toggle-right {
+  position: relative;
+  width: 100%;
+  z-index: -10;
+}
 
 .message-input .wrap {
   position: relative;

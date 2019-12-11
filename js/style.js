@@ -15,6 +15,8 @@ $(document).ready(function () {
         e.preventDefault();
 
         if ($("#sidebar-wrapper").attr("class")) {
+
+            $("message-input").toggleClass("toggle-right");
             $("#sidebar-wrapper").toggleClass("toggle-right");
             $("#page-content-wrapper").toggleClass("toggle-right");
         }
