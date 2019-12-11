@@ -524,7 +524,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
                 } else {
                     $scope.btnAprobacion = true;
                     $scope.btnTerminarInspeccion = false;
-                    toastr.success("El acta fue aprobada por el operador", "Sistema Zona Franca");
+                    toastr.success("El acta ya fue aprobada por el operador", "Sistema Zona Franca");
                     $scope.formActa(inspeccion.data.recordset[0]);
                 }
 
