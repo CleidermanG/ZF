@@ -212,10 +212,12 @@
       </div>
       <div id="sidebar-wrapper">
         <div index-directive type="empresa"></div>
-        <div class="box">
-          <div class="tab-content" id="pills-tabContent">
+        <!-- aqui están contenidos los componentes de angular -->
+        <div class="box" id="caja-comp">
+          <div class="tab-content altura-comp">
+            <!-- componente de modifacion de acta -->
             <div
-              class="tab-pane fade show active"
+              class="tab-pane fade show active altura-comp"
               id="modificar"
               role="tabpanel"
               aria-labelledby="modificar-tab"
@@ -223,7 +225,7 @@
               <div class="titulo text-center py-1">
                 <h4 class="mb-0">Modificar Inspección</h4>
               </div>
-              <div class="overflow-auto contenido">
+              <div class="overflow-auto altura-comp">
                 <div class="px-5 pt-3">
                   <div class="custom-control custom-radio">
                     <input
@@ -288,11 +290,10 @@
                 </div>
               </div>
             </div>
-
-            <!-- <div index-directive-chat type="chat"></div> -->
+            <!-- componente de chat-->
             <div
               data-spy="scroll"
-              class="tab-pane fade"
+              class="tab-pane fade altura-comp"
               id="chat"
               role="tabpanel"
               aria-labelledby="chat-tab"
@@ -301,7 +302,7 @@
             </div>
 
             <div
-              class="tab-pane fade"
+              class="tab-pane fade altura-comp"
               id="check"
               role="tabpanel"
               aria-labelledby="check-tab"
@@ -309,7 +310,7 @@
               <div index-directive-acta type="acta"></div>
             </div>
             <div
-              class="tab-pane fade"
+              class="tab-pane fade altura-comp"
               id="observacion"
               role="tabpanel"
               aria-labelledby="observacion-tab"
@@ -318,82 +319,81 @@
             </div>
           </div>
         </div>
-          <div class="text-center navegacion">
-            <ul
-              class="nav nav-pills mb-3 text-center"
-              id="pills-tab"
-              role="tablist"
-            >
-              <li class="nav-pills2 ">
-                <a
-                  id="btnLlamar"
-                  title="Llamar"
-                  class="nav-link"
-                  href=""
-                  ng-click="btnllamar()"
-                  ><span class="icon-llamar"
-                    ><span class="path1"></span><span class="path2"></span
-                    ><span class="path3"></span
-                    ><span class="path4"></span></span
-                ></a>
-              </li>
-              <li ng-hide="btnTerminarInspeccion" class="nav-item nav-pills2  ">
-                <a
-                  class="nav-link active "
-                  id="modificar-tab"
-                  data-toggle="pill"
-                  href="#modificar"
-                  role="tab"
-                  aria-controls="pills-home"
-                  aria-selected="true"
-                  ><span class="icon-terminar"></span
-                ></a>
-              </li>
-              <li class=" borde-r  "></li>
-              <li class="nav-item nav-pills2">
-                <a
-                  title="Chat"
-                  ng-click="chat()"
-                  class="nav-link"
-                  id="chat-tab"
-                  data-toggle="pill"
-                  href="#chat"
-                  role="tab"
-                  aria-controls="pills-profile"
-                  aria-selected="false"
-                  ><span class="icon-chat"></span
-                ></a>
-              </li>
-              <li class="nav-item nav-pills2">
-                <a
-                  title="Acta inspección"
-                  ng-click="acta()"
-                  class="nav-link"
-                  id="check-tab"
-                  data-toggle="pill"
-                  href="#check"
-                  role="tab"
-                  aria-controls="pills-profile"
-                  aria-selected="false"
-                  ><span class="icon-check"></span
-                ></a>
-              </li>
-              <li class="nav-item nav-pills2">
-                <a
-                  title="Observaciones"
-                  class="nav-link"
-                  ng-click="observations()"
-                  id="observacion-tab"
-                  data-toggle="pill"
-                  href="#observacion"
-                  role="tab"
-                  aria-controls="pills-contact"
-                  aria-selected="false"
-                  ><span class="icon-observacion"></span
-                ></a>
-              </li>
-            </ul>
-          
+        <!-- aqui estan los iconoes de navegacion -->
+        <div class="text-center navegacion">
+          <ul
+            class="nav nav-pills mb-3 text-center"
+            id="pills-tab"
+            role="tablist"
+          >
+            <li class="nav-pills2 ">
+              <a
+                id="btnLlamar"
+                title="Llamar"
+                class="nav-link"
+                href=""
+                ng-click="btnllamar()"
+                ><span class="icon-llamar"
+                  ><span class="path1"></span><span class="path2"></span
+                  ><span class="path3"></span><span class="path4"></span></span
+              ></a>
+            </li>
+            <li ng-hide="btnTerminarInspeccion" class="nav-item nav-pills2  ">
+              <a
+                class="nav-link active "
+                id="modificar-tab"
+                data-toggle="pill"
+                href="#modificar"
+                role="tab"
+                aria-controls="pills-home"
+                aria-selected="true"
+                ><span class="icon-terminar"></span
+              ></a>
+            </li>
+            <li class=" borde-r  "></li>
+            <li class="nav-item nav-pills2">
+              <a
+                title="Chat"
+                ng-click="chat()"
+                class="nav-link"
+                id="chat-tab"
+                data-toggle="pill"
+                href="#chat"
+                role="tab"
+                aria-controls="pills-profile"
+                aria-selected="false"
+                ><span class="icon-chat"></span
+              ></a>
+            </li>
+            <li class="nav-item nav-pills2">
+              <a
+                title="Acta inspección"
+                ng-click="acta()"
+                class="nav-link"
+                id="check-tab"
+                data-toggle="pill"
+                href="#check"
+                role="tab"
+                aria-controls="pills-profile"
+                aria-selected="false"
+                ><span class="icon-check"></span
+              ></a>
+            </li>
+            <li class="nav-item nav-pills2">
+              <a
+                title="Observaciones"
+                class="nav-link"
+                ng-click="observations()"
+                id="observacion-tab"
+                data-toggle="pill"
+                href="#observacion"
+                role="tab"
+                aria-controls="pills-contact"
+                aria-selected="false"
+                ><span class="icon-observacion"></span
+              ></a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

@@ -60,6 +60,22 @@ body.app {
   transition: all 1s ease;
 }
 
+#caja-comp{
+  height: 60vh;
+  position: relative;
+}
+#caja-comp .altura-comp{
+  height: 60vh;
+}
+#caja-comp .altura-comp.input-mjs{
+  height: 58vh;
+}
+
+#comp-chat{
+  position: relative;
+  height: 55vh;
+}
+
 .nav-pills .nav-link {
   background: #00632f;
   border-radius: 100%;
@@ -115,11 +131,11 @@ ul#pills-tab li {
   color: #235170;
   position: absolute;
   z-index: 10;
+  height: 10vh;
   top: 10px;
   left: 0;
   right: 0;
   bottom: 0;
-  margin: auto;
   font-size: 22px;
 }
 
@@ -146,6 +162,7 @@ ul#pills-tab li {
   background: #00632f;
   color: #ffffff;
   padding: 20px;
+  height: 19vh;
 }
 
 .empresa span {
@@ -234,15 +251,14 @@ a.closed {
 }
 
 .message-input {
-  position: absolute;
-  bottom: 135px;
+  position: relative;
   width: 100%;
   z-index: 99;
 }
 
 .message-input .wrap {
-  position: relative;
-  top: 50px;
+  position: absolute;
+  bottom: 0;
 }
 
 .message-input input {
@@ -268,15 +284,17 @@ a.closed {
 }
 
 .navegacion {
-  bottom: 45px;
+  position: absolute;
+  bottom: 0px;
   background: #ffffff;
   width: 100%;
   padding: 10px;
+  height: 10vh;
 }
 
 .contenido {
   height: calc(100vh - 350px);
-  padding-bottom: 90px;
+  /* padding-bottom: 90px; */
 }
 
 .tab-content > .tab-pane {
