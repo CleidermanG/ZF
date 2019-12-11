@@ -60,20 +60,24 @@ body.app {
   transition: all 1s ease;
 }
 
-#caja-comp{
+#caja-comp {
   height: 60vh;
   position: relative;
 }
-#caja-comp .altura-comp{
-  height: 60vh;
+#caja-comp .altura-comp {
+  height: 50vh;
 }
-#caja-comp .altura-comp.input-mjs{
+/* #caja-comp .altura-comp.input-mjs{
   height: 58vh;
-}
+} */
 
-#comp-chat{
+#comp-chat {
   position: relative;
-  height: 51vh;
+  height: 50vh;
+}
+#comp-obsv {
+  position: relative;
+  height: 50vh;
 }
 
 .nav-pills .nav-link {
