@@ -2,25 +2,26 @@
     <h4 class="mb-0">CHAT</h4>
 </div>
 
-<div class="overflow-auto contenido" keep-scroll ng-cloak>
-    <div class="messages">
+<div id="comp-chat" class="overflow-auto" keep-scroll ng-cloak>
+    <div class="messages altura-comp input-mjs">
         <ul>
             <!-- | orderBy: '-id'" -->
             <div scroll-item ng-repeat="mensaje in mensajes track by $index">
                 <li ng-class=" messageFromMe(mensaje) ">
-                    <p> {{mensaje.mensaje}}
-                        <br style="font-size: 22px "> {{mensaje.fecha| date:'dd/MM/yyyy h:mma'}} <br /> </p>
+                    <p>
+                        {{mensaje.mensaje}} <br style="font-size: 22px " /> {{mensaje.fecha| date:'dd/MM/yyyy h:mma'}} <br />
+                    </p>
                 </li>
             </div>
         </ul>
     </div>
-
-    <div class="message-input ">
-        <div class="wrap ">
-            <input ng-model="myMessage " ng-keypress="sendMessageIntro($event) " type="text " placeholder="Escriba su mensaje aquí... ">
-            <button scroll-bottom="autoscroll " ng-click="sendMenssage() " class="submit "><img
-                    src="../images/boton-enviar.png "></button>
-        </div>
+</div>
+<div class="message-input ">
+    <div class="wrap ">
+        <input ng-model="myMessage " ng-keypress="sendMessageIntro($event) " type="text " placeholder="Escriba su mensaje aquí... " />
+        <button scroll-bottom="autoscroll " ng-click="sendMenssage() " class="submit ">
+      <img src="../images/boton-enviar.png " />
+    </button>
     </div>
 </div>
 
