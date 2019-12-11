@@ -73,7 +73,7 @@ body.app {
 
 #comp-chat{
   position: relative;
-  height: 55vh;
+  height: 51vh;
 }
 
 .nav-pills .nav-link {
@@ -257,8 +257,9 @@ a.closed {
 }
 
 .message-input .wrap {
-  position: absolute;
+  position: relative;
   bottom: 0;
+  width: 100%;
 }
 
 .message-input input {
