@@ -15,7 +15,9 @@ body.app {
   height: 100vh;
   border-left: 3px solid #f9f9f9;
 }
-
+/* ***************************************************** */
+/* Configuracion para pantalla con dimensiones 1920x1080 */
+/* ***************************************************** */
 #left-sidebar-wrapper {
   z-index: -1000;
   position: relative;
@@ -60,21 +62,112 @@ body.app {
   transition: all 1s ease;
 }
 
-#caja-comp{
+#caja-comp {
   height: 60vh;
   position: relative;
 }
-#caja-comp .altura-comp{
-  height: 60vh;
-}
-#caja-comp .altura-comp.input-mjs{
-  height: 58vh;
+#caja-comp .altura-comp {
+  height: 50vh;
 }
 
-#comp-chat{
+#comp-chat {
   position: relative;
-  height: 51vh;
+  height: 50vh;
 }
+#comp-obsv {
+  position: relative;
+  height: 50vh;
+}
+
+/* ********************** */
+/* clases de movivimiento */
+/* ********************** */
+
+#sidebar-wrapper.toggle-right {
+  position: relative;
+  width: 4%;
+  height: 100vh;
+  float: left;
+  clear: right;
+  z-index: 1000;
+  transition: width 1s;
+  -webkit-transition: width 1s;
+  -moz-transition: width 1s;
+  -o-transition: width 1s;
+}
+
+#left-sidebar-wrapper.toggle-left {
+  z-index: -1000;
+  position: relative;
+  float: left;
+  clear: left;
+  width: 0%;
+  height: 92vh;
+  overflow-y: auto;
+  background: white;
+  transition: width 1s;
+  -webkit-transition: width 1s;
+  -moz-transition: width 1s;
+  -o-transition: width 1s;
+}
+
+#page-content-wrapper.toggle-right {
+  z-index: -1000;
+  position: relative;
+  width: 90%;
+  height: 92vh;
+  float: left;
+  overflow-y: auto;
+  background: white;
+  transition: width 1s;
+  -webkit-transition: width 1s;
+  -moz-transition: width 1s;
+  -o-transition: width 1s;
+}
+
+#page-content-wrapper.toggle-left {
+  z-index: -1000;
+  position: relative;
+  width: 80%;
+  height: 92vh;
+  float: left;
+  overflow-y: auto;
+  background: white;
+  transition: width 1s;
+  -webkit-transition: width 1s;
+  -moz-transition: width 1s;
+  -o-transition: width 1s;
+}
+
+#page-content-wrapper.toggle-left.toggle-right {
+  z-index: -1000;
+  position: relative;
+  width: 96%;
+  height: 92vh;
+  float: left;
+  overflow-y: auto;
+  background: white;
+  transition: width 1s;
+  -webkit-transition: width 1s;
+  -moz-transition: width 1s;
+  -o-transition: width 1s;
+}
+
+.toggle-right  .navegacion {
+  position: absolute;
+  background: #ffffff;
+  width: 100%;
+  padding: 10px;
+  height: 100%;
+  transition: all 1.5s;
+  -webkit-transition: all 1.5s;
+  -moz-transition: all 1.5s;
+  -o-transition: all 1.5s;
+}
+
+/* ************************** */
+/* Fin clases de movivimiento */
+/* ************************** */
 
 .nav-pills .nav-link {
   background: #00632f;
@@ -222,7 +315,6 @@ a.closed {
 .messages ul li {
   display: inline-block;
   clear: both;
-  float: left;
   margin: 15px 15px 5px 15px;
   width: calc(100% - 25px);
   font-size: 0.9em;
@@ -254,6 +346,11 @@ a.closed {
   position: relative;
   width: 100%;
   z-index: 99;
+}
+.message-input.toggle-right {
+  position: relative;
+  width: 100%;
+  z-index: -10;
 }
 
 .message-input .wrap {
@@ -291,6 +388,10 @@ a.closed {
   width: 100%;
   padding: 10px;
   height: 10vh;
+  transition: all 1.5s;
+  -webkit-transition: all 1.5s;
+  -moz-transition: all 1.5s;
+  -o-transition: all 1.5s;
 }
 
 .contenido {

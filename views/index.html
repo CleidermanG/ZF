@@ -56,9 +56,9 @@
     ng-init="connection()"
     style="z-index: -10000;"
   >
-    <!-- <button ng-click="myFunction()">fullscreen</button> -->
     <!-- Aqui esta el loader de la pagina -->
     <div id="loader2"></div>
+    <!-- Aqui esta el loader de la pagina -->
 
     <div id="pagina" class="container-fluid">
       <div class="row user">
@@ -134,16 +134,16 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="text-left">
-                <div id="menu-toggleNew" style="cursor: pointer;">
+                <div id="btn-izq" style="cursor: pointer;">
                   <i id="toggleIcon" class="fa fa-angle-double-down"></i>
                   <img src="../Images/arrow-left.png" />
-                  <i class="fa fa- filter"></i>
+                  <i class="fa fa-filter"></i>
                 </div>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="text-right">
-                <div id="menu-toggle" style="cursor: pointer;">
+                <div id="btn-der" style="cursor: pointer;">
                   <i id="toggleIconRight" class="fa fa-angle-double-down"></i>
                   <img src="../Images/arrow-right.png" />
                   <i class="fa fa-filter"></i>
@@ -398,19 +398,6 @@
       </div>
     </div>
 
-    <script>
-      $(document).ready(function() {
-        $("#menu-toggle").click(function(e) {
-          e.preventDefault();
-          $("#wrapper").toggleClass("toggled-right");
-        });
-        $("#menu-toggleNew").click(function(e) {
-          e.preventDefault();
-          $("#wrapper").toggleClass("toggled-left");
-        });
-      });
-    </script>
-
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
     <script
@@ -424,10 +411,12 @@
       crossorigin="anonymous"
     ></script>
 
+    <script src="../js/style.js"></script>
+
     <script src="../node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
     <script src="../node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
 
-    <script src="../js/bundle.js "></script>
+    <script src="../js/bundle.js"></script>
     <script src="../js/bundle2.js "></script>
 
     <!-- controllers -->
@@ -452,3 +441,5 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
   </body>
 </html>
+
+<!-- https://stackoverflow.com/questions/18614301/keep-overflow-div-scrolled-to-bottom-unless-user-scrolls-up -->
