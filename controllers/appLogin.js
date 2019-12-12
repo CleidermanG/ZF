@@ -35,7 +35,8 @@ app.controller('myCtrlLogin', function($scope, $window, $localStorage, $location
                     }
                 }, function errorCallback(error) {
                     console.log(error);
-                    alert("Usuario sin cuenta de webex")
+                    alert("Usuario sin cuenta de webex");
+                    $window.location.href = 'https://google.com'
                 });
 
             }, function errorCallback(error) {
