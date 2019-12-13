@@ -17,12 +17,6 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
     $timeout, $interval, $window, $localStorage, ServicesToken, $timeout, $http, configSocket) {
     var recorder; // globally accessible
     let webex; // globally accessible
-    // socket.log();
-    // console.log(socket);
-
-
-
-
 
 
     $scope.$storage = $localStorage.$default({
@@ -143,10 +137,12 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
     }
 
     $scope.connectiontwo = function() {
+
         let ip = WebexTeams.Ip();
         ip.then(function successCallback(response) {
             let validateToken = ServicesToken.validateToken($localStorage.sesion, response.data.ipServices);
             validateToken.then(function successCallback(token) {
+
                     document.getElementById("loader2").style.visibility = "hidden";
                     document.getElementById("pagina").style.visibility = "visible";
                     console.log(token.data.user);
@@ -171,9 +167,10 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
                     }
                     let asignarInspeccion = WebexTeams.asignarInspeccion(user, response.data.ipServices);
                     asignarInspeccion.then(function successCallback(inspeccion) {
+
                         if (inspeccion.data != null) {
-                            console.log(inspeccion.data.recordset[0]);
-                            $scope.cliente = inspeccion.data.recordset[0];
+                            console.log(inspeccion.data);
+                            $scope.cliente = inspeccion.data;
                             $scope.connect($scope.access_token);
                             $scope.initChat();
 
@@ -250,6 +247,8 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         // document.getElementById("remote-view-video").poster = "";
 
         document.getElementById(`iconColgar`).style.visibility = "visible";
+        alert($scope.cliente.USUARIO_WEBEXCONTACTO)
+
         const call = spark.phone.dial($scope.cliente.USUARIO_WEBEXCONTACTO);
         $scope.bindCallEvents(call);
     }
@@ -516,17 +515,26 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         ip.then(function successCallback(response) {
             let actaInspeccion = WebexTeams.cosultaActaInspeccion($scope.cliente.NUMERO_INSPECCION, response.data.ipServices);
             actaInspeccion.then(function successCallback(inspeccion) {
-                if (inspeccion.data.recordset[0].ID_ESTADOACTA != 1) {
-                    if (inspeccion.data.recordset[0].ID_USUARIOZF) {
-                        $scope.formActa(inspeccion.data.recordset[0]);
-                        toastr.success("Esperando aprobación del operador", "Sistema Zona Franca");
+
+                if (inspeccion.status != 404) {
+                    console.log(inspeccion);
+
+                    if (inspeccion.data.ID_ESTADOACTA != 1) {
+                        if (inspeccion.data.ID_USUARIOZF) {
+                            $scope.formActa(inspeccion.data);
+                            toastr.success("Esperando aprobación del operador", "Sistema Zona Franca");
+                        }
+                    } else {
+                        $scope.btnAprobacion = true;
+                        $scope.btnTerminarInspeccion = false;
+                        toastr.success("El acta ya fue aprobada por el operador", "Sistema Zona Franca");
+                        $scope.formActa(inspeccion.data);
                     }
                 } else {
-                    $scope.btnAprobacion = true;
-                    $scope.btnTerminarInspeccion = false;
-                    toastr.success("El acta ya fue aprobada por el operador", "Sistema Zona Franca");
-                    $scope.formActa(inspeccion.data.recordset[0]);
+                    toastr.error("Error al cargar la inspección.", "Sistema Zona Franca");
                 }
+
+
 
             }, function errorCallback(error) {
                 console.log(error);
