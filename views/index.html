@@ -69,8 +69,8 @@
       </div>
       <div id="left-sidebar-wrapper">
         <ul class="sidebar-nav" style="height: 100%;">
-          <div class="col-md-5 text-center pt-3" style="height: 100%;">
-            <div class="scrollbar" id="style-1" style="height: 40%;">
+          <div class="col-md-12 text-center pt-3" style="height: 100%;">
+            <div class="scrollbar" id="style-1" style="">
               <div class="force-overflow">
                 <div class="imagenes">
                   <div ng-repeat="screen in imagesScreenshot">
@@ -97,8 +97,8 @@
               </div>
             </div>
 
-            <div class="borde-am my-3" style="width: 90px"></div>
-            <div class="scrollbar" id="style-1" style="height: 40%;">
+            <div class="borde-am my-3" style=""></div>
+            <div class="scrollbar" id="style-1" style="">
               <div class="force-overflow">
                 <div class="videos">
                   <div ng-repeat="video in videosInspeccion">
@@ -131,24 +131,18 @@
       </div>
       <div id="page-content-wrapper">
         <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="text-left">
-                <div id="btn-izq" style="cursor: pointer;">
-                  <i id="toggleIcon" class="fa fa-angle-double-down"></i>
-                  <img src="../Images/arrow-left.png" />
-                  <i class="fa fa-filter"></i>
-                </div>
-              </div>
+          <div class="text-left flecha-izq">
+            <div id="btn-izq" style="cursor: pointer;">
+              <i id="toggleIcon" class="fa fa-angle-double-down"></i>
+              <img src="../Images/arrow-left.png" />
+              <i class="fa fa-filter"></i>
             </div>
-            <div class="col-lg-6">
-              <div class="text-right">
-                <div id="btn-der" style="cursor: pointer;">
-                  <i id="toggleIconRight" class="fa fa-angle-double-down"></i>
-                  <img src="../Images/arrow-right.png" />
-                  <i class="fa fa-filter"></i>
-                </div>
-              </div>
+          </div>
+          <div class="text-right flecha-der">
+            <div id="btn-der" style="cursor: pointer;">
+              <i id="toggleIconRight" class="fa fa-angle-double-down"></i>
+              <img src="../Images/arrow-right.png" />
+              <i class="fa fa-filter"></i>
             </div>
           </div>
           <div class="row">
