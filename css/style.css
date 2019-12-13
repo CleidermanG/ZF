@@ -122,7 +122,7 @@ body.app {
 #page-content-wrapper.toggle-right {
   z-index: -1000;
   position: relative;
-  width: 85%;
+  width: 86%;
   height: 94vh;
   float: left;
   overflow-y: auto;
@@ -208,13 +208,13 @@ body.app {
 
 .flecha-izq {
   position: absolute;
-  top: 49%;
+  top: 48.9%;
   left: 5px;
   z-index: 1000;
 }
 .flecha-der {
   position: absolute;
-  top: 49%;
+  top: 48.9%;
   right: 5px;
   z-index: 1000;
 }
