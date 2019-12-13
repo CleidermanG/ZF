@@ -70,8 +70,10 @@ body.app {
   height: 60vh;
   position: relative;
 }
-#caja-comp .altura-comp {
+#caja-comp .altura-comp.contenido {
   height: 50vh;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 #comp-chat {
@@ -173,6 +175,12 @@ body.app {
   -o-transition: all 1.5s;
 }
 
+#page-content-wrapper.toggle-left #btn-izq img {
+  content: url("../images/arrow-right.png");
+}
+#page-content-wrapper.toggle-right #btn-der img {
+  content: url("../images/arrow-left.png");
+}
 /* ************************** */
 /* Fin clases de movivimiento */
 /* ************************** */
