@@ -70,8 +70,10 @@ body.app {
   height: 60vh;
   position: relative;
 }
-#caja-comp .altura-comp {
+#caja-comp .altura-comp.contenido {
   height: 50vh;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 #comp-chat {
@@ -122,7 +124,7 @@ body.app {
 #page-content-wrapper.toggle-right {
   z-index: -1000;
   position: relative;
-  width: 85%;
+  width: 86%;
   height: 94vh;
   float: left;
   overflow-y: auto;
@@ -173,6 +175,12 @@ body.app {
   -o-transition: all 1.5s;
 }
 
+#page-content-wrapper.toggle-left #btn-izq img {
+  content: url("../images/arrow-right.png");
+}
+#page-content-wrapper.toggle-right #btn-der img {
+  content: url("../images/arrow-left.png");
+}
 /* ************************** */
 /* Fin clases de movivimiento */
 /* ************************** */
@@ -208,13 +216,13 @@ body.app {
 
 .flecha-izq {
   position: absolute;
-  top: 49%;
+  top: 48.9%;
   left: 5px;
   z-index: 1000;
 }
 .flecha-der {
   position: absolute;
-  top: 49%;
+  top: 48.9%;
   right: 5px;
   z-index: 1000;
 }
