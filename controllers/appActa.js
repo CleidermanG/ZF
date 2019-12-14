@@ -54,12 +54,11 @@ app.controller('myCtrlActa', function($scope, WebexTeams) {
         ip.then(function successCallback(response) {
             let actaInspeccion = WebexTeams.cosultaActaInspeccion($scope.cliente.NUMERO_INSPECCION, response.data.ipServices);
             actaInspeccion.then(function successCallback(inspeccion) {
-                console.log(inspeccion);
-
-                if (inspeccion.data.recordset[0].ID_USUARIOZF == null) {
+                console.log(inspeccion.data.ID_USUARIOZF);
+                if (inspeccion.data.ID_USUARIOZF == '(null)' || inspeccion.data.ID_USUARIOZF == null) {
                     $scope.AddActaInspeccion();
                 } else {
-                    $scope.formActa(inspeccion.data.recordset[0]);
+                    $scope.formActa(inspeccion.data);
                     $scope.enviarActa();
                 }
             }, function errorCallback(error) {
@@ -173,8 +172,13 @@ app.controller('myCtrlActa', function($scope, WebexTeams) {
                 ip.then(function successCallback(response) {
                     let actaInspeccion = WebexTeams.actaInspeccion(data, response.data.ipServices);
                     actaInspeccion.then(function successCallback(inspeccion) {
-                        $scope.enviarActa();
-                        toastr.success("El acta se guardó correctamente", "Sistema Zona Franca");
+                        if (inspeccion.data == 1) {
+                            $scope.enviarActa();
+                            toastr.success("El acta se guardó correctamente", "Sistema Zona Franca");
+                        } else {
+                            toastr.error("Error con la base de datos", "Sistema Zona Franca");
+                        }
+
                     }, function errorCallback(error) {
                         console.log(error);
                     });

@@ -165,6 +165,9 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
                         id: token.data.user.recordset.ID_USUARIOV,
                         usuarioZF: token.data.user.recordset.ID_USUARIOZF
                     }
+
+
+
                     let asignarInspeccion = WebexTeams.asignarInspeccion(user, response.data.ipServices);
                     asignarInspeccion.then(function successCallback(inspeccion) {
 
@@ -537,10 +540,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         ip.then(function successCallback(response) {
             let actaInspeccion = WebexTeams.cosultaActaInspeccion($scope.cliente.NUMERO_INSPECCION, response.data.ipServices);
             actaInspeccion.then(function successCallback(inspeccion) {
-
                 if (inspeccion.status != 404) {
-                    console.log(inspeccion);
-
                     if (inspeccion.data.ID_ESTADOACTA != 1) {
                         if (inspeccion.data.ID_USUARIOZF) {
                             $scope.formActa(inspeccion.data);
@@ -552,13 +552,9 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
                         toastr.success("El acta ya fue aprobada por el operador", "Sistema Zona Franca");
                         $scope.formActa(inspeccion.data);
                     }
-                } else {
-                    toastr.error("Error al cargar la inspección.", "Sistema Zona Franca");
                 }
-
-
-
             }, function errorCallback(error) {
+                toastr.error(error.data, "Sistema Zona Franca");
                 console.log(error);
             });
 
