@@ -397,6 +397,25 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
             return new Blob([ia], { type: mimeString });
         }
 
+        function watermarkedDataURL(canvas, text) {
+            var tempCanvas = document.createElement('canvas');
+            var tempCtx = tempCanvas.getContext('2d');
+            var cw, ch;
+            cw = tempCanvas.width = canvas.width;
+            ch = tempCanvas.height = canvas.height;
+            tempCtx.drawImage(canvas, 0, 0);
+            tempCtx.font = "23px Calibri";
+            var textWidth = tempCtx.measureText(text).width;
+            tempCtx.globalAlpha = .80;
+            tempCtx.fillStyle = '#ffc107'
+            tempCtx.fillText(text, cw - textWidth - 10, ch - 20);
+            tempCtx.fillStyle = '#00632f'
+            tempCtx.fillText(text, cw - textWidth - 10 + 2, ch - 20 + 2);
+            // just testing by adding tempCanvas to document
+            document.body.appendChild(tempCanvas);
+            return (tempCanvas.toDataURL());
+        }
+
         $scope.screenshot = function() {
             let ip = WebexTeams.Ip();
             ip.then(function successCallback(response) {
@@ -405,6 +424,11 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 var video = document.getElementById(`remote-view-video`);
                 context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+                // var dataURL = watermarkedDataURL(canvas, "Fecha");
+
+
+
+
                 var blobImage = $scope.dataURItoBlob(dataURL);
                 var fileImage = new File([blobImage], "fileName.jpeg", {
                     type: "'image/jpeg'"
