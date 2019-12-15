@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Aprobación de acta</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../css/aprobacion.css">
+    <link rel="stylesheet" type="text/css" href="../../css/icon.css">
+    <link rel="stylesheet" type="text/css" href="../../css/fonts.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
+    <script src="../../js/socket.io.js"></script>
+    <script src="../../node_modules/angular-socket-io/socket.js"></script>
+
+    <link rel="shortcut icon" href="#" />
+</head>
+
+<body class="app" ng-cloak ng-app="myApp" ng-controller="myCtrl">
+    <div id="loader"></div>
+
+    <div ng-hide="ocultarTabla" class="container">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-2">
+                <img class="imagen img-fluid" src="../../images/logozfb.png">
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-10 text-center">
+                <table class="table table-bordered table-sm bg-green">
+                    <tbody>
+                        <tr>
+                            <td colspan="3">
+                                FO-SO- 15
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                Acta de inspección de mercanacias
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Version 01
+                            </td>
+                            <td>
+                                Vigencia: Abril 16
+                            </td>
+                            <td>
+                                Página 1 de 1
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" ng-init="init()">
+
+            <div class="col-sm-12 col-md-12 table-responsive">
+                <table class="table table-borderless">
+                    <tr>
+                        <td class="titulo-1">Fecha:</td>
+                        <td class="campo">{{fecha.replace('Z', '') | date:'dd/MM/yyyy h:mm a'}}</td>
+                        <td class="titulo-1 text-right">Usuario:</td>
+                        <td class="campo">{{nombreUsuarioOperador | uppercase}}</td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="col-sm-12 col-md-12 table-responsive">
+                <table class="table table-borderless">
+                    <tr>
+                        <td class="titulo-1">Area de Operaciones:</td>
+                        <td width="50px">Ingresos</td>
+                        <td class="campo">{{areaOperacion1}}</td>
+                        <td width="50px">Salidas</td>
+                        <td class="campo">{{areaOperacion2}}</td>
+                        <td width="50px">Insp.Fisica </td>
+                        <td class="campo">{{areaOperacion3}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-sm-12 col-md-12 table-responsive">
+                <table class="table table-borderless">
+                    <tr>
+                        <td class="titulo-1">Numero(s) de documento(s)</td>
+                        <td class="campo">{{numerosDoctumentos}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-sm-12 col-md-12 table-responsive">
+                <table class="table table-borderless">
+                    <tr>
+                        <td class="titulo-1">Naturaleza:</td>
+                        <td width="50px">DEX</td>
+                        <td class="campo" width="90px">{{naturaleza1}}</td>
+                        <td width="50px">GUIA</td>
+                        <td class="campo" width="90px">{{naturaleza2}}</td>
+                        <td width="50px">DI</td>
+                        <td class="campo" width="90px">{{naturaleza3}}</td>
+                        <td width="50px">Otros</td>
+                        <td class="campo" width="90px">{{naturaleza4}}</td>
+                        <td width="50px">CUAL</td>
+                        <td class="campo">{{naturaleza5}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-sm-12 col-md-12 table-responsive">
+                <table class="table table-borderless">
+                    <tr>
+                        <td class="titulo-1">Numero(s) de formulario(s)</td>
+                        <td class="campo">{{numeros_formularios}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-sm-12 col-md-12 table-responsive">
+                <table class="table table-borderless">
+                    <tr>
+                        <td class="titulo-1">Numero de Bultos</td>
+                        <td class="campo">{{numero_bultos}}</td>
+                        <td width="50px">Peso</td>
+                        <td class="campo">{{peso}} KG</td>
+
+                    </tr>
+                </table>
+            </div>
+            <div class="col-sm-12 col-md-12 table-responsive">
+                <table class="table table-borderless">
+                    <tr>
+                        <td class="titulo-1">Descripción</td>
+                        <td class="campo">{{descripcion}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-sm-12 col-md-12 table-responsive">
+                <table class="table table-borderless">
+                    <tr>
+                        <td class="titulo-1">Estados de los bultos</td>
+                        <td width="50px">Bueno</td>
+                        <td class="campo">{{estadoBultos1}}</td>
+                        <td width="50px">Regular</td>
+                        <td class="campo">{{estadoBultos2}}</td>
+                        <td width="50px">Malo</td>
+                        <td class="campo">{{estadoBultos3}}</td>
+
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-12 ">
+                <table class="table  table-borderless">
+                    <tr>
+                        <td class="titulo-1">Observaciones</td>
+                        <td class="campo">{{observaciones}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-12 pt-5">
+                <table class="table table-sm table-borderless text-center">
+                    <tr>
+                        <td>
+                            <h4>Usuario operador</h4>
+                        </td>
+                        <td>
+                            <h4>Usuario zona franca</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{nombreUsuarioOperador | uppercase}} <br> {{ccUsuarioOperador}}</td>
+                        <td>{{nombreUsuarioZF | uppercase}} <br> {{ccUsuarioZF}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class=" col-md-12 text-center mt-5" style="margin-top: 1rem!important;">
+                <button type="submit" class="btn btn-amarillo mr-3" ng-click="aprobacion()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="../../controllers/appAprobacion.js"></script>
+    <script src="../../services/servicesActaInspeccion.js"></script>
+    <script src="../../services/chatSocket.js"></script>
+</body>
+
+</html>

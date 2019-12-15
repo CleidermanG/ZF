@@ -32,13 +32,13 @@ app.service('WebexTeams', function($http) {
         return $http.post(url + '/api/enviarAprobacion', data);
     };
 
-    this.terminarInspeccion = function(inspeccion, id_usuariozf, url) {
-        var userwebex = {
-            id: id_usuariozf,
-            numInspeccion: inspeccion
-        };
-        return $http.post(url + '/api/terminarInspeccion', JSON.stringify(userwebex));
-    };
+    // this.terminarInspeccion = function(inspeccion, id_usuariozf, url) {
+    //     var userwebex = {
+    //         id: id_usuariozf,
+    //         numInspeccion: inspeccion
+    //     };
+    //     return $http.post(url + '/api/terminarInspeccion', JSON.stringify(userwebex));
+    // };
 
     this.actaInspeccion = function(actaInspeccion, url) {
         return $http.post(url + '/api/guardarActaInspeccion', JSON.stringify(actaInspeccion));

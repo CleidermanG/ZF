@@ -26,10 +26,23 @@ const path = require('path');
 app.engine('html', require('ejs').renderFile);
 
 
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ limit: '10mb' }))
 app.use(cors());
+
+app.get('/actaAprobada', (req, res, next) => {
+    // res.send('hola')
+    res.render('./aprobacion/actaAprobada.html');
+});
+app.get('/default', (req, res, next) => {
+    res.render('./aprobacion/default.html');
+});
+app.get('/aprobacion', (req, res, next) => {
+    res.render('./aprobacion/aprobacion.html');
+});
 
 app.listen(Config.portApplication, function() {
     console.info(`Server listening on port ${Config.portApplication}!`);
