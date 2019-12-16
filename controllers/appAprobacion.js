@@ -15,7 +15,9 @@ app.controller('myCtrl', function($scope, ActaInspeccion, $location, $window, $t
 
     let ip = ActaInspeccion.Ip();
     ip.then(function successCallback(response) {
-        var timeLimite = 60000 * response.data.tokenExpirationCount;
+        // var timeLimite = 60000 * response.data.tokenExpirationCount;
+
+        var timeLimite = 60000 * 3;
         var timerToken = function() {
             $scope.time = $localStorage.time;
             $scope.$storage.time += 1000;
@@ -98,7 +100,7 @@ app.controller('myCtrl', function($scope, ActaInspeccion, $location, $window, $t
                     if (acta.data == '1') {
                         mns.asunto = "Acta aprobada por el operador.";
                         socket.emit("actaAprobada", mns);
-                        $window.location.href = response.data.ipServices + '/views/aprobacion/actaAprobada.html';
+                        $window.location.href = response.data.ipApplication + '/actaAprobada';
                     } else {
                         mns.asunto = "Error en la base de datos.";
                         socket.emit("actaAprobada", mns);
@@ -150,7 +152,7 @@ app.controller('myCtrl', function($scope, ActaInspeccion, $location, $window, $t
                                 console.log(error);
                             });
                         } else {
-                            $window.location.href = response.data.ipServices + '/views/aprobacion/actaAprobada.html';
+                            $window.location.href = response.data.ipApplication + '/actaAprobada';
                         }
 
 
@@ -160,7 +162,7 @@ app.controller('myCtrl', function($scope, ActaInspeccion, $location, $window, $t
 
                 }, function errorCallback(error) {
                     $window.localStorage.clear();
-                    $window.location.href = response.data.ipServices + '/views/aprobacion/default.html';
+                    $window.location.href = response.data.ipApplication + '/default';
                     console.log(error);
                 });
             }, function errorCallback(error) {
