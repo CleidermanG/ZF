@@ -215,7 +215,6 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         });
     }
 
-
     $scope.cargarMultimediaImages = function(inspeccion) {
         let ip = WebexTeams.Ip();
         ip.then(function successCallback(response) {
@@ -232,6 +231,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         });
 
     }
+
     $scope.cargarMultimediaVideos = function(inspeccion) {
         let ip = WebexTeams.Ip();
         ip.then(function successCallback(response) {
@@ -423,7 +423,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
             tempCtx.fillStyle = '#00632f'
             tempCtx.fillText(text, cw - textWidth - 10 + 2, ch - 20 + 2);
             // just testing by adding tempCanvas to document
-            document.body.appendChild(tempCanvas);
+            // document.body.appendChild(tempCanvas);
             return (tempCanvas.toDataURL());
         }
 
@@ -520,7 +520,6 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
 
     }
 
-
     $scope.connect = function(access_token) {
         spark = ciscospark.init({
             credentials: {
@@ -538,7 +537,6 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         });
         $scope.authorize();
     }
-
 
     $scope.authorize = function() {
         webex = window.webex = Webex.init({
@@ -581,7 +579,40 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         });
     }
 
-    //timer with timeout
+    $scope.btnTerminar = function() {
+
+        let ip = WebexTeams.Ip();
+        ip.then(function successCallback(response) {
+
+            var user = {
+                numero_inspeccion: $scope.cliente.NUMERO_INSPECCION,
+                id_usuariozf: $scope.cliente.ID_USUARIOZF
+            }
+
+            let terminarInspeccion = WebexTeams.terminarInspeccion(user, response.data.ipServices);
+            terminarInspeccion.then(function successCallback(inspeccion) {
+                toastr.success("Inspección terminada.", "Sistema Zona Franca");
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+
+
+            }, function errorCallback(error) {
+                if (error.status == 400) {
+                    toastr.error("Error en la base de datos", "Sistema Zona Franca");
+                }
+
+                console.log(error);
+            });
+        }, function errorCallback(error) {
+            console.log(error);
+        });
+
+    }
+
+
+
+
     $scope.timerWithTimeout = 00;
     $scope.startTimerWithTimeout = function() {
         $scope.timerWithTimeout = 00;
