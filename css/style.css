@@ -30,6 +30,7 @@ body.app {
 /* ***************************************************** */
 
 #left-sidebar-wrapper {
+<<<<<<< HEAD
     z-index: -1000;
     position: relative;
     float: left;
@@ -71,6 +72,49 @@ body.app {
     -moz-transition: all 1s ease;
     -o-transition: all 1s ease;
     transition: all 1s ease;
+=======
+  z-index: -1000;
+  position: relative;
+  float: left;
+  clear: left;
+  width: 10%;
+  height: 94vh;
+  overflow: hidden;
+  background: white;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+#page-content-wrapper {
+  z-index: -1000;
+  position: relative;
+  width: 65%;
+  height: 94vh;
+  float: left;
+  overflow: hidden;
+  background: white;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+#sidebar-wrapper {
+  z-index: 1000;
+  position: relative;
+  clear: right;
+  float: left;
+  width: 25%;
+  height: 94vh;
+  overflow: hidden;
+  background: white;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+>>>>>>> vista
 }
 
 #caja-comp {
@@ -79,8 +123,8 @@ body.app {
 }
 
 #comp-chat.altura-comp {
-    display: flex;
-    flex-direction: column-reverse;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 #comp-chat {
@@ -93,8 +137,8 @@ body.app {
     height: 50vh;
 }
 #comp-obsv.altura-comp {
-    display: flex;
-    flex-direction: column-reverse;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 #remote-view-video {
@@ -181,17 +225,17 @@ body.app {
 }
 
 .toggle-right .navegacion {
-    position: absolute;
-    background: #ffffff;
-    z-index: 200;
-    width: 100%;
-    padding: 10px;
-    padding-top: 30vh;
-    height: 100%;
-    transition: all 1.5s;
-    -webkit-transition: all 1.5s;
-    -moz-transition: all 1.5s;
-    -o-transition: all 1.5s;
+  position: absolute;
+  background: #ffffff;
+  z-index: 200;
+  width: 100%;
+  padding: 10px;
+  padding-top: 30vh;
+  height: 100%;
+  transition: all 1.5s;
+  -webkit-transition: all 1.5s;
+  -moz-transition: all 1.5s;
+  -o-transition: all 1.5s;
 }
 
 #page-content-wrapper.toggle-left #btn-izq img {
@@ -299,8 +343,8 @@ body.app {
 }
 
 ul#pills-tab li {
-    margin-right: 5px;
-    margin-bottom: 0.5rem;
+  margin-right: 5px;
+  margin-bottom: 0.5rem;
 }
 
 .user img {
@@ -451,6 +495,7 @@ a.closed {
 }
 
 .message-input input {
+<<<<<<< HEAD
     height: 50px;
     border-radius: 10px;
     border: 0;
@@ -458,6 +503,15 @@ a.closed {
     padding: 10px;
     font-weight: 300;
     margin: 0 20px;
+=======
+  height: 50px;
+  border-radius: 10px;
+  border: 0;
+  width: 92%;
+  padding: 10px;
+  font-weight: 300;
+  margin: 0 12px;
+>>>>>>> vista
 }
 
 .message-input .submit {
@@ -473,6 +527,7 @@ a.closed {
 }
 
 .navegacion {
+<<<<<<< HEAD
     position: absolute;
     bottom: 0px;
     z-index: 200;
@@ -489,6 +544,19 @@ a.closed {
 .contenido {
     height: calc(100vh - 350px);
     /* padding-bottom: 90px; */
+=======
+  position: absolute;
+  bottom: 0px;
+  z-index: 200;
+  background: #ffffff;
+  width: 100%;
+  padding: 10px;
+  height: 10vh;
+  transition: all 1.5s;
+  -webkit-transition: all 1.5s;
+  -moz-transition: all 1.5s;
+  -o-transition: all 1.5s;
+>>>>>>> vista
 }
 
 .tab-content>.tab-pane {
@@ -604,7 +672,6 @@ a.closed {
 
 /* Menu */
 
-
 #toggleIconRight img {
     -webkit-transition: all 1s ease;
     -moz-transition: all 1s ease;
@@ -612,8 +679,11 @@ a.closed {
     transition: all 1s ease;
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> vista
 /* Sidebar Styles */
 
 .sidebar-nav {
@@ -744,9 +814,9 @@ a.closed {
     color: #fff;
     background: none;
 }
-
-
-
+/* ************ */
+/* Clase loader */
+/* ************ */
 
 /**** loader ***/
 
@@ -794,6 +864,7 @@ a.closed {
 }
 
 @keyframes spin {
+<<<<<<< HEAD
     0% {
         transform: rotate(0deg);
     }
@@ -801,3 +872,172 @@ a.closed {
         transform: rotate(360deg);
     }
 }
+=======
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* **************** */
+/* Fin clase loader */
+/* **************** */
+
+/* ****************** */
+/* Clases responsivas */
+/* ****************** */
+
+@media only screen and (max-width: 1600px), screen and (max-height: 900px) {
+  #comp-chat {
+    position: relative;
+    height: 49vh;
+  }
+
+  #comp-obsv {
+    position: relative;
+    height: 49vh;
+  }
+
+  .empresa {
+    background: #00632f;
+    color: #ffffff;
+    padding: 20px;
+    height: 22vh;
+  }
+}
+
+@media only screen and (max-width: 1440px), screen and (max-height: 900px) {
+  #caja-comp {
+    height: 63vh;
+    position: relative;
+  }
+
+  .navegacion {
+    position: absolute;
+    bottom: 0px;
+    z-index: 200;
+    background: #ffffff;
+    width: 100%;
+    padding: 10px;
+    height: 8vh;
+    transition: all 1.5s;
+    -webkit-transition: all 1.5s;
+    -moz-transition: all 1.5s;
+    -o-transition: all 1.5s;
+  }
+  #comp-chat {
+    position: relative;
+    height: 52vh;
+  }
+
+  #comp-obsv {
+    position: relative;
+    height: 52vh;
+  }
+
+  .scrollbar {
+    height: 46%;
+    width: 100%;
+    background: #f5f5f5;
+    overflow-y: scroll;
+    margin-bottom: 15px;
+  }
+}
+
+@media only screen and (max-width: 1280px), screen and (max-height: 800px) {
+  .empresa {
+    background: #00632f;
+    color: #ffffff;
+    padding: 9px;
+    height: 22vh;
+  }
+
+  .navegacion {
+    position: absolute;
+    bottom: 0px;
+    z-index: 200;
+    background: #ffffff;
+    width: 100%;
+    padding: 0px;
+    height: 7vh;
+    transition: all 1.5s;
+    -webkit-transition: all 1.5s;
+    -moz-transition: all 1.5s;
+    -o-transition: all 1.5s;
+  }
+
+  .titulo p {
+    margin-bottom: 0;
+  }
+
+  .user {
+    background: #ffffff;
+    padding: 10px 0;
+    -webkit-box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    position: relative;
+    height: 7vh;
+  }
+
+  #caja-comp #check{
+    overflow-y: scroll;
+    height: 63vh;
+    position: relative;
+  }
+  #caja-comp{
+    height: 64vh;
+    position: relative;
+  }
+
+  .form-app.ng-pristine .text-center{
+    margin-bottom: 10px;
+  }
+
+  #sidebar-wrapper.toggle-right {
+    position: relative;
+    width: 5%;
+    height: 94vh;
+    float: left;
+    clear: right;
+    z-index: 1000;
+    transition: width 1s;
+    -webkit-transition: width 1s;
+    -moz-transition: width 1s;
+    -o-transition: width 1s;
+  }
+
+  #page-content-wrapper.toggle-right {
+  z-index: -1000;
+  position: relative;
+  width: 85%;
+  height: 94vh;
+  float: left;
+  overflow-y: auto;
+  background: white;
+  transition: width 1s;
+  -webkit-transition: width 1s;
+  -moz-transition: width 1s;
+  -o-transition: width 1s;
+}
+
+#page-content-wrapper.toggle-left.toggle-right {
+  z-index: -1000;
+  position: relative;
+  width: 95%;
+  height: 94vh;
+  float: left;
+  overflow-y: auto;
+  background: white;
+  transition: width 1s;
+  -webkit-transition: width 1s;
+  -moz-transition: width 1s;
+  -o-transition: width 1s;
+}
+}
+
+/* ********************** */
+/* Fin clases responsivas */
+/* ********************** */
+>>>>>>> vista
