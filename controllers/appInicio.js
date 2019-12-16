@@ -102,6 +102,10 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
     $scope.videosInspeccion = [];
     $scope.btnAprobacion = false;
     $scope.btnTerminarInspeccion = true;
+    $scope.btnChat = false;
+    $scope.btnLlamarHide = false;
+
+
 
     $scope.connection = function() {
         if ($location.search().token == null) {
@@ -153,6 +157,8 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
                     socket.on('actaAprobada', function(resp) {
                         $scope.btnAprobacion = true;
                         $scope.btnTerminarInspeccion = false;
+                        $scope.btnChat = true;
+                        $scope.btnLlamar = true;
                         toastr.success(resp.asunto, "Sistema Zona Franca");
                     });
 
@@ -401,8 +407,10 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         }
 
         function watermarkedDataURL(canvas, text) {
-            var tempCanvas = document.createElement('canvas');
+            // var tempCanvas = document.createElement('canvas');
+            var tempCanvas = document.getElementById('canvas2');
             var tempCtx = tempCanvas.getContext('2d');
+            // tempCanvas.clearRect(0, 0, canvas.width, canvas.height);
             var cw, ch;
             cw = tempCanvas.width = canvas.width;
             ch = tempCanvas.height = canvas.height;
@@ -419,19 +427,29 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
             return (tempCanvas.toDataURL());
         }
 
+        function fechaServer() {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+            var h = today.getHours();
+            var min = today.getMinutes();
+            today = dd + "/" + mm + "/" + yyyy + " " + h + ":" + min;
+            return (today.toString());
+        }
+
+
+
         $scope.screenshot = function() {
             let ip = WebexTeams.Ip();
             ip.then(function successCallback(response) {
-                var dataURL = canvas.toDataURL()
+                // var dataURL = canvas.toDataURL()
                 var context = canvas.getContext('2d');
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 var video = document.getElementById(`remote-view-video`);
                 context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-                // var dataURL = watermarkedDataURL(canvas, "Fecha");
-
-
-
-
+                var fecha = fechaServer();
+                var dataURL = watermarkedDataURL(canvas, fecha);
                 var blobImage = $scope.dataURItoBlob(dataURL);
                 var fileImage = new File([blobImage], "fileName.jpeg", {
                     type: "'image/jpeg'"
@@ -540,21 +558,21 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         ip.then(function successCallback(response) {
             let actaInspeccion = WebexTeams.cosultaActaInspeccion($scope.cliente.NUMERO_INSPECCION, response.data.ipServices);
             actaInspeccion.then(function successCallback(inspeccion) {
-                if (inspeccion.status != 404) {
-                    if (inspeccion.data.ID_ESTADOACTA != 1) {
-                        if (inspeccion.data.ID_USUARIOZF) {
-                            $scope.formActa(inspeccion.data);
-                            toastr.success("Esperando aprobación del operador", "Sistema Zona Franca");
-                        }
-                    } else {
-                        $scope.btnAprobacion = true;
-                        $scope.btnTerminarInspeccion = false;
-                        toastr.success("El acta ya fue aprobada por el operador", "Sistema Zona Franca");
+                if (inspeccion.data.ID_ESTADOACTA != 1) {
+                    if (inspeccion.data.ID_USUARIOZF) {
                         $scope.formActa(inspeccion.data);
+                        toastr.success("Esperando aprobación del operador", "Sistema Zona Franca");
                     }
+                } else {
+                    $scope.btnAprobacion = true;
+                    $scope.btnChat = true;
+                    $scope.btnLlamar = true;
+                    $scope.btnTerminarInspeccion = false;
+                    toastr.success("El acta ya fue aprobada por el operador", "Sistema Zona Franca");
+                    $scope.formActa(inspeccion.data);
                 }
+
             }, function errorCallback(error) {
-                toastr.error(error.data, "Sistema Zona Franca");
                 console.log(error);
             });
 
