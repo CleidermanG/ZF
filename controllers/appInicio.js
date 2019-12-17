@@ -261,8 +261,8 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
         document.getElementById("remote-view-video").poster = "";
 
         document.getElementById(`iconColgar`).style.visibility = "visible";
-        // const call = spark.phone.dial($scope.cliente.USUARIO_WEBEXCONTACTO);
-        // $scope.bindCallEvents(call);
+        const call = spark.phone.dial($scope.cliente.USUARIO_WEBEXCONTACTO);
+        $scope.bindCallEvents(call);
     }
 
     $scope.bindCallEvents = function (call) {
