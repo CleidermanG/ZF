@@ -9,9 +9,7 @@ body.app {
   position: relative;
 }
 
-.box {
-  border: 2px dotted red;
-}
+
 
 .boxes {
   display: flex;
