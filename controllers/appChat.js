@@ -78,7 +78,7 @@ app.controller('myCtrlChat', function($scope, ChatWebex, WebexTeams, $timeout) {
 
                         let ip = WebexTeams.Ip();
                         ip.then(function successCallback(response) {
-                            var blockURL = message.data.text.includes(response.data.ipServices + "/api/aprobacion?token");
+                            var blockURL = message.data.text.includes(response.data.ipApplication + "/api/aprobacion?token");
                             if (!blockURL) {
                                 if (message.data.personEmail == $scope.cliente.USUARIO_WEBEXCONTACTO ||
                                     message.data.personEmail == $scope.gmailWebex) {
