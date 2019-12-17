@@ -132,7 +132,6 @@ app.controller('myCtrl', function($scope, ActaInspeccion, $location, $window, $t
                     actaInspeccion.then(function successCallback(acta) {
                         console.log(acta);
 
-
                         if (acta.data.ID_ESTADOACTA != 1) {
                             $scope.ocultarTabla = false;
                             var data = {
@@ -140,14 +139,10 @@ app.controller('myCtrl', function($scope, ActaInspeccion, $location, $window, $t
                             }
                             let usuarioZF = ActaInspeccion.consultarUsuarioZF(data, response.data.ipServices);
                             usuarioZF.then(function successCallback(user) {
-
                                 acta.data.NOMBRE_USUARIOZF = user.data.NOMBRE_USUARIOZF;
                                 acta.data.CEDULA_USUARIOZF = user.data.CEDULA_AGENTE;
                                 acta.data.USUARIOWEBEXZF = user.data.USUARIOWEBEX;
-
-
                                 $scope.formActa(acta.data);
-
                             }, function errorCallback(error) {
                                 console.log(error);
                             });
