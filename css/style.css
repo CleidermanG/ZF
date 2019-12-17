@@ -30,49 +30,6 @@ body.app {
 /* ***************************************************** */
 
 #left-sidebar-wrapper {
-<<<<<<< HEAD
-    z-index: -1000;
-    position: relative;
-    float: left;
-    clear: left;
-    width: 10%;
-    height: 94vh;
-    overflow-y: auto;
-    background: white;
-    -webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    transition: all 1s ease;
-}
-
-#page-content-wrapper {
-    z-index: -1000;
-    position: relative;
-    width: 65%;
-    height: 94vh;
-    float: left;
-    overflow-y: auto;
-    background: white;
-    -webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    transition: all 1s ease;
-}
-
-#sidebar-wrapper {
-    z-index: 1000;
-    position: relative;
-    clear: right;
-    float: left;
-    width: 25%;
-    height: 94vh;
-    overflow-y: auto;
-    background: white;
-    -webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    transition: all 1s ease;
-=======
   z-index: -1000;
   position: relative;
   float: left;
@@ -114,7 +71,6 @@ body.app {
   -moz-transition: all 1s ease;
   -o-transition: all 1s ease;
   transition: all 1s ease;
->>>>>>> vista
 }
 
 #caja-comp {
@@ -495,15 +451,6 @@ a.closed {
 }
 
 .message-input input {
-<<<<<<< HEAD
-    height: 50px;
-    border-radius: 10px;
-    border: 0;
-    width: 92%;
-    padding: 10px;
-    font-weight: 300;
-    margin: 0 20px;
-=======
   height: 50px;
   border-radius: 10px;
   border: 0;
@@ -511,7 +458,6 @@ a.closed {
   padding: 10px;
   font-weight: 300;
   margin: 0 12px;
->>>>>>> vista
 }
 
 .message-input .submit {
@@ -527,24 +473,6 @@ a.closed {
 }
 
 .navegacion {
-<<<<<<< HEAD
-    position: absolute;
-    bottom: 0px;
-    z-index: 200;
-    background: #ffffff;
-    width: 100%;
-    padding: 10px;
-    height: 10vh;
-    transition: all 1.5s;
-    -webkit-transition: all 1.5s;
-    -moz-transition: all 1.5s;
-    -o-transition: all 1.5s;
-}
-
-.contenido {
-    height: calc(100vh - 350px);
-    /* padding-bottom: 90px; */
-=======
   position: absolute;
   bottom: 0px;
   z-index: 200;
@@ -556,7 +484,6 @@ a.closed {
   -webkit-transition: all 1.5s;
   -moz-transition: all 1.5s;
   -o-transition: all 1.5s;
->>>>>>> vista
 }
 
 .tab-content>.tab-pane {
@@ -679,11 +606,6 @@ a.closed {
     transition: all 1s ease;
 }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> vista
 /* Sidebar Styles */
 
 .sidebar-nav {
@@ -864,15 +786,6 @@ a.closed {
 }
 
 @keyframes spin {
-<<<<<<< HEAD
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-=======
   0% {
     transform: rotate(0deg);
   }
@@ -1040,4 +953,3 @@ a.closed {
 /* ********************** */
 /* Fin clases responsivas */
 /* ********************** */
->>>>>>> vista
