@@ -5,7 +5,7 @@ var app = angular.module('myApp', [
     'btford.socket-io'
 ]).value('duScrollOffset', 60);
 document.getElementById("pagina").style.visibility = "hidden";
-app.config(['$locationProvider', function($locationProvider) {
+app.config(['$locationProvider', function ($locationProvider) {
     $locationProvider.html5Mode({
         enabled: true,
         requireBase: false
@@ -13,7 +13,7 @@ app.config(['$locationProvider', function($locationProvider) {
 }]);
 
 
-app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filter, $location,
+app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filter, $location,
     $timeout, $interval, $window, $localStorage, ServicesToken, $timeout, $http, configSocket) {
     var recorder; // globally accessible
     let webex; // globally accessible
@@ -26,7 +26,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
 
     // user: null
     // timer callback
-    var timerToken = function() {
+    var timerToken = function () {
         $scope.time = $localStorage.time;
         // $scope.$storage.time = 0;
         $scope.$storage.time += 1000;
@@ -47,7 +47,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         "positionClass": "toast-bottom-left"
     };
 
-    $scope.test = function(nameFile, type) {
+    $scope.test = function (nameFile, type) {
         swal.fire({
             title: 'Seguro que quieres eliminar esto?',
             text: "Esta acción ya no se podrá deshacer, Así que piénsalo bien.",
@@ -91,7 +91,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
 
     var canvas = document.getElementById('canvas');
 
-    document.getElementById(`remote-view-video`).addEventListener('loadedmetadata', function() {
+    document.getElementById(`remote-view-video`).addEventListener('loadedmetadata', function () {
         var video = document.getElementById(`remote-view-video`);
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
@@ -107,7 +107,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
 
 
 
-    $scope.connection = function() {
+    $scope.connection = function () {
         if ($location.search().token == null) {
             // alert('url no valida');
             $scope.connectiontwo();
@@ -140,70 +140,71 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         }
     }
 
-    $scope.connectiontwo = function() {
+    $scope.connectiontwo = function () {
 
         let ip = WebexTeams.Ip();
         ip.then(function successCallback(response) {
             let validateToken = ServicesToken.validateToken($localStorage.sesion, response.data.ipServices);
             validateToken.then(function successCallback(token) {
 
-                    document.getElementById("loader2").style.visibility = "hidden";
-                    document.getElementById("pagina").style.visibility = "visible";
-                    console.log(token.data.user);
-                    $scope.id_usuariozf = token.data.user.recordset.ID_USUARIOZF;
-                    $scope.username = token.data.user.recordset.NOMBRE_USUARIOZF;
-                    $scope.gmailWebex = token.data.user.recordset.USUARIOWEBEX;
-                    var socket = configSocket.socket($scope.gmailWebex, response.data.ipServices)
-                    socket.on('actaAprobada', function(resp) {
-                        $scope.btnAprobacion = true;
-                        $scope.btnTerminarInspeccion = false;
-                        $scope.btnChat = true;
-                        $scope.btnLlamar = true;
-                        toastr.success(resp.asunto, "Sistema Zona Franca");
-                    });
+                document.getElementById("loader2").style.visibility = "hidden";
+                document.getElementById("pagina").style.visibility = "visible";
+                console.log(token.data.user);
+                $scope.id_usuariozf = token.data.user.recordset.ID_USUARIOZF;
+                $scope.username = token.data.user.recordset.NOMBRE_USUARIOZF;
+                $scope.gmailWebex = token.data.user.recordset.USUARIOWEBEX;
+                var socket = configSocket.socket($scope.gmailWebex, response.data.ipServices)
+                socket.on('actaAprobada', function (resp) {
+                    $scope.btnAprobacion = true;
+                    $scope.btnTerminarInspeccion = false;
+                    $scope.btnChat = true;
+                    $scope.btnLlamar = true;
+                    toastr.success(resp.asunto, "Sistema Zona Franca");
+                });
 
-                    if (token.data.user.avatar) {
-                        $scope.avatar = token.data.user.avatar;
+                if (token.data.user.avatar) {
+                    $scope.avatar = token.data.user.avatar;
+                }
+                $scope.access_token = token.data.user.access_token;
+
+                var user = {
+                    id: token.data.user.recordset.ID_USUARIOV,
+                    usuarioZF: token.data.user.recordset.ID_USUARIOZF
+                }
+
+
+
+                let asignarInspeccion = WebexTeams.asignarInspeccion(user, response.data.ipServices);
+                asignarInspeccion.then(function successCallback(inspeccion) {
+
+                    if (inspeccion.data != null) {
+                        console.log(inspeccion.data);
+                        console.log(inspeccion.data.DIRECCION);
+                        $scope.cliente = inspeccion.data;
+                        $scope.connect($scope.access_token);
+                        $scope.initChat();
+
+                        $scope.cargarMultimediaImages($scope.cliente.NUMERO_INSPECCION);
+                        $scope.cargarMultimediaVideos($scope.cliente.NUMERO_INSPECCION);
+
+                        $scope.acta()
+
+                    } else {
+                        toastr.error("Ups!, No existe inspecciones por el momento", "Sistema Zona Franca");
                     }
-                    $scope.access_token = token.data.user.access_token;
 
-                    var user = {
-                        id: token.data.user.recordset.ID_USUARIOV,
-                        usuarioZF: token.data.user.recordset.ID_USUARIOZF
-                    }
+                }, function errorCallback(error) {
+                    console.log(error);
+                });
 
-
-
-                    let asignarInspeccion = WebexTeams.asignarInspeccion(user, response.data.ipServices);
-                    asignarInspeccion.then(function successCallback(inspeccion) {
-
-                        if (inspeccion.data != null) {
-                            console.log(inspeccion.data);
-                            $scope.cliente = inspeccion.data;
-                            $scope.connect($scope.access_token);
-                            $scope.initChat();
-
-                            $scope.cargarMultimediaImages($scope.cliente.NUMERO_INSPECCION);
-                            $scope.cargarMultimediaVideos($scope.cliente.NUMERO_INSPECCION);
-
-                            $scope.acta()
-
-                        } else {
-                            toastr.error("Ups!, No existe inspecciones por el momento", "Sistema Zona Franca");
-                        }
-
-                    }, function errorCallback(error) {
-                        console.log(error);
-                    });
-
-                },
+            },
                 function errorCallback(error) {
                     $window.localStorage.clear();
                     toastr.error("Ups!, término de la sesión ", "Sistema Zona Franca");
                     $http({
                         method: 'GET',
                         url: '/assets/config.json'
-                    }).then(function(response) {
+                    }).then(function (response) {
                         $window.location.href = response.data.ipApplication + '/views/login.html'
                         console.log(error);
                     });
@@ -215,13 +216,13 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         });
     }
 
-    $scope.cargarMultimediaImages = function(inspeccion) {
+    $scope.cargarMultimediaImages = function (inspeccion) {
         let ip = WebexTeams.Ip();
         ip.then(function successCallback(response) {
             $scope.multimediaUrl = response.data.ipServices + "/multimedia/" + inspeccion;
             var screenInspeccion = servicesMultimedia.loadScreen(inspeccion, response.data.ipServices);
             screenInspeccion.then(function successCallback(dataScreen) {
-                $scope.imagesScreenshot = dataScreen.data.sort(function(a, b) { return b.num - a.num });
+                $scope.imagesScreenshot = dataScreen.data.sort(function (a, b) { return b.num - a.num });
             }, function errorCallback(error) {
                 console.log(error);
             });
@@ -232,12 +233,12 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
 
     }
 
-    $scope.cargarMultimediaVideos = function(inspeccion) {
+    $scope.cargarMultimediaVideos = function (inspeccion) {
         let ip = WebexTeams.Ip();
         ip.then(function successCallback(response) {
             var videosUser = servicesMultimedia.loadVideos(inspeccion, response.data.ipServices);
             videosUser.then(function successCallback(dataVideo) {
-                $scope.videosInspeccion = dataVideo.data.sort(function(a, b) { return b.num - a.num });
+                $scope.videosInspeccion = dataVideo.data.sort(function (a, b) { return b.num - a.num });
             }, function errorCallback(error) {
                 console.log(error);
             });
@@ -248,19 +249,20 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
 
     }
 
-    $scope.btnllamar = function() {
+    $scope.btnllamar = function () {
         var myAudio = document.getElementById("myAudio");
         myAudio.play();
-        // document.getElementById("loader").style.display = "block";
-        // document.getElementById("llamando").style.display = "block";
-        // document.getElementById("remote-view-video").poster = "";
+
+        document.getElementById("loader").style.display = "block";
+        document.getElementById("llamando").style.display = "block";
+        document.getElementById("remote-view-video").poster = "";
 
         document.getElementById(`iconColgar`).style.visibility = "visible";
         const call = spark.phone.dial($scope.cliente.USUARIO_WEBEXCONTACTO);
         $scope.bindCallEvents(call);
     }
 
-    $scope.bindCallEvents = function(call) {
+    $scope.bindCallEvents = function (call) {
 
 
         call.on(`error`, (err) => {
@@ -271,7 +273,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         call.once(`remoteMediaStream:change`, () => {
 
             document.getElementById(`remote-view-video`).srcObject = call.remoteMediaStream;
-            document.getElementById(`remote-view-video`).onloadedmetadata = function() {
+            document.getElementById(`remote-view-video`).onloadedmetadata = function () {
 
                 // var sendFile = function() {
                 //     var promise = new Promise(function(resolve, reject) {
@@ -285,6 +287,10 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
                 //     return promise;
                 // };
                 // sendFile();
+
+                document.getElementById("loader").style.display = "none";
+                document.getElementById("llamando").style.display = "none";
+                document.getElementById("remote-view-video").poster = "../images/video.jpg";
 
                 $scope.startTimerWithTimeout()
                 recorder = RecordRTC(call.remoteMediaStream, {
@@ -301,6 +307,11 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
             toastr.success("Videollamada establecida", "Sistema Zona Franca");
             var myAudio = document.getElementById("myAudio");
             myAudio.pause();
+
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("llamando").style.display = "none";
+            document.getElementById("remote-view-video").poster = "../images/video.jpg";
+            
             // document.getElementById("loader").style.display = "none";
             // document.getElementById("llamando").style.display = "none";
 
@@ -321,18 +332,18 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
 
 
         function stopRecordingCallback() {
-            var saveBlob = function() {
-                var promise = new Promise(function(resolve, reject) {
-                    setTimeout(function() {
+            var saveBlob = function () {
+                var promise = new Promise(function (resolve, reject) {
+                    setTimeout(function () {
                         var blob = recorder.getBlob();
                         resolve(blob);
                     }, 2000);
                 });
                 return promise;
             };
-            var codingFile = function(blob) {
-                var promise = new Promise(function(resolve, reject) {
-                    setTimeout(function() {
+            var codingFile = function (blob) {
+                var promise = new Promise(function (resolve, reject) {
+                    setTimeout(function () {
                         var file = new File([blob], ('video' + '.webm'), {
                             type: 'video/webm'
                         });
@@ -342,12 +353,12 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
                 return promise;
             };
 
-            var sendFile = function(file) {
-                var promise = new Promise(function(resolve, reject) {
+            var sendFile = function (file) {
+                var promise = new Promise(function (resolve, reject) {
                     let ip = WebexTeams.Ip();
                     ip.then(function successCallback(response) {
                         var video2 = servicesMultimedia.saveVideo($scope.cliente.NUMERO_INSPECCION, file, response.data.ipServices);
-                        video2.then(function(response) {
+                        video2.then(function (response) {
                             toastr.success(response.data, "Sistema Zona Franca");
                             resolve(true)
                         });
@@ -358,17 +369,17 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
                 });
                 return promise;
             };
-            var destroyRecorder = function() {
-                var promise = new Promise(function(resolve, reject) {
+            var destroyRecorder = function () {
+                var promise = new Promise(function (resolve, reject) {
                     recorder.destroy();
                     recorder = null;
                     resolve(true);
                 });
                 return promise;
             };
-            var updateVideos = function() {
-                var promise = new Promise(function(resolve, reject) {
-                    setTimeout(function() {
+            var updateVideos = function () {
+                var promise = new Promise(function (resolve, reject) {
+                    setTimeout(function () {
                         $scope.cargarMultimediaVideos($scope.cliente.NUMERO_INSPECCION);
                         resolve(true);
                     }, 3000);
@@ -387,7 +398,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
 
         }
 
-        $scope.dataURItoBlob = function(dataURI) {
+        $scope.dataURItoBlob = function (dataURI) {
             // convert base64/URLEncoded data component to raw binary data held in a string
             var byteString;
             if (dataURI.split(',')[0].indexOf('base64') >= 0)
@@ -440,7 +451,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
 
 
 
-        $scope.screenshot = function() {
+        $scope.screenshot = function () {
             let ip = WebexTeams.Ip();
             ip.then(function successCallback(response) {
                 // var dataURL = canvas.toDataURL()
@@ -449,20 +460,21 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
                 var video = document.getElementById(`remote-view-video`);
                 context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
                 var fecha = fechaServer();
+                fecha = $scope.cliente.DIRECCION + " " + fecha;
                 var dataURL = watermarkedDataURL(canvas, fecha);
                 var blobImage = $scope.dataURItoBlob(dataURL);
                 var fileImage = new File([blobImage], "fileName.jpeg", {
                     type: "'image/jpeg'"
                 });
                 var fileImage = servicesMultimedia.saveScreenshot($scope.cliente.NUMERO_INSPECCION, fileImage, response.data.ipServices);
-                fileImage.then(function(resp) {
+                fileImage.then(function (resp) {
                     if (resp.data = true) {
                         toastr.success("ScreenShot save!", "Sistema Zona Franca");
                         $scope.cargarMultimediaImages($scope.cliente.NUMERO_INSPECCION);
                     }
-                }, function(resp) {
+                }, function (resp) {
                     toastr.error("Ups!, hemos encontrado un problema", "Sistema Zona Franca");
-                }, function(evt) {
+                }, function (evt) {
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                     console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
                 });
@@ -494,9 +506,9 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
 
                     var myAudio = document.getElementById("myAudio");
                     myAudio.pause();
-                    // document.getElementById("loader").style.display = "none";
-                    // document.getElementById("llamando").style.display = "none";
-                    // document.getElementById("remote-view-video").poster = "../images/video.jpg";
+                    document.getElementById("loader").style.display = "none";
+                    document.getElementById("llamando").style.display = "none";
+                    document.getElementById("remote-view-video").poster = "../images/video.jpg";
 
                     call.hangup();
                     document.getElementById(`iconColgar`).style.visibility = "hidden";
@@ -520,13 +532,13 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
 
     }
 
-    $scope.connect = function(access_token) {
+    $scope.connect = function (access_token) {
         spark = ciscospark.init({
             credentials: {
                 access_token: access_token
             }
         });
-        spark.once(`ready`, function() {
+        spark.once(`ready`, function () {
             spark.phone.register()
                 .catch((err) => {
                     console.error(err);
@@ -538,7 +550,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         $scope.authorize();
     }
 
-    $scope.authorize = function() {
+    $scope.authorize = function () {
         webex = window.webex = Webex.init({
             credentials: {
                 access_token: $scope.access_token
@@ -551,7 +563,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         return Promise.reject(webex.canAuthorize);
     }
 
-    $scope.acta = function() {
+    $scope.acta = function () {
         let ip = WebexTeams.Ip();
         ip.then(function successCallback(response) {
             let actaInspeccion = WebexTeams.cosultaActaInspeccion($scope.cliente.NUMERO_INSPECCION, response.data.ipServices);
@@ -579,7 +591,7 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
         });
     }
 
-    $scope.btnTerminar = function() {
+    $scope.btnTerminar = function () {
 
         let ip = WebexTeams.Ip();
         ip.then(function successCallback(response) {
@@ -614,19 +626,19 @@ app.controller('myCtrl', function($scope, WebexTeams, servicesMultimedia, $filte
 
 
     $scope.timerWithTimeout = 00;
-    $scope.startTimerWithTimeout = function() {
+    $scope.startTimerWithTimeout = function () {
         $scope.timerWithTimeout = 00;
         if ($scope.myTimeout) {
             $timeout.cancel($scope.myTimeout);
         }
-        $scope.onTimeout = function() {
+        $scope.onTimeout = function () {
             $scope.timerWithTimeout++;
             $scope.myTimeout = $timeout($scope.onTimeout, 1000);
         }
         $scope.myTimeout = $timeout($scope.onTimeout, 1000);
     };
 
-    $scope.pauseTimerWithTimeout = function() {
+    $scope.pauseTimerWithTimeout = function () {
         $timeout.cancel($scope.myTimeout);
     }
 })

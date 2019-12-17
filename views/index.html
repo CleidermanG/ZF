@@ -301,114 +301,55 @@
               <div index-directive-chat type="chat"></div>
             </div>
 
-            <div
-              class="tab-pane fade altura-comp"
-              id="check"
-              role="tabpanel"
-              aria-labelledby="check-tab"
-            >
-              <div index-directive-acta type="acta"></div>
+                    <div class="tab-pane fade altura-comp" id="check" role="tabpanel" aria-labelledby="check-tab">
+                        <div index-directive-acta type="acta"></div>
+                    </div>
+                    <div class="tab-pane fade altura-comp" id="observacion" role="tabpanel"
+                        aria-labelledby="observacion-tab">
+                        <div index-directive-observaciones type="observaciones"></div>
+                    </div>
+                </div>
             </div>
-            <div
-              class="tab-pane fade altura-comp"
-              id="observacion"
-              role="tabpanel"
-              aria-labelledby="observacion-tab"
-            >
-              <div index-directive-observaciones type="observaciones"></div>
+            <!-- aqui estan los iconoes de navegacion -->
+            <div class="text-center navegacion">
+                <ul class="nav nav-pills mb-3 text-center" id="pills-tab" role="tablist">
+                    <li ng-hide="btnLlamar" class="nav-pills2 ">
+                        <a id="btnLlamar" title="Llamar" class="nav-link" href="" ng-click="btnllamar()"><span
+                                class="icon-llamar"><span class="path1"></span><span class="path2"></span><span
+                                    class="path3"></span><span class="path4"></span></span></a>
+                    </li>
+                    <li ng-hide="btnTerminarInspeccion" class="nav-item nav-pills2  ">
+                        <a class="nav-link active " id="modificar-tab" data-toggle="pill" href="#modificar" role="tab"
+                            aria-controls="pills-home" aria-selected="true"><span class="icon-terminar"></span></a>
+                    </li>
+                    <li ng-hide="btnChat" class="nav-item nav-pills2">
+                        <a title="Chat" ng-click="chat()" class="nav-link" id="chat-tab" data-toggle="pill" href="#chat"
+                            role="tab" aria-controls="pills-profile" aria-selected="false"><span
+                                class="icon-chat"></span></a>
+                    </li>
+                    <li class="nav-item nav-pills2">
+                        <a title="Acta inspección" ng-click="acta()" class="nav-link" id="check-tab" data-toggle="pill"
+                            href="#check" role="tab" aria-controls="pills-profile" aria-selected="false"><span
+                                class="icon-check"></span></a>
+                    </li>
+                    <li class="nav-item nav-pills2">
+                        <a title="Observaciones" class="nav-link" ng-click="observations()" id="observacion-tab"
+                            data-toggle="pill" href="#observacion" role="tab" aria-controls="pills-contact"
+                            aria-selected="false"><span class="icon-observacion"></span></a>
+                    </li>
+                </ul>
             </div>
-          </div>
         </div>
-        <!-- aqui estan los iconoes de navegacion -->
-        <div class="text-center navegacion">
-          <ul
-            class="nav nav-pills mb-3 text-center"
-            id="pills-tab"
-            role="tablist"
-          >
-            <li ng-hide="btnLlamar" class="nav-pills2 ">
-              <a
-                id="btnLlamar"
-                title="Llamar"
-                class="nav-link"
-                href=""
-                ng-click="btnllamar()"
-                ><span class="icon-llamar"
-                  ><span class="path1"></span><span class="path2"></span
-                  ><span class="path3"></span><span class="path4"></span></span
-              ></a>
-            </li>
-            <li ng-hide="btnTerminarInspeccion" class="nav-item nav-pills2  ">
-              <a
-                class="nav-link active "
-                id="modificar-tab"
-                data-toggle="pill"
-                href="#modificar"
-                role="tab"
-                aria-controls="pills-home"
-                aria-selected="true"
-                ><span class="icon-terminar"></span
-              ></a>
-            </li>
-            <li ng-hide="btnChat" class="nav-item nav-pills2">
-              <a
-                title="Chat"
-                ng-click="chat()"
-                class="nav-link"
-                id="chat-tab"
-                data-toggle="pill"
-                href="#chat"
-                role="tab"
-                aria-controls="pills-profile"
-                aria-selected="false"
-                ><span class="icon-chat"></span
-              ></a>
-            </li>
-            <li class="nav-item nav-pills2">
-              <a
-                title="Acta inspección"
-                ng-click="acta()"
-                class="nav-link"
-                id="check-tab"
-                data-toggle="pill"
-                href="#check"
-                role="tab"
-                aria-controls="pills-profile"
-                aria-selected="false"
-                ><span class="icon-check"></span
-              ></a>
-            </li>
-            <li class="nav-item nav-pills2">
-              <a
-                title="Observaciones"
-                class="nav-link"
-                ng-click="observations()"
-                id="observacion-tab"
-                data-toggle="pill"
-                href="#observacion"
-                role="tab"
-                aria-controls="pills-contact"
-                aria-selected="false"
-                ><span class="icon-observacion"></span
-              ></a>
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
     <script src="../js/style.js"></script>
 
@@ -438,7 +379,8 @@
     <!-- filters -->
     <script src="../filters/timer.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-  </body>
+</body>
+
 </html>
 
 <!-- https://stackoverflow.com/questions/18614301/keep-overflow-div-scrolled-to-bottom-unless-user-scrolls-up -->
