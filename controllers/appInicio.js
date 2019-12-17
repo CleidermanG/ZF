@@ -179,7 +179,6 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
 
                     if (inspeccion.data != null) {
                         console.log(inspeccion.data);
-                        console.log(inspeccion.data.DIRECCION);
                         $scope.cliente = inspeccion.data;
                         $scope.connect($scope.access_token);
                         $scope.initChat();
@@ -191,6 +190,10 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
 
                     } else {
                         toastr.error("Ups!, No existe inspecciones por el momento", "Sistema Zona Franca");
+                        $scope.btnAprobacion = true;
+                        $scope.btnTerminarInspeccion = true;
+                        $scope.btnChat = true;
+                        $scope.btnLlamar = true;
                     }
 
                 }, function errorCallback(error) {
@@ -311,7 +314,7 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
             document.getElementById("loader").style.display = "none";
             document.getElementById("llamando").style.display = "none";
             document.getElementById("remote-view-video").poster = "../images/video.jpg";
-            
+
             // document.getElementById("loader").style.display = "none";
             // document.getElementById("llamando").style.display = "none";
 
