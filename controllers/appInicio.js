@@ -162,9 +162,7 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
                     toastr.success(resp.asunto, "Sistema Zona Franca");
                 });
                
-                socket.on('refresPage', function(data) {
-                    alert(data)
-                });
+                
 
                 if (token.data.user.avatar) {
                     $scope.avatar = token.data.user.avatar;
@@ -191,6 +189,9 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
                         $scope.acta()
 
                     } else {
+                        socket.on('refresPage', function(data) {
+                            alert(data)
+                        });
                         toastr.error("Ups!, No existe inspecciones por el momento", "Sistema Zona Franca");
                         $scope.btnAprobacion = true;
                         $scope.btnTerminarInspeccion = true;
