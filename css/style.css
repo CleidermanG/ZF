@@ -788,6 +788,20 @@ a.closed {
     padding: 20px;
     height: 22vh;
   }
+
+  .flecha-izq {
+    position: absolute;
+    top: 48.5%;
+    left: 5px;
+    z-index: 1000;
+  }
+
+  .flecha-der {
+    position: absolute;
+    top: 48.5%;
+    right: 5px;
+    z-index: 1000;
+  }
 }
 
 @media only screen and (max-width: 1440px), screen and (max-height: 900px) {
@@ -918,8 +932,93 @@ a.closed {
     -moz-transition: width 1s;
     -o-transition: width 1s;
   }
+
+  .flecha-izq {
+    position: absolute;
+    top: 48.7%;
+    left: 5px;
+    z-index: 1000;
+  }
+
+  .flecha-der {
+    position: absolute;
+    top: 48.7%;
+    right: 5px;
+    z-index: 1000;
+  }
 }
 
+@media only screen and (max-width: 1280px), screen and (max-height: 630px) {
+  .user {
+    background: #ffffff;
+    padding: 10px 0;
+    -webkit-box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+    position: relative;
+    height: 9vh;
+  }
+  .empresa {
+    background: #00632f;
+    color: #ffffff;
+    padding: 2px;
+    height: 26.2vh;
+  }
+
+  #comp-chat {
+    position: relative;
+    height: 41vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  #comp-obsv {
+    position: relative;
+    height: 41vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  #caja-comp {
+    height: 56vh;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  #caja-comp #check {
+    overflow-y: scroll;
+    height: 56vh;
+    position: relative;
+  }
+
+  .navegacion {
+    position: absolute;
+    bottom: 0px;
+    z-index: 200;
+    background: #ffffff;
+    width: 100%;
+    padding: 0px;
+    height: 10.5vh;
+    transition: all 1.5s;
+    -webkit-transition: all 1.5s;
+    -moz-transition: all 1.5s;
+    -o-transition: all 1.5s;
+  }
+
+  .flecha-izq {
+    position: absolute;
+    top: 47.5%;
+    left: 5px;
+    z-index: 1000;
+  }
+
+  .flecha-der {
+    position: absolute;
+    top: 47.5%;
+    right: 5px;
+    z-index: 1000;
+  }
+}
 @media only screen and (max-width: 1024px), screen and (max-height: 768px) {
   .empresa {
     background: #00632f;
@@ -980,11 +1079,6 @@ a.closed {
     overflow-x: hidden;
   }
 }
-
-@media only screen and (max-width: 1280px), screen and (max-height: 630px) {
-
-}
-
 
 /* ********************** */
 /* Fin clases responsivas */
