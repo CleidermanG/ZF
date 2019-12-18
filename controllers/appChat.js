@@ -45,10 +45,10 @@ app.controller('myCtrlChat', function($scope, ChatWebex, WebexTeams, $timeout) {
             var users = ChatWebex.user($scope.cliente.NUMERO_INSPECCION, response.data.ipServices);
             users.then(function(mns) {
                 $scope.mensajes = mns.data;
-                var count = Object.keys($scope.mensajes).length;
-                for (var i = 0; i < count; i++) {
-                    $scope.mensajes[i]["id"] = i;
-                }
+                // var count = Object.keys($scope.mensajes).length;
+                // for (var i = 0; i < count; i++) {
+                //     $scope.mensajes[i]["id"] = i;
+                // }
             }, function(mns) {
                 alert('Error al cargar los mensajes');
             });
