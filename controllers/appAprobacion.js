@@ -1,11 +1,11 @@
 var app = angular.module('myApp', ['ngStorage', 'btford.socket-io']);
-app.config(['$locationProvider', function($locationProvider) {
+app.config(['$locationProvider', function ($locationProvider) {
     $locationProvider.html5Mode({
         enabled: true,
         requireBase: false
     });
 }]);
-app.controller('myCtrl', function($scope, ActaInspeccion, $location, $window, $timeout, $localStorage, configSocket) {
+app.controller('myCtrl', function ($scope, ActaInspeccion, $location, $window, $timeout, $localStorage, configSocket) {
     $scope.ocultarTabla = true;
     $window.localStorage.clear();
     $scope.$storage = $localStorage.$default({
@@ -18,13 +18,13 @@ app.controller('myCtrl', function($scope, ActaInspeccion, $location, $window, $t
         // var timeLimite = 60000 * response.data.tokenExpirationCount;
 
         var timeLimite = 60000 * 3;
-        var timerToken = function() {
+        var timerToken = function () {
             $scope.time = $localStorage.time;
             $scope.$storage.time += 1000;
             $timeout(timerToken, 1000);
             if ($scope.$storage.time === timeLimite) {
                 $scope.$storage.time = 0;
-                setTimeout(() => {}, 1000);
+                setTimeout(() => { }, 1000);
                 $scope.init();
             }
             // console.log($localStorage.time);
@@ -35,7 +35,7 @@ app.controller('myCtrl', function($scope, ActaInspeccion, $location, $window, $t
         console.log(error);
     });
 
-    $scope.formActa = function(actaInspeccion) {
+    $scope.formActa = function (actaInspeccion) {
         if (actaInspeccion.INGRESO == 1) {
             $scope.areaOperacion1 = "X"
         } else if (actaInspeccion.SALIDAS == 1) {
@@ -80,9 +80,11 @@ app.controller('myCtrl', function($scope, ActaInspeccion, $location, $window, $t
         $scope.fecha = actaInspeccion.FECHA;
 
         $scope.usuario_webexcontacto = actaInspeccion.USUARIO_WEBEXCONTACTO;
-        $scope.usuariowebexzf = actaInspeccion.USUARIOWEBEXZF
+        $scope.usuariowebexzf = actaInspeccion.USUARIO_WEBEXZF
 
-        $scope.aprobacion = function() {
+
+
+        $scope.aprobacion = function () {
 
             var data = {
                 numero_inspeccion: actaInspeccion.NUMERO_INSPECCION,
@@ -94,15 +96,21 @@ app.controller('myCtrl', function($scope, ActaInspeccion, $location, $window, $t
                 let actaInspeccion = ActaInspeccion.aprobacion(data, response.data.ipServices);
                 actaInspeccion.then(function successCallback(acta) {
                     var socket = configSocket.socket($scope.usuario_webexcontacto, response.data.ipServices);
-                    var mns = {
-                        "correoElectronico": $scope.usuariowebexzf,
-                    }
+
                     if (acta.data == '1') {
-                        mns.asunto = "Acta aprobada por el operador.";
+                        var mns = {
+                            "correoElectronico": $scope.usuariowebexzf,
+                            "asunto": "Acta aprobada por el operador."
+                        }
+                        // mns.asunto = "Acta aprobada por el operador.";
                         socket.emit("actaAprobada", mns);
                         $window.location.href = response.data.ipApplication + '/actaAprobada';
                     } else {
-                        mns.asunto = "Error en la base de datos.";
+                        var mns = {
+                            "correoElectronico": $scope.usuariowebexzf,
+                            "asunto": "Error en la base de datos."
+                        }
+                        // mns.asunto = "Error en la base de datos.";
                         socket.emit("actaAprobada", mns);
                     }
 
@@ -118,7 +126,7 @@ app.controller('myCtrl', function($scope, ActaInspeccion, $location, $window, $t
         }
 
     }
-    $scope.init = function() {
+    $scope.init = function () {
         if ($location.search().token == null) {
             alert('url no valida');
         } else {
@@ -134,18 +142,7 @@ app.controller('myCtrl', function($scope, ActaInspeccion, $location, $window, $t
 
                         if (acta.data.ID_ESTADOACTA != 1) {
                             $scope.ocultarTabla = false;
-                            var data = {
-                                usuarioZF: acta.data.ID_USUARIOZF
-                            }
-                            let usuarioZF = ActaInspeccion.consultarUsuarioZF(data, response.data.ipServices);
-                            usuarioZF.then(function successCallback(user) {
-                                acta.data.NOMBRE_USUARIOZF = user.data.NOMBRE_USUARIOZF;
-                                acta.data.CEDULA_USUARIOZF = user.data.CEDULA_AGENTE;
-                                acta.data.USUARIOWEBEXZF = user.data.USUARIOWEBEX;
-                                $scope.formActa(acta.data);
-                            }, function errorCallback(error) {
-                                console.log(error);
-                            });
+                            $scope.formActa(acta.data);
                         } else {
                             $window.location.href = response.data.ipApplication + '/actaAprobada';
                         }
