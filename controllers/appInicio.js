@@ -163,8 +163,8 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
                     $scope.btnLlamar = true;
                     toastr.success(resp.asunto, "Sistema Zona Franca");
                 });
-               
-                
+
+
 
                 if (token.data.user.avatar) {
                     $scope.avatar = token.data.user.avatar;
@@ -191,7 +191,7 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
                         $scope.acta()
 
                     } else {
-                        socket.on('refresPage', function(data) {
+                        socket.on('refresPage', function (data) {
                             setTimeout(() => {
                                 location.reload();
                             }, 2000);
@@ -201,7 +201,7 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
                         $scope.btnTerminarInspeccion = true;
                         $scope.btnChat = true;
                         $scope.btnLlamar = true;
-                        
+
                     }
 
                 }, function errorCallback(error) {

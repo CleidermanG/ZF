@@ -1,6 +1,6 @@
-app.controller('myCtrlObservaciones', function($scope, ChatWebex, WebexTeams) {
+app.controller('myCtrlObservaciones', function ($scope, ChatWebex, WebexTeams) {
 
-    $scope.sendObservation = function() {
+    $scope.sendObservation = function () {
         var menssage = {
             toPersonEmail: $scope.gmailWebex,
             inspeccion: $scope.cliente.NUMERO_INSPECCION,
@@ -26,18 +26,18 @@ app.controller('myCtrlObservaciones', function($scope, ChatWebex, WebexTeams) {
 
 
     }
-    $scope.sendMessageIntroObservation = function(keyEvent) {
+    $scope.sendMessageIntroObservation = function (keyEvent) {
         if (keyEvent.which === 13)
             $scope.sendObservation();
     }
-    $scope.loadObservations = function() {
+    $scope.loadObservations = function () {
         $scope.mnsobservations = [];
         let ip = WebexTeams.Ip();
         ip.then(function successCallback(response) {
             var observation = ChatWebex.loadObservations($scope.cliente.NUMERO_INSPECCION, response.data.ipServices);
             observation.then(function successCallback(observations) {
-                    $scope.mnsobservations = observations.data;
-                },
+                $scope.mnsobservations = observations.data;
+            },
                 function errorCallback(error) {
                     console.log(error);
                 });
@@ -47,7 +47,7 @@ app.controller('myCtrlObservaciones', function($scope, ChatWebex, WebexTeams) {
 
     }
 
-    $scope.observations = function() {
+    $scope.observations = function () {
         $scope.loadObservations();
     }
 });

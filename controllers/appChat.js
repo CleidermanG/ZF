@@ -1,4 +1,4 @@
-app.controller('myCtrlChat', function($scope, ChatWebex, WebexTeams, $timeout) {
+app.controller('myCtrlChat', function ($scope, ChatWebex, WebexTeams, $timeout) {
 
     function updateScroll() {
         var element = document.getElementById("autoscroll");
@@ -6,7 +6,7 @@ app.controller('myCtrlChat', function($scope, ChatWebex, WebexTeams, $timeout) {
         element.scrollTop = element.scrollHeight;
     }
 
-    $scope.sendMenssage = function() {
+    $scope.sendMenssage = function () {
         var menssage = {
             toPersonEmail: $scope.cliente.USUARIO_WEBEXCONTACTO,
             text: $scope.myMessage,
@@ -25,31 +25,31 @@ app.controller('myCtrlChat', function($scope, ChatWebex, WebexTeams, $timeout) {
         }
 
     }
-    $scope.sendMessageIntro = function(keyEvent) {
+    $scope.sendMessageIntro = function (keyEvent) {
         if (keyEvent.which === 13)
             $scope.sendMenssage();
     }
-    $scope.messageFromMe = function(mensaje) {
-            if (mensaje.email == $scope.cliente.USUARIO_WEBEXCONTACTO)
-                return 'sent';
-            else
-                return 'replies'
-        }
-        // setInterval(updateScroll, 1000);
+    $scope.messageFromMe = function (mensaje) {
+        if (mensaje.email == $scope.cliente.USUARIO_WEBEXCONTACTO)
+            return 'sent';
+        else
+            return 'replies'
+    }
+    // setInterval(updateScroll, 1000);
 
-    $scope.initChat = function() {
+    $scope.initChat = function () {
 
         $scope.mensajes = [];
         let ip = WebexTeams.Ip();
         ip.then(function successCallback(response) {
             var users = ChatWebex.user($scope.cliente.NUMERO_INSPECCION, response.data.ipServices);
-            users.then(function(mns) {
+            users.then(function (mns) {
                 $scope.mensajes = mns.data;
                 // var count = Object.keys($scope.mensajes).length;
                 // for (var i = 0; i < count; i++) {
                 //     $scope.mensajes[i]["id"] = i;
                 // }
-            }, function(mns) {
+            }, function (mns) {
                 alert('Error al cargar los mensajes');
             });
 
@@ -100,25 +100,25 @@ app.controller('myCtrlChat', function($scope, ChatWebex, WebexTeams, $timeout) {
                 });
         });
     }
-}).directive("keepScroll", function() {
+}).directive("keepScroll", function () {
 
     return {
 
-        controller: function($scope) {
+        controller: function ($scope) {
             var element = 0;
 
-            this.setElement = function(el) {
+            this.setElement = function (el) {
                 element = el;
             }
 
-            this.addItem = function(item) {
+            this.addItem = function (item) {
                 // console.log("Adding item", item, item.clientHeight);
                 element.scrollTop = (element.scrollTop + item.clientHeight + 1); //1px for margin
             };
 
         },
 
-        link: function(scope, el, attr, ctrl) {
+        link: function (scope, el, attr, ctrl) {
 
             ctrl.setElement(el[0]);
 
@@ -128,13 +128,13 @@ app.controller('myCtrlChat', function($scope, ChatWebex, WebexTeams, $timeout) {
 
 })
 
-.directive("scrollItem", function() {
+    .directive("scrollItem", function () {
 
 
-    return {
-        require: "^keepScroll",
-        link: function(scope, el, att, scrCtrl) {
-            scrCtrl.addItem(el[0]);
+        return {
+            require: "^keepScroll",
+            link: function (scope, el, att, scrCtrl) {
+                scrCtrl.addItem(el[0]);
+            }
         }
-    }
-})
+    })

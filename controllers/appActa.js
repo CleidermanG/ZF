@@ -94,7 +94,7 @@ app.controller('myCtrlActa', function ($scope, WebexTeams) {
     }
 
     $scope.AddActaInspeccion = function () {
-        
+
         if ($scope.operacion && $scope.naturaleza && $scope.valoracion &&
             $scope.numDocument && $scope.numForms && $scope.numBultos && $scope.weight) {
             var other = document.getElementById("other").required;
@@ -164,9 +164,9 @@ app.controller('myCtrlActa', function ($scope, WebexTeams) {
                 data.nombre_usuariooperador = $scope.cliente.NOMBRE_CONTACTO;
                 data.usuario_webexcontacto = $scope.cliente.USUARIO_WEBEXCONTACTO;
 
-                data.nombre_usuariozf =$scope.username ;
-                data.cedula_usuariozf = $scope.cedula_usuariozf.trim() ;
-                data.usuariowebexzf = $scope.gmailWebex  ;
+                data.nombre_usuariozf = $scope.username;
+                data.cedula_usuariozf = $scope.cedula_usuariozf.trim();
+                data.usuariowebexzf = $scope.gmailWebex;
 
 
 
