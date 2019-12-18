@@ -195,7 +195,7 @@ app.controller('myCtrlActa', function ($scope, WebexTeams) {
 
             }
         }
-    }
+    } 
 
     function fechaServer() {
         let date_ob = new Date();
