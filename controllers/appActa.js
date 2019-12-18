@@ -1,16 +1,16 @@
-app.controller('myCtrlActa', function($scope, WebexTeams) {
+app.controller('myCtrlActa', function ($scope, WebexTeams) {
     document.getElementById("other").required = false;
     $scope.cual = true;
-    $scope.change = function() {
+    $scope.change = function () {
         $scope.cual = false;
         document.getElementById("other").required = true;
     }
-    $scope.changeTwo = function() {
+    $scope.changeTwo = function () {
         $scope.cual = true;
         document.getElementById("other").required = false;
     }
 
-    $scope.formActa = function(actaInspeccion) {
+    $scope.formActa = function (actaInspeccion) {
         console.log(actaInspeccion);
         document.getElementById("NUMEROS_DOCUMENTOS").value = actaInspeccion.NUMEROS_DOCUMENTOS;
         document.getElementById("NUMEROS_FORMULARIOS").value = actaInspeccion.NUMEROS_FORMULARIOS;
@@ -49,7 +49,7 @@ app.controller('myCtrlActa', function($scope, WebexTeams) {
         }
     }
 
-    $scope.aprobacion = function() {
+    $scope.aprobacion = function () {
         let ip = WebexTeams.Ip();
         ip.then(function successCallback(response) {
             let actaInspeccion = WebexTeams.cosultaActaInspeccion($scope.cliente.NUMERO_INSPECCION, response.data.ipServices);
@@ -69,7 +69,7 @@ app.controller('myCtrlActa', function($scope, WebexTeams) {
             console.log(error);
         });
     }
-    $scope.enviarActa = function() {
+    $scope.enviarActa = function () {
         var user = {
             token: $scope.access_token,
             toPersonEmail: $scope.cliente.USUARIO_WEBEXCONTACTO,
@@ -93,12 +93,12 @@ app.controller('myCtrlActa', function($scope, WebexTeams) {
 
     }
 
-    $scope.AddActaInspeccion = function() {
-
+    $scope.AddActaInspeccion = function () {
+        
         if ($scope.operacion && $scope.naturaleza && $scope.valoracion &&
             $scope.numDocument && $scope.numForms && $scope.numBultos && $scope.weight) {
             var other = document.getElementById("other").required;
-            if (other && $scope.other == null) {} else {
+            if (other && $scope.other == null) { } else {
                 var data = {}
 
                 data.numero_inspeccion = $scope.cliente.NUMERO_INSPECCION;
@@ -163,6 +163,12 @@ app.controller('myCtrlActa', function($scope, WebexTeams) {
                 data.cedula_usuariooperador = $scope.cliente.CEDULA_CONTACTO;
                 data.nombre_usuariooperador = $scope.cliente.NOMBRE_CONTACTO;
                 data.usuario_webexcontacto = $scope.cliente.USUARIO_WEBEXCONTACTO;
+
+                data.nombre_usuariozf =$scope.username ;
+                data.cedula_usuariozf = $scope.cedula_usuariozf.trim() ;
+                data.usuariowebexzf = $scope.gmailWebex  ;
+
+
 
                 data.id_estadoacta = null;
                 data.fecha_horaaprobacion = null;
