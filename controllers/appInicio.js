@@ -153,6 +153,8 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
                 $scope.id_usuariozf = token.data.user.recordset.ID_USUARIOZF;
                 $scope.username = token.data.user.recordset.NOMBRE_USUARIOZF;
                 $scope.gmailWebex = token.data.user.recordset.USUARIOWEBEX;
+                $scope.cedula_usuariozf = token.data.user.recordset.CEDULA_AGENTE;
+
                 var socket = configSocket.socket($scope.gmailWebex, response.data.ipServices)
                 socket.on('actaAprobada', function (resp) {
                     $scope.btnAprobacion = true;
@@ -190,7 +192,9 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
 
                     } else {
                         socket.on('refresPage', function(data) {
-                            alert(data)
+                            setTimeout(() => {
+                                location.reload();
+                            }, 2000);
                         });
                         toastr.error("Ups!, No existe inspecciones por el momento", "Sistema Zona Franca");
                         $scope.btnAprobacion = true;
@@ -281,19 +285,6 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
 
             document.getElementById(`remote-view-video`).srcObject = call.remoteMediaStream;
             document.getElementById(`remote-view-video`).onloadedmetadata = function () {
-
-                // var sendFile = function() {
-                //     var promise = new Promise(function(resolve, reject) {
-                //         var myAudio = document.getElementById("myAudio");
-                //         myAudio.pause();
-                //         document.getElementById("loader").style.display = "none";
-                //         document.getElementById("llamando").style.display = "none";
-                //         document.getElementById("remote-view-video").poster = "../images/video.jpg";
-                //         resolve(true)
-                //     });
-                //     return promise;
-                // };
-                // sendFile();
 
                 document.getElementById("loader").style.display = "none";
                 document.getElementById("llamando").style.display = "none";
@@ -613,9 +604,7 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
                 toastr.success("Inspección terminada.", "Sistema Zona Franca");
                 setTimeout(() => {
                     location.reload();
-                }, 1000);
-
-
+                }, 2000);
             }, function errorCallback(error) {
                 if (error.status == 400) {
                     toastr.error("Error en la base de datos", "Sistema Zona Franca");
