@@ -275,7 +275,7 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
 
     $scope.bindCallEvents = function (call) {
 
-
+ 
         call.on(`error`, (err) => {
             console.error(err);
             alert(err);
