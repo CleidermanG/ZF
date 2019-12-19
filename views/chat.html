@@ -6,7 +6,7 @@
   <div class="messages altura-comp input-mjs">
     <ul>
       <!-- | orderBy: '-id'" -->
-      <div scroll-item ng-repeat="mensaje in mensajes track by $index">
+      <div ng-repeat="mensaje in mensajes track by $index">
         <li ng-class=" messageFromMe(mensaje) ">
           <p>
             {{mensaje.mensaje}} <br style="font-size: 22px " />
