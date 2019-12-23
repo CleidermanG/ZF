@@ -2,7 +2,11 @@ app.controller('myCtrlChat', function ($scope, ChatWebex, WebexTeams, $timeout) 
 
 
     $scope.sendMenssage = function () {
-
+        var menssage = {
+            toPersonEmail: $scope.cliente.USUARIO_WEBEXCONTACTO,
+            text: $scope.myMessage,
+        }
+        
         var blockURL = menssage.text.includes("aprobacion?token");
         if (!blockURL) {
             webex.messages.create(menssage)
