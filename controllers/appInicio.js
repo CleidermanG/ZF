@@ -231,6 +231,8 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
         let ip = WebexTeams.Ip();
         ip.then(function successCallback(response) {
             $scope.multimediaUrl = response.data.ipServices + "/multimedia/" + inspeccion;
+            console.log($scope.multimediaUrl );
+            
             var screenInspeccion = servicesMultimedia.loadScreen(inspeccion, response.data.ipServices);
             screenInspeccion.then(function successCallback(dataScreen) {
                 $scope.imagesScreenshot = dataScreen.data.sort(function (a, b) { return b.num - a.num });
