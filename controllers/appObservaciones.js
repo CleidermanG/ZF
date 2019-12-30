@@ -44,10 +44,44 @@ app.controller('myCtrlObservaciones', function ($scope, ChatWebex, WebexTeams) {
         }, function errorCallback(error) {
             console.log(error);
         });
+    }
+
+    $scope.sendLocation = function () {
+        let ip = WebexTeams.Ip();
+        ip.then(function successCallback(response) {
+
+            var user = {
+                token: $scope.access_token,
+                inspeccion: $scope.cliente.NUMERO_INSPECCION,
+                toPersonEmail: $scope.cliente.USUARIO_WEBEXCONTACTO,
+                id_usuariozf: $scope.id_usuariozf,
+                gmailUsuariozf: $scope.gmailWebex
+            }
+
+            let enviarUbicacion = WebexTeams.enviarUbicacion(user, response.data.ipServices);
+            enviarUbicacion.then(function successCallback(inspeccion) {
+
+                if (inspeccion.data != null) {
+                    console.log(inspeccion.data);
+                    toastr.success(inspeccion.data, "Sistema Zona Franca");
+                } else {
+                    toastr.error("Ups!, problemas con la ubicación", "Sistema Zona Franca");
+                }
+
+            }, function errorCallback(error) {
+                console.log(error);
+            });
+        }, function errorCallback(error) {
+            console.log(error);
+        });
 
     }
 
+
     $scope.observations = function () {
         $scope.loadObservations();
+    }
+    $scope.location = function () {
+        $scope.sendLocation();
     }
 });
