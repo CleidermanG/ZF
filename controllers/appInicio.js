@@ -164,6 +164,11 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
                     toastr.success(resp.asunto, "Sistema Zona Franca");
                 });
 
+                socket.on('ubicacion', function (resp) {
+                    console.log(resp);
+                    toastr.success(resp.asunto, "Sistema Zona Franca");
+                });
+
 
 
                 if (token.data.user.avatar) {
