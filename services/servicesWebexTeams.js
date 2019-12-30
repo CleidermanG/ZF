@@ -41,7 +41,6 @@ app.service('WebexTeams', function($http) {
     };
 
     this.cosultaActaInspeccion = function(inspeccion, url) {
-
         return $http({
             method: 'GET',
             url: url + '/api/consultarActaInspeccion',
@@ -53,6 +52,11 @@ app.service('WebexTeams', function($http) {
     this.generarToken = function(data, url) {
         return $http.post(url + '/api/tokenZF', JSON.stringify(data));
     };
+
+    this.enviarUbicacion = function(data, url) {
+        return $http.post(url + '/api/enviarUbicacion', JSON.stringify(data));
+    };
+
 
 
 });
