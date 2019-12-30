@@ -31,7 +31,6 @@ app.use(bodyParser.json({ limit: '10mb' }))
 app.use(cors());
 
 app.get('/actaAprobada', (req, res, next) => {
-    // res.send('hola')
     res.render('./aprobacion/actaAprobada.html');
 });
 app.get('/default', (req, res, next) => {
@@ -40,6 +39,10 @@ app.get('/default', (req, res, next) => {
 app.get('/aprobacion', (req, res, next) => {
     res.render('./aprobacion/aprobacion.html');
 });
+app.get('/ubicacion', (req, res, next) => {
+    res.render('./ubicacion.html');
+});
+
 
 app.listen(Config.portApplication, function() {
     console.info(`Server listening on port ${Config.portApplication}!`);
