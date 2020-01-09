@@ -46,7 +46,7 @@ app.controller('myCtrlObservaciones', function ($scope, ChatWebex, WebexTeams) {
         });
     }
 
-    $scope.sendLocation = function () {
+    $scope.btnLocation = function () {
         let ip = WebexTeams.Ip();
         ip.then(function successCallback(response) {
 
@@ -77,11 +77,7 @@ app.controller('myCtrlObservaciones', function ($scope, ChatWebex, WebexTeams) {
 
     }
 
-
     $scope.observations = function () {
         $scope.loadObservations();
-    }
-    $scope.location = function () {
-        $scope.sendLocation();
     }
 });
