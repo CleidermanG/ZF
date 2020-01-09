@@ -60,7 +60,7 @@
                       data-lightbox="mygallery">
                       <img ng-src="{{multimediaUrl}}/screenshot/{{screen.name}}" class="img-fluid mx-auto" />
                     </a>
-                    <a class="closed" href="#" ng-click="test(screen.name,'screenshot')"><img
+                    <a class="closed" href="#" ng-click="formDelete(screen.name,'screenshot')"><img
                         src="../images/closed.png" /></a>
                   </div>
                 </div>
@@ -79,7 +79,7 @@
                         <source src="{{multimediaUrl}}/videos/{{video.name}}" type="video/mp4" />
                       </video>
                     </a>
-                    <a class="closed" href="#" ng-click="test(video.name,'videos')"><img
+                    <a class="closed" href="#" ng-click="formDelete(video.name,'videos')"><img
                         src="../images/closed.png" /></a>
                   </div>
                 </div>
@@ -224,11 +224,6 @@
             <a title="Observaciones" class="nav-link" ng-click="observations()" id="observacion-tab" data-toggle="pill"
               href="#observacion" role="tab" aria-controls="pills-contact" aria-selected="false"><span
                 class="icon-observacion"></span></a>
-          </li>
-          <li class="nav-item nav-pills2">
-            <a title="Ubicación" class="nav-link" ng-click="location()" id="ubicacion-tab" data-toggle="pill"
-              href="#ubicacion" role="tab" aria-controls="pills-contact" aria-selected="false"><span
-                class="icon-ubicacion "></span></a>
           </li>
         </ul>
       </div>
