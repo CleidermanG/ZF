@@ -57,6 +57,10 @@ app.service('WebexTeams', function($http) {
         return $http.post(url + '/api/enviarUbicacion', JSON.stringify(data));
     };
 
+    this.guardarUbicacion = function(data, url) {
+        return $http.post(url + '/api/guardarUbicacion', JSON.stringify(data));
+    };
+
 
 
 });
