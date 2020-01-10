@@ -397,69 +397,18 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
 
         }
 
-        $scope.dataURItoBlob = function (dataURI) {
-            // convert base64/URLEncoded data component to raw binary data held in a string
-            var byteString;
-            if (dataURI.split(',')[0].indexOf('base64') >= 0)
-                byteString = atob(dataURI.split(',')[1]);
-            else
-                byteString = unescape(dataURI.split(',')[1]);
-
-            // separate out the mime component
-            var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-            // write the bytes of the string to a typed array
-            var ia = new Uint8Array(byteString.length);
-            for (var i = 0; i < byteString.length; i++) {
-                ia[i] = byteString.charCodeAt(i);
-            }
-            return new Blob([ia], { type: mimeString });
-        }
-
-        function watermarkedDataURL(canvas, text) {
-            // var tempCanvas = document.createElement('canvas');
-            var tempCanvas = document.getElementById('canvas2');
-            var tempCtx = tempCanvas.getContext('2d');
-            // tempCanvas.clearRect(0, 0, canvas.width, canvas.height);
-            var cw, ch;
-            cw = tempCanvas.width = canvas.width;
-            ch = tempCanvas.height = canvas.height;
-            tempCtx.drawImage(canvas, 0, 0);
-            tempCtx.font = "23px Calibri";
-            var textWidth = tempCtx.measureText(text).width;
-            tempCtx.globalAlpha = .80;
-            tempCtx.fillStyle = '#ffc107'
-            tempCtx.fillText(text, cw - textWidth - 10, ch - 20);
-            tempCtx.fillStyle = '#00632f'
-            tempCtx.fillText(text, cw - textWidth - 10 + 2, ch - 20 + 2);
-            // just testing by adding tempCanvas to document
-            // document.body.appendChild(tempCanvas);
-            return (tempCanvas.toDataURL());
-        }
-
-        function fechaServer() {
-            var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0');
-            var yyyy = today.getFullYear();
-            var h = today.getHours();
-            var min = today.getMinutes();
-            today = dd + "/" + mm + "/" + yyyy + " " + h + ":" + min;
-            return (today.toString());
-        }
-
-        function GPS() {
+        function modificarMetadata(fecha) {
             // make exif data
             var zerothIfd = {};
             var exifIfd = {};
             var gpsIfd = {};
-            zerothIfd[piexif.ImageIFD.Make] = "ZONA FRANCA-1";
+            zerothIfd[piexif.ImageIFD.Make] = "ZONA FRANCA";
             zerothIfd[piexif.ImageIFD.XResolution] = [777, 1];
             zerothIfd[piexif.ImageIFD.YResolution] = [777, 1];
-            zerothIfd[piexif.ImageIFD.Software] = "ZONA FRANCA-2";
+            zerothIfd[piexif.ImageIFD.Software] = "TELEPRESENCIA";
             // zerothIfd[piexif.ImageIFD.] = "ZONA FRANCA-2";
-            exifIfd[piexif.ExifIFD.DateTimeOriginal] = "2010:10:10 10:10:10";
-            exifIfd[piexif.ExifIFD.LensMake] = "ZONA FRANCA-3";
+            exifIfd[piexif.ExifIFD.DateTimeOriginal] = fecha;
+            exifIfd[piexif.ExifIFD.LensMake] = "ZONA FRANCA";
             exifIfd[piexif.ExifIFD.Sharpness] = 777;
             exifIfd[piexif.ExifIFD.LensSpecification] = [
                 [1, 1],
@@ -469,8 +418,6 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
             ];
             gpsIfd[piexif.GPSIFD.GPSVersionID] = [7, 7, 7, 7];
             gpsIfd[piexif.GPSIFD.GPSDateStamp] = "1999:99:99 99:99:99";
-            console.log($scope.cliente.LONGITUD)
-            console.log($scope.cliente.LATITUD);
 
             var lat = $scope.cliente.LATITUD.replace(/,/g, '.');
             var lng = $scope.cliente.LONGITUD.replace(/,/g, '.');
@@ -518,13 +465,7 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
                 var video = document.getElementById(`remote-view-video`);
                 context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
                 var fecha = fechaServer();
-                fecha = $scope.cliente.DIRECCION + " " + fecha;
-
-                // var dataURL = watermarkedDataURL(canvas, fecha);
-                var blobImage = GPS();
- 
-
-                // var blobImage = $scope.dataURItoBlob(dataURL);
+                var blobImage = modificarMetadata(fecha);
 
                 var fileImage = new File([blobImage], "fileName.jpeg", {
                     type: "'image/jpeg'"
@@ -547,6 +488,17 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
                 console.log(error);
             });
 
+        }
+
+        function fechaServer() {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+            var h = today.getHours();
+            var min = today.getMinutes();
+            today = dd + "/" + mm + "/" + yyyy + " " + h + ":" + min;
+            return (today.toString());
         }
 
 
