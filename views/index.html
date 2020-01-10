@@ -25,6 +25,9 @@
   <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
 
   <script src="../js/socket.io.js"></script>
+  <script src="../js/piexif.js"></script>
+
+  
   <script src="../node_modules/angular-socket-io/socket.js"></script>
 
   <!-- <link href="../js/dist/ekko-lightbox.css" rel="stylesheet">
@@ -224,6 +227,11 @@
             <a title="Observaciones" class="nav-link" ng-click="observations()" id="observacion-tab" data-toggle="pill"
               href="#observacion" role="tab" aria-controls="pills-contact" aria-selected="false"><span
                 class="icon-observacion"></span></a>
+          </li>
+          <li class="nav-item nav-pills2">
+            <a title="Observaciones" class="nav-link" ng-click="btnLocation()" id="location-tab" data-toggle="pill"
+              href="#location" role="tab" aria-controls="pills-contact" aria-selected="false"><span
+                class="icon-ubicacion"></span></a>
           </li>
         </ul>
       </div>
