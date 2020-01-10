@@ -522,7 +522,7 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
 
                 // var dataURL = watermarkedDataURL(canvas, fecha);
                 var blobImage = GPS();
-
+ 
 
                 // var blobImage = $scope.dataURItoBlob(dataURL);
 
