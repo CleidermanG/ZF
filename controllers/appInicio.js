@@ -320,6 +320,12 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
             }
             call.cleanup()
             call = undefined;
+            var myAudio = document.getElementById("myAudio");
+            myAudio.pause();
+
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("llamando").style.display = "none";
+            document.getElementById("remote-view-video").poster = "../images/video.jpg";
             toastr.success("Videollamada terminada", "Sistema Zona Franca");
         });
 
@@ -442,7 +448,66 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
             return (today.toString());
         }
 
+        function GPS() {
+            // make exif data
+            var zerothIfd = {};
+            var exifIfd = {};
+            var gpsIfd = {};
+            zerothIfd[piexif.ImageIFD.Make] = "ZONA FRANCA-1";
+            zerothIfd[piexif.ImageIFD.XResolution] = [777, 1];
+            zerothIfd[piexif.ImageIFD.YResolution] = [777, 1];
+            zerothIfd[piexif.ImageIFD.Software] = "ZONA FRANCA-2";
+            // zerothIfd[piexif.ImageIFD.] = "ZONA FRANCA-2";
+            exifIfd[piexif.ExifIFD.DateTimeOriginal] = "2010:10:10 10:10:10";
+            exifIfd[piexif.ExifIFD.LensMake] = "ZONA FRANCA-3";
+            exifIfd[piexif.ExifIFD.Sharpness] = 777;
+            exifIfd[piexif.ExifIFD.LensSpecification] = [
+                [1, 1],
+                [1, 1],
+                [1, 1],
+                [1, 1]
+            ];
+            gpsIfd[piexif.GPSIFD.GPSVersionID] = [7, 7, 7, 7];
+            gpsIfd[piexif.GPSIFD.GPSDateStamp] = "1999:99:99 99:99:99";
+            console.log($scope.cliente.LONGITUD)
+            console.log($scope.cliente.LATITUD);
 
+            var lat = $scope.cliente.LATITUD.replace(/,/g, '.');
+            var lng = $scope.cliente.LONGITUD.replace(/,/g, '.');
+
+            gpsIfd[piexif.GPSIFD.GPSLatitudeRef] = lat < 0 ? 'S' : 'N';
+            gpsIfd[piexif.GPSIFD.GPSLatitude] = piexif.GPSHelper.degToDmsRational(lat);
+            gpsIfd[piexif.GPSIFD.GPSLongitudeRef] = lng < 0 ? 'W' : 'E';
+            gpsIfd[piexif.GPSIFD.GPSLongitude] = piexif.GPSHelper.degToDmsRational(lng);
+
+            var exifObj = {
+                "0th": zerothIfd,
+                "Exif": exifIfd,
+                "GPS": gpsIfd
+            };
+
+            // get exif binary as "string" type
+            var exifBytes = piexif.dump(exifObj);
+
+            // get JPEG image from canvas
+            var jpegData = document.getElementById("canvas").toDataURL("image/jpeg", 1.0);
+
+            // insert exif binary into JPEG binary(DataURL)
+
+            var exifModified = piexif.insert(exifBytes, jpegData);
+
+
+            var jpegBinary = atob(exifModified.split(",")[1]);
+            var data = [];
+            for (var p = 0; p < jpegBinary.length; p++) {
+                data[p] = jpegBinary.charCodeAt(p);
+            }
+            var ua = new Uint8Array(data);
+            var blob = new Blob([ua], {
+                type: "image/jpeg"
+            });
+            return blob;
+        }
 
         $scope.screenshot = function () {
             let ip = WebexTeams.Ip();
@@ -454,11 +519,17 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
                 context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
                 var fecha = fechaServer();
                 fecha = $scope.cliente.DIRECCION + " " + fecha;
-                var dataURL = watermarkedDataURL(canvas, fecha);
-                var blobImage = $scope.dataURItoBlob(dataURL);
+
+                // var dataURL = watermarkedDataURL(canvas, fecha);
+                var blobImage = GPS();
+
+
+                // var blobImage = $scope.dataURItoBlob(dataURL);
+
                 var fileImage = new File([blobImage], "fileName.jpeg", {
                     type: "'image/jpeg'"
                 });
+
                 var fileImage = servicesMultimedia.saveScreenshot($scope.cliente.NUMERO_INSPECCION, fileImage, response.data.ipServices);
                 fileImage.then(function (resp) {
                     if (resp.data = true) {
@@ -477,12 +548,6 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
             });
 
         }
-
-        // document.getElementById("llamando").style.display = "block";
-        // document.getElementById("loader").style.display = "block";
-        // var myAudio = document.getElementById("myAudio");
-        // myAudio.play();
-        // document.getElementById("iconColgar").style.visibility = "visible";
 
 
         document.getElementById(`btnColgar`).addEventListener(`click`, () => {
@@ -673,4 +738,34 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
             }
         })
     }
-})
+
+    $scope.btnLocation = function () {
+        let ip = WebexTeams.Ip();
+        ip.then(function successCallback(response) {
+
+            var user = {
+                token: $scope.access_token,
+                inspeccion: $scope.cliente.NUMERO_INSPECCION,
+                toPersonEmail: $scope.cliente.USUARIO_WEBEXCONTACTO,
+                id_usuariozf: $scope.id_usuariozf,
+                gmailUsuariozf: $scope.gmailWebex
+            }
+
+            let enviarUbicacion = WebexTeams.enviarUbicacion(user, response.data.ipServices);
+            enviarUbicacion.then(function successCallback(inspeccion) {
+
+                if (inspeccion.data != null) {
+                    console.log(inspeccion.data);
+                    toastr.success(inspeccion.data, "Sistema Zona Franca");
+                } else {
+                    toastr.error("Ups!, problemas con la ubicación", "Sistema Zona Franca");
+                }
+
+            }, function errorCallback(error) {
+                console.log(error);
+            });
+        }, function errorCallback(error) {
+            console.log(error);
+        });
+    }
+});
