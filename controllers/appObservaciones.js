@@ -44,7 +44,7 @@ app.controller('myCtrlObservaciones', function ($scope, ChatWebex, WebexTeams) {
         }, function errorCallback(error) {
             console.log(error);
         });
-    }   
+    }
 
     $scope.observations = function () {
         $scope.loadObservations();
