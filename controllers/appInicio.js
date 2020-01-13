@@ -64,7 +64,7 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
     $scope.btnTerminarInspeccion = true;
     $scope.btnChat = false;
     $scope.btnLlamarHide = false;
-
+    $scope.mnsBienvenida = true;
 
 
     $scope.connection = function () {
@@ -100,16 +100,12 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
         }
     }
 
-
-
     $scope.connectiontwo = function () {
         let ip = WebexTeams.Ip();
         ip.then(function successCallback(response) {
             let validateToken = ServicesToken.validateToken($localStorage.sesion, response.data.ipServices);
             validateToken.then(function successCallback(token) {
 
-                // document.getElementById("loader2").style.visibility = "hidden";
-                // document.getElementById("pagina").style.visibility = "visible";
                 console.log(token.data.user);
                 $scope.id_usuariozf = token.data.user.recordset.ID_USUARIOZF;
                 $scope.username = token.data.user.recordset.NOMBRE_USUARIOZF;
@@ -125,7 +121,30 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
                     toastr.success(resp.asunto, "Sistema Zona Franca");
                 });
 
+                socket.on('ubicacion', function (resp) {
+                    toastr.success(resp.asunto, "Sistema Zona Franca");
+                    var user = {
+                        numero_inspeccion: $scope.cliente.NUMERO_INSPECCION,
+                        id_usuariozf: $scope.cliente.ID_USUARIOZF,
+                        longitud: resp.Longitude,
+                        latitud: resp.Latitude
+                    }
 
+                    let guardarUbicacion = WebexTeams.guardarUbicacion(user, response.data.ipServices);
+                    guardarUbicacion.then(function successCallback(inspeccion) {
+                        console.log(inspeccion.data);
+                        
+                        if (inspeccion.data != 0) {
+                            $scope.connectiontwo();
+                            $scope.mnsBienvenida = false;
+                        } else {
+                            toastr.error("Ups!, problemas con la ubicación", "Sistema Zona Franca");
+                        }
+
+                    }, function errorCallback(error) {
+                        console.log(error);
+                    });
+                });
 
 
                 if (token.data.user.avatar) {
@@ -144,38 +163,22 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
                     if (inspeccion.data != null) {
                         console.log(inspeccion.data);
                         $scope.cliente = inspeccion.data;
-                        $scope.connect($scope.access_token);
-                        $scope.initChat();
-                        if (!$scope.cliente.LONGITUD && !$scope.cliente.LATITUD
-                            || $scope.cliente.LONGITUD == '(null)' && $scope.cliente.LATITUD == '(null)') {
-                            socket.on('ubicacion', function (resp) {
-                                toastr.success(resp.asunto, "Sistema Zona Franca");
-                                var user = {
-                                    numero_inspeccion: $scope.cliente.NUMERO_INSPECCION,
-                                    id_usuariozf: $scope.cliente.ID_USUARIOZF,
-                                    longitud: resp.Longitude,
-                                    latitud: resp.Latitude
-                                }
 
-                                let guardarUbicacion = WebexTeams.guardarUbicacion(user, response.data.ipServices);
-                                guardarUbicacion.then(function successCallback(inspeccion) {
-                                    if (inspeccion.data != 0) {
-                                        setTimeout(() => {
-                                            location.reload();
-                                        }, 2000);
-                                    } else {
-                                        toastr.error("Ups!, problemas con la ubicación", "Sistema Zona Franca");
-                                    }
-
-                                }, function errorCallback(error) {
-                                    console.log(error);
-                                });
-                            });
-                            $scope.btnLocation();
-                        } else {
-                            document.getElementById("loader2").style.visibility = "hidden";
-                            document.getElementById("pagina").style.visibility = "visible";
+                        if ($scope.mnsBienvenida) {
+                            $scope.connect($scope.access_token);
+                            $scope.initChat();
                         }
+
+                        if (!$scope.cliente.LONGITUD && !$scope.cliente.LATITUD
+                            || $scope.cliente.LONGITUD == '0' && $scope.cliente.LATITUD == '0') {
+                            $scope.btnLlamar = true;
+                        } else {
+                            $scope.btnLlamar = false;
+                        }
+
+                        document.getElementById("loader2").style.visibility = "hidden";
+                        document.getElementById("pagina").style.visibility = "visible";
+
 
                         $scope.cargarMultimediaImages($scope.cliente.NUMERO_INSPECCION);
                         $scope.cargarMultimediaVideos($scope.cliente.NUMERO_INSPECCION);
@@ -219,8 +222,6 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
         });
     }
 
-
-
     $scope.cargarMultimediaImages = function (inspeccion) {
         let ip = WebexTeams.Ip();
         ip.then(function successCallback(response) {
@@ -230,6 +231,9 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
             var screenInspeccion = servicesMultimedia.loadScreen(inspeccion, response.data.ipServices);
             screenInspeccion.then(function successCallback(dataScreen) {
                 $scope.imagesScreenshot = dataScreen.data.sort(function (a, b) { return b.num - a.num });
+
+                console.log($scope.imagesScreenshot);
+
             }, function errorCallback(error) {
                 console.log(error);
             });
@@ -246,6 +250,8 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
             var videosUser = servicesMultimedia.loadVideos(inspeccion, response.data.ipServices);
             videosUser.then(function successCallback(dataVideo) {
                 $scope.videosInspeccion = dataVideo.data.sort(function (a, b) { return b.num - a.num });
+
+
             }, function errorCallback(error) {
                 console.log(error);
             });
@@ -269,7 +275,6 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
     }
 
     $scope.bindCallEvents = function (call) {
-
 
         call.on(`error`, (err) => {
             console.error(err);
@@ -398,6 +403,7 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
         }
 
         function modificarMetadata(fecha) {
+
             // make exif data
             var zerothIfd = {};
             var exifIfd = {};
@@ -497,7 +503,9 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
             var yyyy = today.getFullYear();
             var h = today.getHours();
             var min = today.getMinutes();
-            today = dd + "/" + mm + "/" + yyyy + " " + h + ":" + min;
+            var sg = today.getSeconds();
+            today = yyyy + ":" + mm + ":" + dd + " " + h + ":" + min + ":" + sg;
+
             return (today.toString());
         }
 
@@ -556,6 +564,7 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
                     throw err;
                 });
             toastr.success("Hola, bienvenido al sistema ya puedes iniciar video llamadas", "Sistema Zona Franca");
+
         });
         $scope.authorize();
     }
@@ -629,9 +638,6 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
         });
 
     }
-
-
-
 
     $scope.timerWithTimeout = 00;
     $scope.startTimerWithTimeout = function () {
@@ -720,4 +726,33 @@ app.controller('myCtrl', function ($scope, WebexTeams, servicesMultimedia, $filt
             console.log(error);
         });
     }
+
+    $scope.mapa = function () {
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal 
+
+        modal.style.display = "block";
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        $scope.inicio();
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    }
+
+   
+
 });
