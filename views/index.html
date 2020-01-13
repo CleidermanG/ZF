@@ -110,8 +110,8 @@
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <div index-directive-mapa type="mapa"></div>
-            <div class="video-llamada" id="test" style="visibility: hidden">
+            <!-- <div index-directive-mapa type="mapa"></div> -->
+            <div class="video-llamada" id="test" style="visibility: visible">
               <div class="tiempo text-center py-2">
                 <span>{{timerWithTimeout | hh }}</span>:<span>{{timerWithTimeout | mm }}</span>:<span>{{timerWithTimeout | ss }}</span>
               </div>
@@ -234,7 +234,7 @@
               role="tab" aria-controls="pills-contact" aria-selected="false"><span class="icon-ubicacion"></span></a>
           </li>
 
-          <li class="nav-item nav-pills2">
+          <li class="nav-item nav-pills2" style="visibility: hidden;">
             <a title="Mapa" class="nav-link" id="myBtn"  ng-click="mapa()"id="mapa-tab" data-toggle="pill" href="" role="tab"
               aria-controls="pills-contact" aria-selected="false"><span class="icon-ubicacionMapa"></span></a>
           </li>
