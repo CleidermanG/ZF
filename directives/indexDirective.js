@@ -25,12 +25,23 @@ app.directive('indexDirectiveObservaciones', function() {
     };
 
 });
+
 app.directive('indexDirectiveActa', function() {
     return {
         templateUrl: function() {
             return '../views/acta.html';
         },
         controller: "myCtrlActa"
+    };
+
+});
+
+app.directive('indexDirectiveMapa', function() {
+    return {
+        templateUrl: function() {
+            return '../views/test.html';
+        },
+        controller: "myCtrlMapa"
     };
 
 });

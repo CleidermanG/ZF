@@ -27,7 +27,7 @@
   <script src="../js/socket.io.js"></script>
   <script src="../js/piexif.js"></script>
 
-  
+
   <script src="../node_modules/angular-socket-io/socket.js"></script>
 
   <!-- <link href="../js/dist/ekko-lightbox.css" rel="stylesheet">
@@ -54,8 +54,8 @@
     <div id="left-sidebar-wrapper">
       <ul class="sidebar-nav" style="height: 100%;">
         <div class="col-md-12 text-center pt-3" style="height: 100%;">
-          <div class="scrollbar" id="style-1">
-            <div class="force-overflow">
+          <div class="scrollbar " id="style-1">
+            <div class="force-overflow ">
               <div class="imagenes">
                 <div ng-repeat="screen in imagesScreenshot">
                   <div>
@@ -72,7 +72,7 @@
           </div>
 
           <div class="borde-am my-3"></div>
-          <div class="scrollbar" id="style-1">
+          <div class=" scrollbar " id="style-1">
             <div class="force-overflow">
               <div class="videos">
                 <div ng-repeat="video in videosInspeccion">
@@ -110,7 +110,8 @@
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <div class="video-llamada" id="test">
+            <div index-directive-mapa type="mapa"></div>
+            <div class="video-llamada" id="test" style="visibility: hidden">
               <div class="tiempo text-center py-2">
                 <span>{{timerWithTimeout | hh }}</span>:<span>{{timerWithTimeout | mm }}</span>:<span>{{timerWithTimeout | ss }}</span>
               </div>
@@ -144,8 +145,7 @@
       <div class="box" id="caja-comp">
         <div class="tab-content altura-comp">
           <!-- componente de modifacion de acta -->
-          <div class="tab-pane fade  altura-comp" id="modificar" role="tabpanel"
-            aria-labelledby="modificar-tab" >
+          <div class="tab-pane fade  altura-comp" id="modificar" role="tabpanel" aria-labelledby="modificar-tab">
             <div class="titulo text-center py-1">
               <h4 class="mb-0">Modificar Inspección</h4>
             </div>
@@ -200,6 +200,7 @@
           <div class="tab-pane fade altura-comp " id="observacion" role="tabpanel" aria-labelledby="observacion-tab">
             <div index-directive-observaciones type="observaciones"></div>
           </div>
+
         </div>
       </div>
       <!-- aqui estan los iconoes de navegacion -->
@@ -229,14 +230,20 @@
                 class="icon-observacion"></span></a>
           </li>
           <li class="nav-item nav-pills2">
-            <a title="Observaciones" class="nav-link" ng-click="btnLocation()" id="location-tab" data-toggle="pill"
-              href="#location" role="tab" aria-controls="pills-contact" aria-selected="false"><span
-                class="icon-ubicacion"></span></a>
+            <a title="Ubicación" class="nav-link" ng-click="btnLocation()" id="location-tab" data-toggle="pill" href=""
+              role="tab" aria-controls="pills-contact" aria-selected="false"><span class="icon-ubicacion"></span></a>
           </li>
+
+          <li class="nav-item nav-pills2">
+            <a title="Mapa" class="nav-link" id="myBtn"  ng-click="mapa()"id="mapa-tab" data-toggle="pill" href="" role="tab"
+              aria-controls="pills-contact" aria-selected="false"><span class="icon-ubicacionMapa"></span></a>
+          </li>
+
         </ul>
       </div>
     </div>
   </div>
+
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
@@ -261,6 +268,9 @@
   <script src=" ../controllers/appChat.js"></script>
   <script src=" ../controllers/appObservaciones.js"></script>
   <script src=" ../controllers/appActa.js"></script>
+  <script src=" ../controllers/appMapa.js"></script>
+
+  
 
   <!-- directives -->
   <script src="../directives/indexDirective.js "></script>
@@ -274,7 +284,10 @@
 
   <!-- filters -->
   <script src="../filters/timer.js"></script>
+
   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+
 </body>
 
 </html>
