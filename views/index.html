@@ -27,6 +27,7 @@
   <script src="../js/socket.io.js"></script>
   <script src="../js/piexif.js"></script>
 
+
   <script src="../node_modules/angular-socket-io/socket.js"></script>
 
   <!-- <link href="../js/dist/ekko-lightbox.css" rel="stylesheet">
@@ -107,25 +108,12 @@
             <i class="fa fa-filter"></i>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-12">
-          <!-- <div index-directive-mapa type="mapa"></div> -->
-          <div class="video-llamada" id="test" style="visibility: visible">
-            <div class="tiempo text-center py-2">
-              <span>{{timerWithTimeout | hh }}</span>:<span>{{timerWithTimeout | mm }}</span>:<span>{{timerWithTimeout | ss }}</span>
-            </div>
-            <div id="loader" style="display: none"></div>
-            <video class="img-fluid" width="100%" poster="../images/video.jpg" style="background-color: #fff;"
-              id="remote-view-video" autoplay></video>
-            <audio id="myAudio" src="sonido.mp3" type="audio/mpeg" controls loop="true" hidden></audio>
-            <div class="loader-video text-center" id="llamando" style="display: none">
-              <span>Llamando a {{cliente.NOMBRE_CONTACTO}}...</span>
-            </div>
-            <div class="iconos">
-              <div id="iconScreen" style="display:none">
-                <a title="Screenshot" id="btnScreen" ng-click="screenshot()" href=""><img
-                    src="../images/camera.png" /></a>
+        <div class="row">
+          <div class="col-lg-12">
+            <div index-directive-mapa type="mapa"></div>
+            <div class="video-llamada" id="test" style="visibility: hidden">
+              <div class="tiempo text-center py-2">
+                <span>{{timerWithTimeout | hh }}</span>:<span>{{timerWithTimeout | mm }}</span>:<span>{{timerWithTimeout | ss }}</span>
               </div>
               <div id="loader" style="display: none"></div>
               <video class="img-fluid" width="100%" poster="../images/video.jpg" style="background-color: #fff;"
@@ -212,129 +200,94 @@
           <div class="tab-pane fade altura-comp " id="observacion" role="tabpanel" aria-labelledby="observacion-tab">
             <div index-directive-observaciones type="observaciones"></div>
           </div>
+
         </div>
       </div>
-     </div> <!-- aqui estan los iconoes de navegacion -->
-        <div class="text-center navegacion">
-          <ul class="nav nav-pills mb-3 text-center" id="pills-tab" role="tablist">
-            <li ng-hide="btnLlamar" class="nav-pills2 ">
-              <a id="btnLlamar" title="Llamar" class="nav-link" href="" ng-click="btnllamar()"><span
-                  class="icon-llamar"><span class="path1"></span><span class="path2"></span><span
-                    class="path3"></span><span class="path4"></span></span></a>
-            </li>
-            <li ng-hide="btnTerminarInspeccion" class="nav-item nav-pills2  ">
-              <a class="nav-link active " id="modificar-tab" data-toggle="pill" href="#modificar" role="tab"
-                aria-controls="pills-home" aria-selected="true"><span class="icon-terminar"></span></a>
-            </li>
-            <li ng-hide="btnChat" class="nav-item nav-pills2">
-              <a title="Chat" ng-click="chat()" class="nav-link" id="chat-tab" data-toggle="pill" href="#chat"
-                role="tab" aria-controls="pills-profile" aria-selected="false"><span class="icon-chat"></span></a>
-            </li>
-            <li class="nav-item nav-pills2">
-              <a title="Acta inspección" ng-click="acta()" class="nav-link" id="check-tab" data-toggle="pill"
-                href="#check" role="tab" aria-controls="pills-profile" aria-selected="false"><span
-                  class="icon-check"></span></a>
-            </li>
-            <li class="nav-item nav-pills2">
-              <a title="Observaciones" class="nav-link" ng-click="observations()" id="observacion-tab"
-                data-toggle="pill" href="#observacion" role="tab" aria-controls="pills-contact"
-                aria-selected="false"><span class="icon-observacion"></span></a>
-            </li>
-            <li class="nav-item nav-pills2">
-              <a title="Ubicación" class="nav-link" ng-click="btnLocation()" id="location-tab" data-toggle="pill"
-                href="" role="tab" aria-controls="pills-contact" aria-selected="false"><span
-                  class="icon-ubicacion"></span></a>
-            </li>
+      <!-- aqui estan los iconoes de navegacion -->
+      <div class="text-center navegacion">
+        <ul class="nav nav-pills mb-3 text-center" id="pills-tab" role="tablist">
+          <li ng-hide="btnLlamar" class="nav-pills2 ">
+            <a id="btnLlamar" title="Llamar" class="nav-link" href="" ng-click="btnllamar()"><span
+                class="icon-llamar"><span class="path1"></span><span class="path2"></span><span
+                  class="path3"></span><span class="path4"></span></span></a>
+          </li>
+          <li ng-hide="btnTerminarInspeccion" class="nav-item nav-pills2  ">
+            <a class="nav-link active " id="modificar-tab" data-toggle="pill" href="#modificar" role="tab"
+              aria-controls="pills-home" aria-selected="true"><span class="icon-terminar"></span></a>
+          </li>
+          <li ng-hide="btnChat" class="nav-item nav-pills2">
+            <a title="Chat" ng-click="chat()" class="nav-link" id="chat-tab" data-toggle="pill" href="#chat" role="tab"
+              aria-controls="pills-profile" aria-selected="false"><span class="icon-chat"></span></a>
+          </li>
+          <li class="nav-item nav-pills2">
+            <a title="Acta inspección" ng-click="acta()" class="nav-link" id="check-tab" data-toggle="pill"
+              href="#check" role="tab" aria-controls="pills-profile" aria-selected="false"><span
+                class="icon-check"></span></a>
+          </li>
+          <li class="nav-item nav-pills2">
+            <a title="Observaciones" class="nav-link" ng-click="observations()" id="observacion-tab" data-toggle="pill"
+              href="#observacion" role="tab" aria-controls="pills-contact" aria-selected="false"><span
+                class="icon-observacion"></span></a>
+          </li>
+          <li class="nav-item nav-pills2">
+            <a title="Ubicación" class="nav-link" ng-click="btnLocation()" id="location-tab" data-toggle="pill" href=""
+              role="tab" aria-controls="pills-contact" aria-selected="false"><span class="icon-ubicacion"></span></a>
+          </li>
 
-            <li class="nav-item nav-pills2" style="visibility: hidden;">
-              <a title="Mapa" class="nav-link" id="myBtn" ng-click="mapa()" id="mapa-tab" data-toggle="pill" href=""
-                role="tab" aria-controls="pills-contact" aria-selected="false"><span
-                  class="icon-ubicacionMapa"></span></a>
-            </li>
+          <!-- <li class="nav-item nav-pills2" >
+            <a title="Mapa" class="nav-link" id="myBtn"  ng-click="mapa()"id="mapa-tab" data-toggle="pill" href="" role="tab"
+              aria-controls="pills-contact" aria-selected="false"><span class="icon-ubicacionMapa"></span></a>
+          </li> -->
 
-          </ul>
-          
-          <!-- aqui estan los iconoes de navegacion -->
-          <div class="text-center navegacion">
-            <ul class="nav nav-pills mb-3 text-center" id="pills-tab" role="tablist">
-              <li ng-hide="btnLlamar" class="nav-pills2 ">
-                <a id="btnLlamar" title="Llamar" class="nav-link" href="" ng-click="btnllamar()"><span
-                    class="icon-llamar"><span class="path1"></span><span class="path2"></span><span
-                      class="path3"></span><span class="path4"></span></span></a>
-              </li>
-              <li ng-hide="btnTerminarInspeccion" class="nav-item nav-pills2  ">
-                <a class="nav-link active " id="modificar-tab" data-toggle="pill" href="#modificar" role="tab"
-                  aria-controls="pills-home" aria-selected="true"><span class="icon-terminar"></span></a>
-              </li>
-              <li ng-hide="btnChat" class="nav-item nav-pills2">
-                <a title="Chat" ng-click="chat()" class="nav-link" id="chat-tab" data-toggle="pill" href="#chat"
-                  role="tab" aria-controls="pills-profile" aria-selected="false"><span class="icon-chat"></span></a>
-              </li>
-              <li class="nav-item nav-pills2">
-                <a title="Acta inspección" ng-click="acta()" class="nav-link" id="check-tab" data-toggle="pill"
-                  href="#check" role="tab" aria-controls="pills-profile" aria-selected="false"><span
-                    class="icon-check"></span></a>
-              </li>
-              <li class="nav-item nav-pills2">
-                <a title="Observaciones" class="nav-link" ng-click="observations()" id="observacion-tab"
-                  data-toggle="pill" href="#observacion" role="tab" aria-controls="pills-contact"
-                  aria-selected="false"><span class="icon-observacion"></span></a>
-              </li>
-              <li class="nav-item nav-pills2">
-                <a title="Ubicación" class="nav-link" ng-click="btnLocation()" id="location-tab" data-toggle="pill"
-                  href="" role="tab" aria-controls="pills-contact" aria-selected="false"><span
-                    class="icon-ubicacion"></span></a>
-              </li>
-
-              <li class="nav-item nav-pills2" style="visibility: hidden;">
-                <a title="Mapa" class="nav-link" id="myBtn" ng-click="mapa()" id="mapa-tab" data-toggle="pill" href=""
-                  role="tab" aria-controls="pills-contact" aria-selected="false"><span
-                    class="icon-ubicacionMapa"></span></a>
-              </li>
-            </ul>
-          </div>
-        </div>
+        </ul>
+      </div>
     </div>
+  </div>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"></script>
 
-    <script src="../js/style.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 
-    <script src="../node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
-    <script src="../node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+  <script src="../js/style.js"></script>
 
-    <script src="../js/bundle.js"></script>
-    <script src="../js/bundle2.js "></script>
+  <script src="../node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
+  <script src="../node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
 
-    <!-- controllers -->
+  <script src="../js/bundle.js"></script>
+  <script src="../js/bundle2.js "></script>
 
-    <script src=" ../controllers/appInicio.js "></script>
-    <script src=" ../controllers/appChat.js"></script>
-    <script src=" ../controllers/appObservaciones.js"></script>
-    <script src=" ../controllers/appActa.js"></script>
-    <script src=" ../controllers/appMapa.js"></script>
+  <!-- controllers -->
 
-    <!-- directives -->
-    <script src="../directives/indexDirective.js "></script>
+  <script src=" ../controllers/appInicio.js "></script>
+  <script src=" ../controllers/appChat.js"></script>
+  <script src=" ../controllers/appObservaciones.js"></script>
+  <script src=" ../controllers/appActa.js"></script>
+  <script src=" ../controllers/appMapa.js"></script>
 
-    <!-- services -->
-    <script src="../services/servicesWebexTeams.js"></script>
-    <script src="../services/servicesChat.js"></script>
-    <script src="../services/servicesMultimedia.js"></script>
-    <script src="../services/servicesToken.js"></script>
-    <script src="../services/chatSocket.js"></script>
+  
 
-    <!-- filters -->
-    <script src="../filters/timer.js"></script>
+  <!-- directives -->
+  <script src="../directives/indexDirective.js "></script>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+  <!-- services -->
+  <script src="../services/servicesWebexTeams.js"></script>
+  <script src="../services/servicesChat.js"></script>
+  <script src="../services/servicesMultimedia.js"></script>
+  <script src="../services/servicesToken.js"></script>
+  <script src="../services/chatSocket.js"></script>
+
+  <!-- filters -->
+  <script src="../filters/timer.js"></script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+
 </body>
 
 </html>
