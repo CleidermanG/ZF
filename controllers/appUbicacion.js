@@ -57,7 +57,7 @@ app.controller('myCtrl', function ($scope, Ubicacion, $location, $window, $timeo
             function showPosition(position) {
                 var mns = {
                     "correoElectronico": $scope.usuariowebexzf,
-                    "asunto": "Ubicación enviada por el operador.",
+                    "asunto": "Se recibió la ubicación enviada por el operador.",
                     "Latitude": position.coords.latitude,
                     "Longitude": position.coords.longitude
                 }
