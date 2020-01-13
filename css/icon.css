@@ -65,6 +65,11 @@
     content: "\e908";
 }
 .icon-ubicacion:before {
-    content: "\f041";
+    content: "\e910";
+    color: rgb(255, 255, 255);
+}
+
+.icon-ubicacionMapa:before {
+    content: "\e911";
     color: rgb(255, 255, 255);
 }
