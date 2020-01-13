@@ -3,11 +3,6 @@ const app = express();
 const bodyParser = require('body-parser');
 const Config = require('./assets/config.json');
 const cors = require('cors');
-const fs = require('fs');
-
-// var fileupload = require("express-fileupload");
-// app.use(fileupload());
-// app.use('/multimedia', express.static('./Inspeccion'));
 
 app.use('/node_modules', express.static('./node_modules'));
 app.use('/views', express.static('./views'));
